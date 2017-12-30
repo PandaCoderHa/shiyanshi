@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ShiYanShiModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="M_ShiYanShi">
+    <Key>
+      <PropertyRef Name="zidongbianhao" />
+    </Key>
+    <Property Name="zidongbianhao" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="mingzi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="shifoutingyong" Type="Boolean" />
+    <Property Name="shifoushanchu" Type="Boolean" Nullable="false" />
+    <Property Name="gengxinriqi" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="M_ZuoWei" Relationship="Self.FK_M_ZuoWei_M_ShiYanShi" FromRole="M_ShiYanShi" ToRole="M_ZuoWei" />
+    <NavigationProperty Name="T_ShiYanShiBuKeYongShiJian" Relationship="ShiYanShiModel.FK_T_ShiYanShiBuKeYongShiJian_M_ShiYanShi" FromRole="M_ShiYanShi" ToRole="T_ShiYanShiBuKeYongShiJian" />
+    <NavigationProperty Name="T_YuYue" Relationship="ShiYanShiModel.FK_T_YuYue_M_ShiYanShi" FromRole="M_ShiYanShi" ToRole="T_YuYue" />
+  </EntityType>
+  <EntityType Name="M_ZuoWei">
+    <Key>
+      <PropertyRef Name="zidongbianhao" />
+    </Key>
+    <Property Name="zidongbianhao" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="zuoweimingcheng" Type="String" MaxLength="60" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="shifoutingyong" Type="Boolean" />
+    <Property Name="shifoushanchu" Type="Boolean" Nullable="false" />
+    <Property Name="gengxinriqi" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="M_ShiYanShi" Relationship="Self.FK_M_ZuoWei_M_ShiYanShi" FromRole="M_ZuoWei" ToRole="M_ShiYanShi" />
+    <Property Name="zhuohao" Type="Int32" />
+    <NavigationProperty Name="T_YuYue" Relationship="ShiYanShiModel.FK_T_YuYue_M_ZuoWei" FromRole="M_ZuoWei" ToRole="T_YuYue" />
+  </EntityType>
+  <Association Name="FK_M_ZuoWei_M_ShiYanShi">
+    <End Role="M_ShiYanShi" Type="Self.M_ShiYanShi" Multiplicity="1" />
+    <End Role="M_ZuoWei" Type="Self.M_ZuoWei" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="ShiYanShiEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="M_ShiYanShi" EntityType="Self.M_ShiYanShi" />
+    <EntitySet Name="M_ZuoWei" EntityType="Self.M_ZuoWei" />
+    <AssociationSet Name="FK_M_ZuoWei_M_ShiYanShi" Association="Self.FK_M_ZuoWei_M_ShiYanShi">
+      <End Role="M_ShiYanShi" EntitySet="M_ShiYanShi" />
+      <End Role="M_ZuoWei" EntitySet="M_ZuoWei" />
+    </AssociationSet>
+    <EntitySet Name="T_ShiYanShiBuKeYongShiJian" EntityType="ShiYanShiModel.T_ShiYanShiBuKeYongShiJian" />
+    <AssociationSet Name="FK_T_ShiYanShiBuKeYongShiJian_M_ShiYanShi" Association="ShiYanShiModel.FK_T_ShiYanShiBuKeYongShiJian_M_ShiYanShi">
+      <End Role="M_ShiYanShi" EntitySet="M_ShiYanShi" />
+      <End Role="T_ShiYanShiBuKeYongShiJian" EntitySet="T_ShiYanShiBuKeYongShiJian" />
+    </AssociationSet>
+    <EntitySet Name="T_YuYue" EntityType="ShiYanShiModel.T_YuYue" />
+    <AssociationSet Name="FK_T_YuYue_M_ShiYanShi" Association="ShiYanShiModel.FK_T_YuYue_M_ShiYanShi">
+      <End Role="M_ShiYanShi" EntitySet="M_ShiYanShi" />
+      <End Role="T_YuYue" EntitySet="T_YuYue" />
+    </AssociationSet>
+    <AssociationSet Name="FK_T_YuYue_M_ZuoWei" Association="ShiYanShiModel.FK_T_YuYue_M_ZuoWei">
+      <End Role="M_ZuoWei" EntitySet="M_ZuoWei" />
+      <End Role="T_YuYue" EntitySet="T_YuYue" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="T_ShiYanShiBuKeYongShiJian">
+    <Key>
+      <PropertyRef Name="zidongbianhao" />
+    </Key>
+    <Property Name="zidongbianhao" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="zhouji" Type="Int32" Nullable="false" />
+    <Property Name="kaishiriqi" Type="DateTime" Precision="3" Nullable="false" />
+    <Property Name="jieshuriqi" Type="DateTime" Precision="3" Nullable="false" />
+    <Property Name="gengxinriqi" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="M_ShiYanShi" Relationship="ShiYanShiModel.FK_T_ShiYanShiBuKeYongShiJian_M_ShiYanShi" FromRole="T_ShiYanShiBuKeYongShiJian" ToRole="M_ShiYanShi" />
+  </EntityType>
+  <Association Name="FK_T_ShiYanShiBuKeYongShiJian_M_ShiYanShi">
+    <End Type="ShiYanShiModel.M_ShiYanShi" Role="M_ShiYanShi" Multiplicity="1" />
+    <End Type="ShiYanShiModel.T_ShiYanShiBuKeYongShiJian" Role="T_ShiYanShiBuKeYongShiJian" Multiplicity="*" />
+  </Association>
+  <EntityType Name="T_YuYue">
+    <Key>
+      <PropertyRef Name="zidongbianhao" />
+    </Key>
+    <Property Name="zidongbianhao" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="jiaoshibianhao" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="xueshengbianhao" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="yuyuekaishiriqi" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="yuyuejieshuriqi" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="gengxinriqi" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="xiangmu" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="zhidaojiaoshi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="banji" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="xueshengxingming" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="M_ShiYanShi" Relationship="ShiYanShiModel.FK_T_YuYue_M_ShiYanShi" FromRole="T_YuYue" ToRole="M_ShiYanShi" />
+    <NavigationProperty Name="M_ZuoWei" Relationship="ShiYanShiModel.FK_T_YuYue_M_ZuoWei" FromRole="T_YuYue" ToRole="M_ZuoWei" />
+  </EntityType>
+  <Association Name="FK_T_YuYue_M_ShiYanShi">
+    <End Type="ShiYanShiModel.M_ShiYanShi" Role="M_ShiYanShi" Multiplicity="1" />
+    <End Type="ShiYanShiModel.T_YuYue" Role="T_YuYue" Multiplicity="*" />
+  </Association>
+  <Association Name="FK_T_YuYue_M_ZuoWei">
+    <End Type="ShiYanShiModel.M_ZuoWei" Role="M_ZuoWei" Multiplicity="1" />
+    <End Type="ShiYanShiModel.T_YuYue" Role="T_YuYue" Multiplicity="*" />
+  </Association>
+</Schema>

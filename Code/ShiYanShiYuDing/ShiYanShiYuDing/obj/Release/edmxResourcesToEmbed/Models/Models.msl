@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ShiYanShiModelStoreContainer" CdmEntityContainer="ShiYanShiEntities">
+    <EntitySetMapping Name="M_ShiYanShi">
+      <EntityTypeMapping TypeName="ShiYanShiModel.M_ShiYanShi">
+        <MappingFragment StoreEntitySet="M_ShiYanShi">
+          <ScalarProperty Name="zidongbianhao" ColumnName="zidongbianhao" />
+          <ScalarProperty Name="mingzi" ColumnName="mingzi" />
+          <ScalarProperty Name="shifoutingyong" ColumnName="shifoutingyong" />
+          <ScalarProperty Name="shifoushanchu" ColumnName="shifoushanchu" />
+          <ScalarProperty Name="gengxinriqi" ColumnName="gengxinriqi" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="M_ZuoWei">
+      <EntityTypeMapping TypeName="ShiYanShiModel.M_ZuoWei">
+        <MappingFragment StoreEntitySet="M_ZuoWei">
+          <ScalarProperty Name="zhuohao" ColumnName="zhuohao" />
+          <ScalarProperty Name="zidongbianhao" ColumnName="zidongbianhao" />
+          <ScalarProperty Name="zuoweimingcheng" ColumnName="zuoweimingcheng" />
+          <ScalarProperty Name="shifoutingyong" ColumnName="shifoutingyong" />
+          <ScalarProperty Name="shifoushanchu" ColumnName="shifoushanchu" />
+          <ScalarProperty Name="gengxinriqi" ColumnName="gengxinriqi" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="FK_M_ZuoWei_M_ShiYanShi" TypeName="ShiYanShiModel.FK_M_ZuoWei_M_ShiYanShi" StoreEntitySet="M_ZuoWei">
+      <EndProperty Name="M_ShiYanShi">
+        <ScalarProperty Name="zidongbianhao" ColumnName="shiyanshibianhao" />
+      </EndProperty>
+      <EndProperty Name="M_ZuoWei">
+        <ScalarProperty Name="zidongbianhao" ColumnName="zidongbianhao" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <EntitySetMapping Name="T_ShiYanShiBuKeYongShiJian">
+      <EntityTypeMapping TypeName="ShiYanShiModel.T_ShiYanShiBuKeYongShiJian">
+        <MappingFragment StoreEntitySet="T_ShiYanShiBuKeYongShiJian">
+          <ScalarProperty Name="gengxinriqi" ColumnName="gengxinriqi" />
+          <ScalarProperty Name="jieshuriqi" ColumnName="jieshuriqi" />
+          <ScalarProperty Name="kaishiriqi" ColumnName="kaishiriqi" />
+          <ScalarProperty Name="zhouji" ColumnName="zhouji" />
+          <ScalarProperty Name="zidongbianhao" ColumnName="zidongbianhao" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="FK_T_ShiYanShiBuKeYongShiJian_M_ShiYanShi" TypeName="ShiYanShiModel.FK_T_ShiYanShiBuKeYongShiJian_M_ShiYanShi" StoreEntitySet="T_ShiYanShiBuKeYongShiJian">
+      <EndProperty Name="T_ShiYanShiBuKeYongShiJian">
+        <ScalarProperty Name="zidongbianhao" ColumnName="zidongbianhao" />
+      </EndProperty>
+      <EndProperty Name="M_ShiYanShi">
+        <ScalarProperty Name="zidongbianhao" ColumnName="shiyanshibianhao" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <EntitySetMapping Name="T_YuYue">
+      <EntityTypeMapping TypeName="ShiYanShiModel.T_YuYue">
+        <MappingFragment StoreEntitySet="T_YuYue">
+          <ScalarProperty Name="xueshengxingming" ColumnName="xueshengxingming" />
+          <ScalarProperty Name="banji" ColumnName="banji" />
+          <ScalarProperty Name="zhidaojiaoshi" ColumnName="zhidaojiaoshi" />
+          <ScalarProperty Name="xiangmu" ColumnName="xiangmu" />
+          <ScalarProperty Name="gengxinriqi" ColumnName="gengxinriqi" />
+          <ScalarProperty Name="yuyuejieshuriqi" ColumnName="yuyuejieshuriqi" />
+          <ScalarProperty Name="yuyuekaishiriqi" ColumnName="yuyuekaishiriqi" />
+          <ScalarProperty Name="xueshengbianhao" ColumnName="xueshengbianhao" />
+          <ScalarProperty Name="jiaoshibianhao" ColumnName="jiaoshibianhao" />
+          <ScalarProperty Name="zidongbianhao" ColumnName="zidongbianhao" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="FK_T_YuYue_M_ShiYanShi" TypeName="ShiYanShiModel.FK_T_YuYue_M_ShiYanShi" StoreEntitySet="T_YuYue">
+      <EndProperty Name="T_YuYue">
+        <ScalarProperty Name="zidongbianhao" ColumnName="zidongbianhao" />
+      </EndProperty>
+      <EndProperty Name="M_ShiYanShi">
+        <ScalarProperty Name="zidongbianhao" ColumnName="shiyanshibianhao" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK_T_YuYue_M_ZuoWei" TypeName="ShiYanShiModel.FK_T_YuYue_M_ZuoWei" StoreEntitySet="T_YuYue">
+      <EndProperty Name="T_YuYue">
+        <ScalarProperty Name="zidongbianhao" ColumnName="zidongbianhao" />
+      </EndProperty>
+      <EndProperty Name="M_ZuoWei">
+        <ScalarProperty Name="zidongbianhao" ColumnName="zuoweibianhao" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>
