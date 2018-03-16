@@ -1,3 +1,8 @@
-#Code/ShiYanShiYuDing/packages/
+Code/ShiYanShiYuDing/packages/
 Code/publish/API/
 Code/publish/Web/
+Code/ShiYanShiYuDing/.vs
+Code/ShiYanShiYuDing/ShiYanShiYuDing/bin/
+Code/ShiYanShiYuDing/ShiYanShiYuDing/obj/
+*.ide
+*.lock
