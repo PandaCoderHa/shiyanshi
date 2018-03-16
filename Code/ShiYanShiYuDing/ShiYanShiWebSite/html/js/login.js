@@ -94,7 +94,7 @@ function login() {
                             userObj.classes = studentJson.classes;
                             userObj.name = studentJson.name;
                             sessionStorage.setItem("user", JSON.stringify(userObj));
-                            window.location.href = "/html/preview.html?sysid=1";
+                            window.location.href = "/html/home.html?sysid=1";
                         }
                     }
                 },
@@ -176,7 +176,7 @@ function doLogin() {
     });
     console.log("students", students);
     sessionStorage.setItem("user", userObj);
-    window.location.href = "/html/preview.html?sysid=1";
+    window.location.href = "/html/home.html?sysid=1";
 }
 
 function randomString(len) {

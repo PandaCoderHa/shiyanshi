@@ -4,6 +4,10 @@
     <EntitySetMapping Name="M_ShiYanShi">
       <EntityTypeMapping TypeName="ShiYanShiModel.M_ShiYanShi">
         <MappingFragment StoreEntitySet="M_ShiYanShi">
+          <ScalarProperty Name="fuzeren" ColumnName="fuzeren" />
+          <ScalarProperty Name="tupian" ColumnName="tupian" />
+          <ScalarProperty Name="miaoshu" ColumnName="miaoshu" />
+          <ScalarProperty Name="louceng" ColumnName="louceng" />
           <ScalarProperty Name="zidongbianhao" ColumnName="zidongbianhao" />
           <ScalarProperty Name="mingzi" ColumnName="mingzi" />
           <ScalarProperty Name="shifoutingyong" ColumnName="shifoutingyong" />
@@ -35,6 +39,8 @@
     <EntitySetMapping Name="T_ShiYanShiBuKeYongShiJian">
       <EntityTypeMapping TypeName="ShiYanShiModel.T_ShiYanShiBuKeYongShiJian">
         <MappingFragment StoreEntitySet="T_ShiYanShiBuKeYongShiJian">
+          <ScalarProperty Name="jieshuzhou" ColumnName="jieshuzhou" />
+          <ScalarProperty Name="kaishizhou" ColumnName="kaishizhou" />
           <ScalarProperty Name="gengxinriqi" ColumnName="gengxinriqi" />
           <ScalarProperty Name="jieshuriqi" ColumnName="jieshuriqi" />
           <ScalarProperty Name="kaishiriqi" ColumnName="kaishiriqi" />
@@ -83,5 +89,15 @@
         <ScalarProperty Name="zidongbianhao" ColumnName="zuoweibianhao" />
       </EndProperty>
     </AssociationSetMapping>
+    <EntitySetMapping Name="T_ZiYuan">
+      <EntityTypeMapping TypeName="ShiYanShiModel.T_ZiYuan">
+        <MappingFragment StoreEntitySet="T_ZiYuan">
+          <ScalarProperty Name="url" ColumnName="url" />
+          <ScalarProperty Name="shuoming" ColumnName="shuoming" />
+          <ScalarProperty Name="biaoti" ColumnName="biaoti" />
+          <ScalarProperty Name="zidongbianhao" ColumnName="zidongbianhao" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

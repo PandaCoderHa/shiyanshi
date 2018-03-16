@@ -12,6 +12,10 @@
     <NavigationProperty Name="M_ZuoWei" Relationship="Self.FK_M_ZuoWei_M_ShiYanShi" FromRole="M_ShiYanShi" ToRole="M_ZuoWei" />
     <NavigationProperty Name="T_ShiYanShiBuKeYongShiJian" Relationship="ShiYanShiModel.FK_T_ShiYanShiBuKeYongShiJian_M_ShiYanShi" FromRole="M_ShiYanShi" ToRole="T_ShiYanShiBuKeYongShiJian" />
     <NavigationProperty Name="T_YuYue" Relationship="ShiYanShiModel.FK_T_YuYue_M_ShiYanShi" FromRole="M_ShiYanShi" ToRole="T_YuYue" />
+    <Property Name="louceng" Type="Int32" />
+    <Property Name="miaoshu" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="tupian" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="fuzeren" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="M_ZuoWei">
     <Key>
@@ -51,6 +55,7 @@
       <End Role="M_ZuoWei" EntitySet="M_ZuoWei" />
       <End Role="T_YuYue" EntitySet="T_YuYue" />
     </AssociationSet>
+    <EntitySet Name="T_ZiYuan" EntityType="ShiYanShiModel.T_ZiYuan" />
   </EntityContainer>
   <EntityType Name="T_ShiYanShiBuKeYongShiJian">
     <Key>
@@ -62,6 +67,8 @@
     <Property Name="jieshuriqi" Type="DateTime" Precision="3" Nullable="false" />
     <Property Name="gengxinriqi" Type="DateTime" Nullable="false" Precision="3" />
     <NavigationProperty Name="M_ShiYanShi" Relationship="ShiYanShiModel.FK_T_ShiYanShiBuKeYongShiJian_M_ShiYanShi" FromRole="T_ShiYanShiBuKeYongShiJian" ToRole="M_ShiYanShi" />
+    <Property Name="kaishizhou" Type="Int32" />
+    <Property Name="jieshuzhou" Type="Int32" />
   </EntityType>
   <Association Name="FK_T_ShiYanShiBuKeYongShiJian_M_ShiYanShi">
     <End Type="ShiYanShiModel.M_ShiYanShi" Role="M_ShiYanShi" Multiplicity="1" />
@@ -92,4 +99,13 @@
     <End Type="ShiYanShiModel.M_ZuoWei" Role="M_ZuoWei" Multiplicity="1" />
     <End Type="ShiYanShiModel.T_YuYue" Role="T_YuYue" Multiplicity="*" />
   </Association>
+  <EntityType Name="T_ZiYuan">
+    <Key>
+      <PropertyRef Name="zidongbianhao" />
+    </Key>
+    <Property Name="zidongbianhao" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="biaoti" Type="String" Nullable="false" MaxLength="120" FixedLength="false" Unicode="true" />
+    <Property Name="shuoming" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="url" Type="String" MaxLength="300" FixedLength="true" Unicode="true" />
+  </EntityType>
 </Schema>

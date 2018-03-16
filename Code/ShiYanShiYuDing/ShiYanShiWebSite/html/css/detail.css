@@ -90,8 +90,8 @@ video {
     margin: 0;
     padding: 0;
     border: 0;
-    font-size: 100%;
-    font: inherit;
+    /* font-size: 100%; */
+    /* font: inherit; */
     vertical-align: baseline
 }
 
@@ -135,7 +135,7 @@ table {
     border-collapse: collapse;
     border-spacing: 0
 }
-
+s
 html {
     background-color: #f7f5f4;
     _background-image: url(about:blank);
@@ -144,8 +144,8 @@ html {
 }
 
 body {
-    font: 13px 'Microsoft YaHei', '\5fae\8f6f\96c5\9ed1', Arial, Verdana, Tahoma;
-    color: #999
+    font: 14px 'Microsoft YaHei', '\5fae\8f6f\96c5\9ed1', Arial, Verdana, Tahoma;
+    color: #222;
 }
 
 h1,
@@ -172,12 +172,12 @@ textarea {
 }
 
 a {
-    color: #000;
+    color: #3c8dbc;
     text-decoration: none
 }
 
 a:hover {
-    color: #ff8200
+    color: #00a65a;
 }
 
 strong {
@@ -189,7 +189,7 @@ img {
 }
 
 ::selection {
-    background-color: #ff8200;
+    background-color: #00a65a;
     color: white;
     text-shadow: none
 }
@@ -371,7 +371,7 @@ img {
 }
 
 .g-in {
-    width: 1400px;
+    width: 1100px;
     margin: 0 auto
 }
 
@@ -387,16 +387,16 @@ img {
 
 .g-mn {
     float: left;
-    width: 1050px;
+    width: 1100px;
     padding-left: 10px;
     background: #fff;
-    padding: 15px;
-    border: 1px solid #e6e6e6;
+    padding: 0;
+    
     border-radius: 4px;
 }
 
 .g-mn.gw {
-    width: 1080px
+    width: 1100px
 }
 
 .g-mn.gs {
@@ -411,10 +411,10 @@ img {
 }
 
 .g-mncw {
-    background-color: #fff;
-    border: 1px solid #dbdee0;
-    width: 1050px;
+    background-color: #fff; 
+    width: 1100px;
     float: left;
+	box-shadow: 0 1px 1px rgba(0,0,0,0.1);
 }
 
 .g-sd-l {
@@ -422,6 +422,7 @@ img {
     width: 280px;
     margin-right: 30px;
     margin-top: 7px;
+	display: none;
 }
 
 .g-sd-l .m-s-menu .service {
@@ -471,7 +472,7 @@ img {
 }
 
 .g-ft .links a:hover {
-    color: #ff8200
+    color: #00a65a
 }
 
 .g-ft .links i {
@@ -557,7 +558,7 @@ img {
 }
 
 .m-top a:hover {
-    color: #ff8200
+    color: #00a65a
 }
 
 .m-menu {
@@ -603,7 +604,7 @@ img {
 
 .m-menu .tips .txt {
     float: left;
-    color: #ff8200;
+    color: #00a65a;
     background: url(../image/common/sprites.gif?v=i5HzgjlmHGFbvibKs3o7pQ%3D%3D) -100px -354px repeat-x;
     _position: relative;
     _top: 0
@@ -669,7 +670,7 @@ img {
 .m-head {
     font-family: 'Microsoft YaHei', '\5fae\8f6f\96c5\9ed1', arial, '\5b8b\4f53';
     background-color: #fff;
-    border-bottom: solid 2px #ff8200
+    border-bottom: solid 2px #00a65a
 }
 
 .m-head .g-in {
@@ -715,7 +716,7 @@ img {
 }
 
 .m-head .nav .crt a {
-    color: #ff8200;
+    color: #00a65a;
     background: url(../image/common/sprites.gif?v=i5HzgjlmHGFbvibKs3o7pQ%3D%3D) center -182px no-repeat
 }
 
@@ -841,7 +842,7 @@ img {
     height: 40px;
     /* line-height: 40px; */
     font-size: 18px;
-    color: #ff8200;
+    color: #00a65a;
     font-weight: bold;
     background: url(../image/common/sprites_menu.png?v=cRrVkj9fNkoztYd2Di3pIg%3D%3D) 0 0 no-repeat;
     background-position: 0 8px
@@ -882,9 +883,9 @@ img {
 }
 
 .m-s-menu li.crt a {
-    /* color: #ff8200;
+    /* color: #00a65a;
                 font-weight: bold; */
-    color: #ff8200;
+    color: #00a65a;
     font-weight: bold;
     line-height: 20px;
     padding-left: 10px;
@@ -898,7 +899,7 @@ img {
 }
 
 .m-s-menu li a:hover {
-    color: #ff8200;
+    color: #00a65a;
 }
 
 .m-s-menu li .icon-new {
@@ -938,7 +939,7 @@ img {
 
 .m-s-menu .feedback .pen a {
     padding-right: 14px;
-    color: #ff8200;
+    color: #00a65a;
     background: url(../image/common/sprites.gif?v=i5HzgjlmHGFbvibKs3o7pQ%3D%3D) right -207px no-repeat
 }
 
@@ -982,7 +983,7 @@ img {
 }
 
 .m-ad-lg .m-side .hd li.crt {
-    background-color: #ff8200
+    background-color: #00a65a
 }
 
 .m-ad-lg .m-count {
@@ -1246,7 +1247,7 @@ img {
 .m-tabs li a:hover {
     color: #000;
     background-color: #fff;
-    border-top-color: #ff8200;
+    border-top-color: #00a65a;
     border-bottom-color: #fff
 }
 
@@ -1290,13 +1291,13 @@ img {
 .m-pagenavi a:hover,
 .m-pagenavi a.crt,
 .m-pagenavi a:active {
-    border-color: #ff8200
+    border-color: #00a65a
 }
 
 .m-pagenavi a.crt,
 .m-pagenavi a:active {
     color: #fff;
-    background-color: #ff8200
+    background-color: #00a65a
 }
 
 .m-pagenavi .p,
@@ -1311,7 +1312,7 @@ img {
 .m-pagenavi .n:hover,
 .m-pagenavi .p:active,
 .m-pagenavi .n:active {
-    color: #ff8200;
+    color: #00a65a;
     background-color: #efefef;
     border-color: #efefef
 }
@@ -1350,7 +1351,7 @@ img {
     height: 31px;
     line-height: 31px;
     color: #fff;
-    background-color: #ff8200
+    background-color: #00a65a
 }
 
 .m-alert .hd h4 {
@@ -1486,7 +1487,7 @@ img {
     margin-top: -50px;
     margin-left: -110px;
     background: white url(../image/common/icon-load.gif?v=P7B89nJuqOnAsvVIZbJRTA%3D%3D) 55px 40px no-repeat;
-    border: 1px solid #ff8200;
+    border: 1px solid #00a65a;
     box-shadow: -4px 4px 0 rgba(255, 130, 0, 0.1)
 }
 
@@ -1575,7 +1576,7 @@ dl.u-list dd {
 .u-tt-lg,
 .u-tt-xl {
     font-family: 'Microsoft YaHei', '\5fae\8f6f\96c5\9ed1', arial, '\5b8b\4f53';
-    color: #ff8200;
+    color: #00a65a;
     font-weight: bold;
 }
 
@@ -1620,15 +1621,15 @@ dl.u-list dd {
 
 .u-btn:hover,
 .u-btn.hover {
-    color: #ff8200;
-    border-color: #ff8200
+    color: #00a65a;
+    border-color: #00a65a
 }
 
 .u-btn:active,
 .u-btn.active {
     color: #fff;
-    background-color: #ff8200;
-    border-color: #ff8200
+    background-color: #00a65a;
+    border-color: #00a65a
 }
 
 .u-btn.active:hover {
@@ -1682,7 +1683,7 @@ dl.u-list dd {
 .u-ipt:focus,
 .u-ipt.focus {
     background-position: 0 -30px;
-    border-color: #ff8200
+    border-color: #00a65a
 }
 
 .u-rad,
@@ -1802,7 +1803,7 @@ dl.u-list dd {
 }
 
 .u-tab tfoot tr {
-    color: #ff8200
+    color: #00a65a
 }
 
 .u-noContent {
@@ -1813,7 +1814,7 @@ dl.u-list dd {
 }
 
 .u-noContent a {
-    color: #ff8200
+    color: #00a65a
 }
 
 .u-noContent a:hover {
@@ -1874,7 +1875,7 @@ dl.u-list dd {
 }
 
 .s-fc6 {
-    color: #ff8200
+    color: #00a65a
 }
 
 .m-head .addFile {
@@ -2022,7 +2023,7 @@ dl.u-list dd {
 }
 
 .m-ls-rank h3 .crt {
-    color: #ff8200
+    color: #00a65a
 }
 
 .m-ls-rank h4 {
@@ -2120,7 +2121,7 @@ dl.u-list dd {
     height: 15px;
     line-height: 15px;
     border-radius: 50%;
-    background: #ff8200;
+    background: #00a65a;
     color: #fff;
     font-size: 12px;
     text-align: center
@@ -2160,7 +2161,7 @@ dl.u-list dd {
 }
 
 .m-sticky .img:hover {
-    border-color: #ff8200
+    border-color: #00a65a
 }
 
 .m-sticky .cnt {
@@ -2206,7 +2207,7 @@ dl.u-list dd {
 }
 
 .m-ls-pop .img:hover {
-    border-color: #ff8200
+    border-color: #00a65a
 }
 
 .m-ls-pop .img img {
@@ -2230,7 +2231,7 @@ dl.u-list dd {
     right: -28px;
     float: right;
     width: 28px;
-    color: #ff8200;
+    color: #00a65a;
     text-align: right
 }
 
@@ -2284,7 +2285,7 @@ dl.u-list dd {
 }
 
 .m-course .u-tit .note a:hover {
-    color: #ff8200
+    color: #00a65a
 }
 
 .m-course .u-tit .nav {
@@ -2354,7 +2355,7 @@ dl.u-list dd {
 .m-user-info .info .title .name {
     float: left;
     font-size: 18px;
-    color: #ff8200
+    color: #00a65a
 }
 
 .m-user-info .info .title .word {
@@ -2434,7 +2435,7 @@ dl.u-list dd {
 }
 
 .m-user-info .list-main .f-tdu:hover {
-    color: #ff8200
+    color: #00a65a
 }
 
 .m-user-info .list-main .tips {
@@ -2452,7 +2453,7 @@ dl.u-list dd {
 .m-user-info .list-main .clock1 {
     padding-left: 15px;
     background: url(../image/menber/ue/clock1.png?v=uGh3MIGYwCjBSGbPBhOi2g%3D%3D) 0 center no-repeat;
-    color: #ff8200
+    color: #00a65a
 }
 
 .m-user-info .list-main .clock2 {
@@ -2462,7 +2463,7 @@ dl.u-list dd {
 }
 
 .m-user-info .list-main .f-c1 {
-    color: #ff8200
+    color: #00a65a
 }
 
 .m-user-info .list-main .f-c2 {
@@ -2559,7 +2560,7 @@ dl.u-list dd {
 }
 
 .m-user-info .complex1 .u-see-plan {
-    color: #ff8200;
+    color: #00a65a;
     display: inline-block;
     margin-top: 5px
 }
@@ -2623,7 +2624,7 @@ dl.u-list dd {
 }
 
 .m-user-info .complex2 .u-see-plan {
-    color: #ff8200;
+    color: #00a65a;
     display: inline-block;
     margin-top: 5px
 }
@@ -2721,7 +2722,7 @@ dl.u-list dd {
 }
 
 .m-courses-item .avatar:hover {
-    border-color: #ff8200
+    border-color: #00a65a
 }
 
 .m-courses-item .avatar img {
@@ -2757,7 +2758,7 @@ dl.u-list dd {
 
 .m-courses-item .list-main .get {
     text-indent: 1.2em;
-    color: #ff8200;
+    color: #00a65a;
     background: url(../image/menber/up/icon-get.gif?v=xRkb%2FA1fzLtNewxzS5uCqg%3D%3D) 0 center no-repeat
 }
 
@@ -2848,7 +2849,7 @@ dl.u-list dd {
 }
 
 .m-courses-item .look_study h3 {
-    color: #ff8200;
+    color: #00a65a;
     padding-top: 2px
 }
 
@@ -3134,7 +3135,7 @@ dl.u-list dd {
 }
 
 .m-u-octop .oc_slide .time .oc_date {
-    background: #ff8200;
+    background: #00a65a;
     color: #fff;
     padding: 0 7px;
     border-radius: 2px;
@@ -3257,7 +3258,7 @@ dl.u-list dd {
 }
 
 .m-interest .tit .f-fr:hover {
-    color: #ff8200
+    color: #00a65a
 }
 
 .m-interest .bd {
@@ -3279,7 +3280,7 @@ dl.u-list dd {
 }
 
 .m-interest .img:hover {
-    border-color: #ff8200
+    border-color: #00a65a
 }
 
 .m-interest .img img {
@@ -3585,7 +3586,7 @@ dl.u-list dd {
 }
 
 .m-dialog .grade h3 {
-    color: #ff8200;
+    color: #00a65a;
     font-size: 16px;
     margin: -9px 0 5px 0
 }
@@ -3687,7 +3688,7 @@ dl.u-list dd {
 }
 
 .m-dialog .grade-zj h3 {
-    color: #ff8200;
+    color: #00a65a;
     font-size: 16px;
     margin: -9px 0 10px 0
 }
@@ -3836,7 +3837,7 @@ dl.u-list dd {
 }
 
 .m-dialog .certificate .title {
-    color: #ff8200;
+    color: #00a65a;
     margin-top: 20px;
     margin-bottom: 20px
 }
@@ -4016,7 +4017,7 @@ dl.u-list dd {
 }
 
 .m-dialog .pay-result-new .crt {
-    color: #ff8200
+    color: #00a65a
 }
 
 .m-dialog .pay-result-new .line {
@@ -4503,7 +4504,7 @@ dl.u-list dd {
 
 .m-quacourse .m-title .u-title {
     font-size: 18px;
-    color: #ff8200
+    color: #00a65a
 }
 
 .m-quacourse .m-mn {
@@ -4520,7 +4521,7 @@ dl.u-list dd {
 }
 
 .m-quacourse .m-mn .u-text .u-ora {
-    color: #ff8200
+    color: #00a65a
 }
 
 .m-quacourse .m-mn .u-text2 {
@@ -4530,7 +4531,7 @@ dl.u-list dd {
 }
 
 .m-quacourse .m-mn .u-btn {
-    background: #ff8200;
+    background: #00a65a;
     font-size: 14px;
     color: #fff;
     text-align: center;
@@ -4613,7 +4614,7 @@ dl.u-list dd {
     font-family: "Microsoft YaHei";
     text-align: center;
     margin: auto;
-    background: #ff8200;
+    background: #00a65a;
     border-radius: 3px
 }
 
@@ -5149,7 +5150,7 @@ dl.u-list dd {
 }
 
 .m-timetable .m-t-info .u-ac {
-    color: #ff8200;
+    color: #00a65a;
     text-decoration: underline
 }
 
@@ -5214,7 +5215,7 @@ dl.u-list dd {
 
 .m-timetable .m-table-2 th.active {
     color: #fff;
-    background: #ff8200
+    background: #00a65a
 }
 
 .m-timetable .m-table-2 td {
@@ -5245,8 +5246,8 @@ dl.u-list dd {
 }
 
 .m-timetable .m-table-2 td.active {
-    border: 1px solid #ff8200;
-    border-left: 1px solid #ff8200;
+    border: 1px solid #00a65a;
+    border-left: 1px solid #00a65a;
     border-top: none;
     padding: 4px 0 2px
 }
@@ -5458,13 +5459,13 @@ dl.u-list dd {
 }
 
 .m-user-banner .read {
-    color: #ff8200;
-    border: 1px solid #ff8200;
+    color: #00a65a;
+    border: 1px solid #00a65a;
     background-position: 40px 13px
 }
 
 .m-user-banner .read a {
-    color: #ff8200
+    color: #00a65a
 }
 
 .m-user-banner .read span {
@@ -5502,7 +5503,7 @@ dl.u-list dd {
 }
 
 .m-dialog .grade h3 {
-    color: #ff8200;
+    color: #00a65a;
     font-size: 16px
 }
 
@@ -5555,8 +5556,8 @@ dl.u-list dd {
 .m-dialog .grade .add-tab ul .on,
 .m-dialog .grade .add-tab-sec ul .on {
     color: #fff;
-    background: #ff8200;
-    border: 1px solid #ff8200
+    background: #00a65a;
+    border: 1px solid #00a65a
 }
 
 .m-dialog .grade .grade-input {
@@ -5625,7 +5626,7 @@ dl.u-list dd {
 }
 
 .teacher-dialog .teacher .img:hover {
-    border-color: #ff8200
+    border-color: #00a65a
 }
 
 .teacher-dialog .teacher .img img {
@@ -5678,7 +5679,7 @@ dl.u-list dd {
 .teacher-dialog .teacher .num {
     width: 28px;
     font-size: 13px;
-    color: #ff8200
+    color: #00a65a
 }
 
 .teacher-dialog .teacher ul {
@@ -5826,7 +5827,7 @@ dl.u-list dd {
 
 .pt-newclass .tit {
     font-size: 13px;
-    color: #ff8200;
+    color: #00a65a;
     margin: 0 0 20px 20px
 }
 
@@ -5870,7 +5871,7 @@ dl.u-list dd {
     border-radius: 3px;
     font-size: 14px;
     color: #fff;
-    background-color: #ff8200;
+    background-color: #00a65a;
     text-align: center;
     margin-left: 53px
 }
@@ -5978,7 +5979,7 @@ dl.u-list dd {
     border-radius: 3px;
     text-align: center;
     color: #FFFFFF;
-    background-color: #ff8200;
+    background-color: #00a65a;
     margin-top: 40px;
     margin-right: -3px
 }
@@ -5999,7 +6000,7 @@ dl.u-list dd {
     line-height: 31px;
     width: 100%;
     height: 31px;
-    background-color: #ff8200;
+    background-color: #00a65a;
     color: #fff
 }
 
@@ -6049,7 +6050,7 @@ dl.u-list dd {
     position: absolute;
     left: 445px;
     top: 243px;
-    border: 1px dashed #ff8200;
+    border: 1px dashed #00a65a;
     width: 100px;
     height: 100px
 }
@@ -6140,7 +6141,7 @@ dl.u-list dd {
     width: 99px;
     height: 30px;
     line-height: 30px;
-    background: #ff8200;
+    background: #00a65a;
     border-radius: 3px;
     color: #fff;
     filter: alpha(opacity=100);
@@ -6241,7 +6242,7 @@ dl.u-list dd {
 .add-u-tit span {
     float: left;
     font-size: 16px;
-    color: #ff8200
+    color: #00a65a
 }
 
 .add-u-tit .rt-tit {
@@ -6249,7 +6250,7 @@ dl.u-list dd {
 }
 
 .add-u-tit .rt-tit:hover {
-    color: #ff8200
+    color: #00a65a
 }
 
 .m-ls-rank .add-crt-jsTab1 li {
@@ -6315,7 +6316,7 @@ dl.u-list dd {
 
 .add-pay-class .oc_info .add-pay-m .add-pay-now {
     font-size: 20px;
-    color: #ff8200;
+    color: #00a65a;
     margin-right: 3px;
     float: left
 }
@@ -6367,7 +6368,7 @@ dl.u-list dd {
 }
 
 .add-pay-cb ul .add-pay-top .add-pay-text .open-pay {
-    color: #ff8200;
+    color: #00a65a;
     margin-right: 5px
 }
 
@@ -6380,7 +6381,7 @@ dl.u-list dd {
 .add-pay-cb ul .add-pay-top .add-pay-text .add-pay-y {
     float: right;
     padding: 4px 12px 3px;
-    background-color: #ff8200;
+    background-color: #00a65a;
     color: #fff;
     margin-top: 3px;
     font-size: 13px;
@@ -6404,7 +6405,7 @@ dl.u-list dd {
 .add-dialog .new-bdshare span {
     float: left;
     font-size: 13px;
-    color: #ff8200;
+    color: #00a65a;
     margin: 5px 0 0 15px
 }
 
@@ -6574,7 +6575,7 @@ dl.u-list dd {
 }
 
 .ly_xbk li .ly_txt .will_get {
-    background-color: #ff8200
+    background-color: #00a65a
 }
 
 .ly_xbk li .ly_txt .yet_get,
@@ -6602,7 +6603,7 @@ dl.u-list dd {
     font-size: 24px;
     padding: 50px 0;
     text-align: center;
-    color: #ff8200;
+    color: #00a65a;
     font-family: 'Microsoft YaHei', '微软雅黑', arial, '宋体'
 }
 
@@ -6660,20 +6661,20 @@ dl.u-list dd {
 }
 
 .u_box dd:hover {
-    border-color: #ff8200;
-    color: #ff8200
+    border-color: #00a65a;
+    color: #00a65a
 }
 
 .u_box dd.u_active {
     color: #fff;
-    background-color: #ff8200;
-    border-color: #ff8200
+    background-color: #00a65a;
+    border-color: #00a65a
 }
 
 .u_mybtn {
     width: 184px;
     height: 46px;
-    background-color: #ff8200;
+    background-color: #00a65a;
     color: #fff;
     text-align: center;
     line-height: 46px;
@@ -6910,7 +6911,7 @@ dl.u-list dd {
 #expired_pop .ft .sibmit span {
     border: none;
     color: #ffffff;
-    background-color: #ff8200
+    background-color: #00a65a
 }
 
 .clearfix:after {
@@ -7262,7 +7263,7 @@ dl.u-list dd {
     border: 1px solid #ccc;
     border-left: none;
     line-height: 28px;
-    color: #ff8200
+    color: #00a65a
 }
 
 .m-dialog .m-all-englist .engList .tri {
@@ -7276,25 +7277,25 @@ dl.u-list dd {
 }
 
 .m-dialog .m-all-englist .engList .nameBox .nameTab .names {
-    border: 1px solid #ff8200
+    border: 1px solid #00a65a
 }
 
 .m-dialog .m-all-englist .engList .nameBox .nameTab .names a {
-    color: #ff8200
+    color: #00a65a
 }
 
 .m-dialog .m-all-englist .engList .nameBox .nameTab .names .active {
-    background-color: #ff8200;
+    background-color: #00a65a;
     color: #fff
 }
 
 .m-dialog .m-all-englist .engList .nameBox .nameTab .refresh {
     background: url(../image/menber/ue/name_refresh2.png?v=zDjdD6JnGqlSvHtF4RRoaQ%3D%3D) left center no-repeat;
-    color: #ff8200
+    color: #00a65a
 }
 
 .m-dialog .m-all-englist .engList .nameBox .namesList li a:hover {
-    color: #ff8200
+    color: #00a65a
 }
 
 .m-addadult-name {
@@ -7303,7 +7304,7 @@ dl.u-list dd {
     background-color: #fff9f2;
     margin-bottom: 10px;
     position: relative;
-    color: #ff8200
+    color: #00a65a
 }
 
 .m-addadult-name .title {
@@ -7401,8 +7402,8 @@ dl.u-list dd {
     width: 87px;
     height: 28px;
     line-height: 28px;
-    border: 1px solid #ff8200;
-    color: #ff8200;
+    border: 1px solid #00a65a;
+    color: #00a65a;
     background-color: #fff;
     text-align: center
 }
@@ -7435,7 +7436,7 @@ dl.u-list dd {
     float: left;
     margin-left: 19px;
     width: 164px;
-    border: 1px solid #ff8200;
+    border: 1px solid #00a65a;
     border-radius: 2px
 }
 
@@ -7446,12 +7447,12 @@ dl.u-list dd {
     height: 28px;
     text-align: center;
     line-height: 28px;
-    color: #ff8200;
+    color: #00a65a;
     vertical-align: middle
 }
 
 .m-addadult-name .m-list .enameBox .nameTab .names .active {
-    background-color: #ff8200;
+    background-color: #00a65a;
     color: #fff
 }
 
@@ -7463,7 +7464,7 @@ dl.u-list dd {
     margin-right: 14px;
     background: url(../image/menber/ue/name_refresh2.png?v=zDjdD6JnGqlSvHtF4RRoaQ%3D%3D) left center no-repeat;
     text-align: right;
-    color: #ff8200
+    color: #00a65a
 }
 
 .m-addadult-name .m-list .enameBox .u-loadding {
@@ -7498,7 +7499,7 @@ dl.u-list dd {
 }
 
 .m-addadult-name .m-list .enameBox .namesList li a:hover {
-    color: #ff8200
+    color: #00a65a
 }
 
 .m-addadult-name .subtn {
@@ -7509,7 +7510,7 @@ dl.u-list dd {
     display: block;
     line-height: 30px;
     text-align: center;
-    background-color: #ff8200;
+    background-color: #00a65a;
     color: #fff
 }
 
@@ -7519,7 +7520,7 @@ dl.u-list dd {
     border: 1px solid #ffb66a;
     background-color: #fff9f2;
     margin-bottom: 10px;
-    color: #ff8200
+    color: #00a65a
 }
 
 .m-addyoung-name .title {
@@ -7664,8 +7665,8 @@ dl.u-list dd {
     width: 87px;
     height: 28px;
     line-height: 28px;
-    border: 1px solid #ff8200;
-    color: #ff8200;
+    border: 1px solid #00a65a;
+    color: #00a65a;
     background-color: #fff;
     text-align: center
 }
@@ -7708,7 +7709,7 @@ dl.u-list dd {
     float: left;
     margin-left: 19px;
     width: 164px;
-    border: 1px solid #ff8200;
+    border: 1px solid #00a65a;
     border-radius: 2px
 }
 
@@ -7719,12 +7720,12 @@ dl.u-list dd {
     height: 28px;
     text-align: center;
     line-height: 28px;
-    color: #ff8200;
+    color: #00a65a;
     vertical-align: middle
 }
 
 .m-addyoung-name .m-list .enameBox .nameTab .names .active {
-    background-color: #ff8200;
+    background-color: #00a65a;
     color: #fff
 }
 
@@ -7736,7 +7737,7 @@ dl.u-list dd {
     margin-right: 14px;
     background: url(../image/menber/ue/name_refresh2.png?v=zDjdD6JnGqlSvHtF4RRoaQ%3D%3D) left center no-repeat;
     text-align: right;
-    color: #ff8200
+    color: #00a65a
 }
 
 .m-addyoung-name .m-list .enameBox .u-loadding {
@@ -7771,7 +7772,7 @@ dl.u-list dd {
 }
 
 .m-addyoung-name .m-list .enameBox .namesList li a:hover {
-    color: #ff8200
+    color: #00a65a
 }
 
 .m-addyoung-name .subtn {
@@ -7782,7 +7783,7 @@ dl.u-list dd {
     display: block;
     line-height: 30px;
     text-align: center;
-    background-color: #ff8200;
+    background-color: #00a65a;
     color: #fff
 }
 
@@ -7871,7 +7872,7 @@ dl.u-list dd {
 
 .date_selector .button:hover,
 .date_selector .button.hover {
-    background: #ff8200;
+    background: #00a65a;
     color: #fff;
     cursor: pointer;
     border-color: #ccc
@@ -7929,14 +7930,14 @@ dl.u-list dd {
 }
 
 .date_selector td.selected {
-    background: #ff8200;
+    background: #00a65a;
     color: white;
     font-weight: bold
 }
 
 .date_selector td.selectable_day:hover,
 .date_selector td.selectable_day.hover {
-    background: #ff8200;
+    background: #00a65a;
     color: white
 }
 
@@ -7972,11 +7973,11 @@ dl.u-list dd {
 }
 
 .m-u-octop .oc_info1 .add_course_w a:hover {
-    color: #ff8200
+    color: #00a65a
 }
 
 .m-u-octop .oc_info1 .add_course_w:hover {
-    color: #ff8200
+    color: #00a65a
 }
 
 .m-u-octop .oc_info1 .op_c_t {
@@ -7996,7 +7997,7 @@ dl.u-list dd {
 }
 
 .m-u-octop .oc_info1 .add_c_pass .add_c_p {
-    color: #ff8200;
+    color: #00a65a;
     display: inline-block;
     line-height: 1;
     width: 100%;
@@ -8054,7 +8055,7 @@ dl.u-list dd {
     bottom: 95px;
     padding: 12px 48px;
     color: #fff;
-    background: #ff8200;
+    background: #00a65a;
     border-radius: 4px;
     -moz-border-radius: 4px
 }
@@ -8642,7 +8643,7 @@ dl.u-list dd {
 }
 
 .cs_mask h3 {
-    color: #ff8200;
+    color: #00a65a;
     font-size: 18px
 }
 
@@ -9378,7 +9379,7 @@ dl.u-list dd {
 .b-last-record .b-tit {
     height: 20px;
     margin-bottom: 20px;
-    color: #ff8200;
+    color: #00a65a;
     font-size: 16px;
     line-height: 20px
 }
@@ -9390,7 +9391,7 @@ dl.u-list dd {
 }
 
 .b-last-record .b-tit .b-more:hover {
-    color: #ff8200
+    color: #00a65a
 }
 
 .b-last-record .b-info {
@@ -9411,7 +9412,7 @@ dl.u-list dd {
 }
 
 .b-last-record .b-info-teacher .b-head:hover {
-    border-color: #ff8200
+    border-color: #00a65a
 }
 
 .b-last-record .b-info-teacher .b-name {
@@ -9481,19 +9482,19 @@ dl.u-list dd {
 
 .b-link-wrap .b-report {
     color: #fff;
-    background-color: #ff8200;
-    border-color: #ff8200
+    background-color: #00a65a;
+    border-color: #00a65a
 }
 
 .b-link-wrap .b-review {
-    color: #ff8200;
-    border-color: #ff8200
+    color: #00a65a;
+    border-color: #00a65a
 }
 
 .b-link-wrap .b-review:active {
     color: #fff;
-    background-color: #ff8200;
-    border-color: #ff8200
+    background-color: #00a65a;
+    border-color: #00a65a
 }
 
 .clsDialog .hd {
@@ -9524,7 +9525,7 @@ dl.u-list dd {
 
 .aprise {
     font-size: 16px;
-    color: #ff8200;
+    color: #00a65a;
     margin-bottom: 0
 }
 
@@ -10071,7 +10072,7 @@ dl.u-list dd {
 
 #special_pop .ft .sibmit .u-btn {
     color: #ffffff;
-    background-color: #ff8200
+    background-color: #00a65a
 }
 
 .m-school {
@@ -10157,7 +10158,7 @@ dl.u-list dd {
 }
 
 .m-school .dates li:hover {
-    color: #ff8200;
+    color: #00a65a;
     background-position: -98px -77px
 }
 
@@ -10178,7 +10179,7 @@ dl.u-list dd {
 }
 
 .m-school .dates .hover {
-    color: #ff8200;
+    color: #00a65a;
     background-position: -98px -77px
 }
 
@@ -10459,8 +10460,8 @@ dl.u-list dd {
 
 .m-school .success .add_link .parents_m_read {
     color: #fff;
-    background-color: #ff8200;
-    border: 1px solid #ff8200
+    background-color: #00a65a;
+    border: 1px solid #00a65a
 }
 
 .m-school .success .add_marginR {
@@ -10475,9 +10476,9 @@ dl.u-list dd {
 }
 
 .m-school .success .add_bg_color {
-    background-color: #ff8200;
+    background-color: #00a65a;
     color: #fff;
-    border-color: #ff8200
+    border-color: #00a65a
 }
 
 .m-school .success .add_marginLN {
@@ -10518,7 +10519,7 @@ dl.u-list dd {
     height: 15px;
     line-height: 15px;
     border-radius: 50%;
-    background: #ff8200;
+    background: #00a65a;
     color: #fff;
     text-align: center
 }
@@ -10554,7 +10555,7 @@ dl.u-list dd {
 
 .m-school .free .tit span {
     font-size: 16px;
-    color: #ff8200;
+    color: #00a65a;
     padding-right: 12px;
     float: left
 }
@@ -10635,7 +10636,7 @@ dl.u-list dd {
 }
 
 .m-school .free .u-btn {
-    background-color: #ff8200;
+    background-color: #00a65a;
     border: none;
     color: #fff;
     padding: 0 24px;
@@ -10645,7 +10646,7 @@ dl.u-list dd {
 }
 
 .m-school .free .u-btn:hover {
-    border-color: #ff8200;
+    border-color: #00a65a;
     color: #fff
 }
 
@@ -10710,7 +10711,7 @@ dl.u-list dd {
 }
 
 .m-school .soft-down dd a:hover {
-    border-color: #ff8200
+    border-color: #00a65a
 }
 
 .m-school .soft-down .lines a {
@@ -10876,7 +10877,7 @@ dl.u-list dd {
     float: left;
     height: 30px;
     line-height: 30px;
-    color: #ff8200
+    color: #00a65a
 }
 
 .add_g_list {
@@ -10946,13 +10947,13 @@ dl.u-list dd {
 
 .m-school .add_chinaTt .add_chinaT_a {
     background-color: #fff;
-    border-top: 1px solid #ff8200;
+    border-top: 1px solid #00a65a;
     border-right: 1px solid #e4eaee;
     border-left: 1px solid #e4eaee;
     margin-left: -1px;
     padding-top: 0;
     padding-right: 25px;
-    color: #ff8200
+    color: #00a65a
 }
 
 .m-school .add_chinaTb .add_onlyD {
@@ -10964,14 +10965,14 @@ dl.u-list dd {
 }
 
 .m-school .add_chinaTb .add_onlyD a {
-    color: #ff8200
+    color: #00a65a
 }
 
 .m-school .add_chinaTb .add_ct {
     height: 34px;
     font-size: 13px;
     padding-top: 20px;
-    color: #ff8200
+    color: #00a65a
 }
 
 .m-school .add_chinaTb .add_import {
@@ -10988,7 +10989,7 @@ dl.u-list dd {
 }
 
 .m-school .add_broadTb .add_down {
-    color: #ff8200;
+    color: #00a65a;
     padding-left: 10px
 }
 

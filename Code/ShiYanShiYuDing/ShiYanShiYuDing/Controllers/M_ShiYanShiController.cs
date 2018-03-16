@@ -22,10 +22,15 @@ namespace ShiYanShiYuDing.Controllers
         public IQueryable<object> GetM_ShiYanShi()
         {
             return from sys in db.M_ShiYanShi
+                   orderby sys.louceng 
                    select new
                    {
                        sys.zidongbianhao,
-                       sys.mingzi
+                       sys.mingzi,
+                       sys.louceng,
+                       sys.miaoshu,
+                       sys.tupian,
+                       sys.fuzeren
                    };
         }
 
@@ -60,6 +65,13 @@ namespace ShiYanShiYuDing.Controllers
             old.mingzi = m_ShiYanShi.mingzi;
             old.shifoutingyong = m_ShiYanShi.shifoutingyong;
             old.gengxinriqi = m_ShiYanShi.gengxinriqi;
+            old.louceng = m_ShiYanShi.louceng;
+            old.fuzeren = m_ShiYanShi.fuzeren;
+            if (!string.IsNullOrEmpty(m_ShiYanShi.tupian))
+            {
+                old.tupian = m_ShiYanShi.tupian;
+
+            }
             db.Entry(old).State = EntityState.Modified;
 
             //db.Entry(m_ShiYanShi).State = EntityState.Modified;

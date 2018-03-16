@@ -14,6 +14,10 @@
           <Property Name="shifoutingyong" Type="bit" />
           <Property Name="shifoushanchu" Type="bit" Nullable="false" />
           <Property Name="gengxinriqi" Type="datetime" />
+          <Property Name="louceng" Type="int" />
+          <Property Name="miaoshu" Type="nvarchar" MaxLength="300" />
+          <Property Name="tupian" Type="nvarchar" MaxLength="300" />
+          <Property Name="fuzeren" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="M_ZuoWei">
           <Key>
@@ -37,6 +41,8 @@
           <Property Name="kaishiriqi" Type="datetime" Nullable="false" />
           <Property Name="jieshuriqi" Type="datetime" Nullable="false" />
           <Property Name="gengxinriqi" Type="datetime" Nullable="false" />
+          <Property Name="kaishizhou" Type="int" />
+          <Property Name="jieshuzhou" Type="int" />
         </EntityType>
         <EntityType Name="T_YuYue">
           <Key>
@@ -54,6 +60,15 @@
           <Property Name="zhidaojiaoshi" Type="nvarchar" MaxLength="100" />
           <Property Name="banji" Type="nvarchar" MaxLength="100" />
           <Property Name="xueshengxingming" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="T_ZiYuan">
+          <Key>
+            <PropertyRef Name="zidongbianhao" />
+          </Key>
+          <Property Name="zidongbianhao" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="biaoti" Type="nvarchar" MaxLength="120" Nullable="false" />
+          <Property Name="shuoming" Type="nvarchar" MaxLength="500" />
+          <Property Name="url" Type="nchar" MaxLength="300" />
         </EntityType>
         <Association Name="FK_M_ZuoWei_M_ShiYanShi">
           <End Role="M_ShiYanShi" Type="Self.M_ShiYanShi" Multiplicity="1" />
@@ -108,6 +123,7 @@
           <EntitySet Name="M_ZuoWei" EntityType="Self.M_ZuoWei" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="T_ShiYanShiBuKeYongShiJian" EntityType="Self.T_ShiYanShiBuKeYongShiJian" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="T_YuYue" EntityType="Self.T_YuYue" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="T_ZiYuan" EntityType="Self.T_ZiYuan" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_M_ZuoWei_M_ShiYanShi" Association="Self.FK_M_ZuoWei_M_ShiYanShi">
             <End Role="M_ShiYanShi" EntitySet="M_ShiYanShi" />
             <End Role="M_ZuoWei" EntitySet="M_ZuoWei" />
@@ -141,6 +157,10 @@
           <NavigationProperty Name="M_ZuoWei" Relationship="Self.FK_M_ZuoWei_M_ShiYanShi" FromRole="M_ShiYanShi" ToRole="M_ZuoWei" />
           <NavigationProperty Name="T_ShiYanShiBuKeYongShiJian" Relationship="ShiYanShiModel.FK_T_ShiYanShiBuKeYongShiJian_M_ShiYanShi" FromRole="M_ShiYanShi" ToRole="T_ShiYanShiBuKeYongShiJian" />
           <NavigationProperty Name="T_YuYue" Relationship="ShiYanShiModel.FK_T_YuYue_M_ShiYanShi" FromRole="M_ShiYanShi" ToRole="T_YuYue" />
+          <Property Name="louceng" Type="Int32" />
+          <Property Name="miaoshu" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="tupian" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="fuzeren" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="M_ZuoWei">
           <Key>
@@ -180,6 +200,7 @@
             <End Role="M_ZuoWei" EntitySet="M_ZuoWei" />
             <End Role="T_YuYue" EntitySet="T_YuYue" />
           </AssociationSet>
+          <EntitySet Name="T_ZiYuan" EntityType="ShiYanShiModel.T_ZiYuan" />
         </EntityContainer>
         <EntityType Name="T_ShiYanShiBuKeYongShiJian">
           <Key>
@@ -191,6 +212,8 @@
           <Property Name="jieshuriqi" Type="DateTime" Precision="3" Nullable="false" />
           <Property Name="gengxinriqi" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="M_ShiYanShi" Relationship="ShiYanShiModel.FK_T_ShiYanShiBuKeYongShiJian_M_ShiYanShi" FromRole="T_ShiYanShiBuKeYongShiJian" ToRole="M_ShiYanShi" />
+          <Property Name="kaishizhou" Type="Int32" />
+          <Property Name="jieshuzhou" Type="Int32" />
         </EntityType>
         <Association Name="FK_T_ShiYanShiBuKeYongShiJian_M_ShiYanShi">
           <End Type="ShiYanShiModel.M_ShiYanShi" Role="M_ShiYanShi" Multiplicity="1" />
@@ -221,6 +244,15 @@
           <End Type="ShiYanShiModel.M_ZuoWei" Role="M_ZuoWei" Multiplicity="1" />
           <End Type="ShiYanShiModel.T_YuYue" Role="T_YuYue" Multiplicity="*" />
         </Association>
+        <EntityType Name="T_ZiYuan">
+          <Key>
+            <PropertyRef Name="zidongbianhao" />
+          </Key>
+          <Property Name="zidongbianhao" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="biaoti" Type="String" Nullable="false" MaxLength="120" FixedLength="false" Unicode="true" />
+          <Property Name="shuoming" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="url" Type="String" MaxLength="300" FixedLength="true" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -230,6 +262,10 @@
           <EntitySetMapping Name="M_ShiYanShi">
             <EntityTypeMapping TypeName="ShiYanShiModel.M_ShiYanShi">
               <MappingFragment StoreEntitySet="M_ShiYanShi">
+                <ScalarProperty Name="fuzeren" ColumnName="fuzeren" />
+                <ScalarProperty Name="tupian" ColumnName="tupian" />
+                <ScalarProperty Name="miaoshu" ColumnName="miaoshu" />
+                <ScalarProperty Name="louceng" ColumnName="louceng" />
                 <ScalarProperty Name="zidongbianhao" ColumnName="zidongbianhao" />
                 <ScalarProperty Name="mingzi" ColumnName="mingzi" />
                 <ScalarProperty Name="shifoutingyong" ColumnName="shifoutingyong" />
@@ -261,6 +297,8 @@
           <EntitySetMapping Name="T_ShiYanShiBuKeYongShiJian">
             <EntityTypeMapping TypeName="ShiYanShiModel.T_ShiYanShiBuKeYongShiJian">
               <MappingFragment StoreEntitySet="T_ShiYanShiBuKeYongShiJian">
+                <ScalarProperty Name="jieshuzhou" ColumnName="jieshuzhou" />
+                <ScalarProperty Name="kaishizhou" ColumnName="kaishizhou" />
                 <ScalarProperty Name="gengxinriqi" ColumnName="gengxinriqi" />
                 <ScalarProperty Name="jieshuriqi" ColumnName="jieshuriqi" />
                 <ScalarProperty Name="kaishiriqi" ColumnName="kaishiriqi" />
@@ -309,6 +347,16 @@
               <ScalarProperty Name="zidongbianhao" ColumnName="zuoweibianhao" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="T_ZiYuan">
+            <EntityTypeMapping TypeName="ShiYanShiModel.T_ZiYuan">
+              <MappingFragment StoreEntitySet="T_ZiYuan">
+                <ScalarProperty Name="url" ColumnName="url" />
+                <ScalarProperty Name="shuoming" ColumnName="shuoming" />
+                <ScalarProperty Name="biaoti" ColumnName="biaoti" />
+                <ScalarProperty Name="zidongbianhao" ColumnName="zidongbianhao" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

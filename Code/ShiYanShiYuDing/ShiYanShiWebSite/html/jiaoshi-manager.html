@@ -10,82 +10,105 @@
     <link rel="stylesheet" href="../libs/assets/font-awesome/css/font-awesome.min.css" type="text/css" />
     <link rel="stylesheet" href="../libs/assets/simple-line-icons/css/simple-line-icons.css" type="text/css" />
     <link rel="stylesheet" href="../libs/jquery/bootstrap/dist/css/bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="css/flat/zebra_dialog.min.css" type="text/css">
     <link rel="stylesheet" href="css/font.css" type="text/css" />
     <link rel="stylesheet" href="css/app.css" type="text/css" />
-    
+
 
     <link href="css/site.css" rel="stylesheet" type="text/css" />
     <link href="css/detail.css" rel="stylesheet" type="text/css" />
-	<link rel="stylesheet" href="css/style.css" type="text/css" />
+    <link rel="stylesheet" href="css/style.css" type="text/css" />
+
+    <script src="../libs/jquery/jquery/dist/jquery.js"></script>
+    <script src="../libs/jquery/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="js/ui-load.js"></script>
+    <script src="js/ui-jp.config.js"></script>
+    <script src="js/ui-jp.js"></script>
+    <script src="js/ui-nav.js"></script>
+    <script src="js/ui-toggle.js"></script>
+    <script src="js/ui-client.js"></script>
+    <script src="js/jquery.bootstrap.newsbox.min.js" type="text/javascript"></script>
+    <script src="js/zebra_dialog.min.js"></script>
+    <script src="js/common.js" type="text/javascript"></script>
+    <script src="js/jiaoshi-manager.js" type="text/javascript"></script>
 
 </head>
 
 <body>
     <header id="header" class="app-header navbar" role="menu">
-        <!-- navbar header -->
-        <div class="navbar-header bg-dark">
-            <button class="pull-right visible-xs dk" ui-toggle-class="show" target=".navbar-collapse">
-                <i class="glyphicon glyphicon-cog"></i>
-            </button>
-            <button class="pull-right visible-xs" ui-toggle-class="off-screen" target=".app-aside" ui-scroll="app">
-                <i class="glyphicon glyphicon-align-justify"></i>
-            </button>
-            <!-- brand -->
-            <a href="home.html" class="navbar-brand text-lt">
-
-                <span class="hidden-folded m-l-xs">高校实验室预约系统</span>
-            </a>
-            <!-- / brand -->
-        </div>
-
-
-        <div class="collapse pos-rlt navbar-collapse box-shadow bg-white-only">
-
-            <ul class="nav navbar-nav navbar-right mr20">
-
-                <li class="dropdown">
-                    <a href="#" data-toggle="dropdown" class="dropdown-toggle" aria-expanded="false">
-                        <i class="fa fa-fw fa-plus visible-xs-inline-block"></i>
-                        <span translate="header.navbar.new.NEW">管理员设置</span>
-                        <span class="caret"></span>
+        <div class="navbar navbar-static-top">
+            <div class="container">
+                <div class="navbar-header bg-dark">
+                    <button class="pull-right visible-xs dk" ui-toggle-class="show" target=".navbar-collapse">
+                        <i class="glyphicon glyphicon-cog"></i>
+                    </button>
+                    <button class="pull-right visible-xs" ui-toggle-class="off-screen" target=".app-aside" ui-scroll="app">
+                        <i class="glyphicon glyphicon-align-justify"></i>
+                    </button>
+                    <a href="home.html" class="navbar-brand text-lt">
+                        <span class="hidden-folded m-l-xs">高校实验室预约系统</span>
                     </a>
-                    <ul id="manager" class="dropdown-menu" role="menu">
+                </div>
+
+                <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
+
+                    <ul class="nav navbar-nav navbar-menu">
                         <li>
-                            <a href="jiaoshi-manamer.html">实验室管理</a>
+                            <a href="jiaoshi-manager.html">
+                                <span>实验室管理</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="ziyuan-list.html">
+                                <span>实验室座位管理</span>
+                            </a>
                         </li>
                         <li>
-                            <a href="javascript:">实验室座位管理</a>
+                            <a href="yuyue-manager.html">
+                                <span>预约记录</span>
+                            </a>
                         </li>
+
                         <li>
-                            <a href="jiaoshi-set.html">实验室基础设定</a>
+                            <a href="yuyue-liucheng.html">
+                                <span>预约流程</span>
+                            </a>
                         </li>
 
                     </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="#" data-toggle="dropdown" class="dropdown-toggle" aria-expanded="false">
-                        <i class="fa fa-fw fa-plus visible-xs-inline-block"></i>
-                        <span translate="header.navbar.new.NEW">个人中心</span>
-                        <span class="caret"></span>
-                    </a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li>
-                            <a href="yuyue-manager.html">预约管理</a>
-                        </li>
-                        <li>
-                            <a href="info-change.html">修改个人资料</a>
+                </div>
+
+
+                <div class="navbar-custom-menu hidden-xs">
+                    <ul class="nav navbar-nav">
+
+
+                        <li class="dropdown">
+                            <a href="#" data-toggle="dropdown" class="dropdown-toggle" aria-expanded="false">
+                                <i class="fa fa-fw fa-plus visible-xs-inline-block"></i>
+                                <span translate="header.navbar.new.NEW">
+                                    <img src="img/user.png" class="user-image" alt="User Image"> 个人中心</span>
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+
+                                <li>
+                                    <a href="info-change.html">修改个人资料</a>
+                                </li>
+                                <li>
+                                    <a id="logout" ui-sref="access.signin">退出登录</a>
+                                </li>
+                            </ul>
                         </li>
 
-                        <li>
-                            <a id="logout" ui-sref="access.signin">退出登录</a>
-                        </li>
                     </ul>
-                </li>
-            </ul>
+                </div>
 
-            <!-- / navbar right -->
+
+            </div>
         </div>
-        <!-- / navbar collapse -->
+
     </header>
     <!-- <banner>
         <div class="banner-img"></div>
@@ -120,11 +143,13 @@
                                     <thead>
                                         <tr>
                                             <th>实验室名称</th>
-                                            <th style="width:120px;">操作</th>
+                                            <th style="width:180px;">操作</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-
+                                        <tr>
+                                            <td colspan="2"></td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -132,7 +157,8 @@
                         </div>
 
                         <div class="sibmit f-tac">
-                            <input type="button" value="新 增" class="u-btn md active jsSubmit" data-toggle="modal" data-target="#myModal">
+                            <input type="button" value="新增实验室" class="u-btn md active jsSubmit" data-toggle="modal" data-target="#myModal">
+                            <input type="button" value="新增资源" class="u-btn md active jsSubmit" data-toggle="modal" data-target="#myModal_ziyuan">
                         </div>
                     </div>
                 </form>
@@ -152,11 +178,32 @@
                     <h3 class="modal-title" id="myModalLabel">编辑实验室</h3>
                 </div>
                 <div class="modal-body">
+
                     <input id="M_id" type="hidden" name="">
                     <div class="form-group-info">
                         <label class="control-label">实验室名称</label>
                         <div>
                             <input id="M_mingzi" type="text" class="form-control" placeholder="实验室名称">
+                        </div>
+                    </div>
+                    <div class="form-group-info">
+                        <label class="control-label">楼层</label>
+                        <div>
+                            <select id="M_louceng" class="form-control">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group-info">
+                        <label class="control-label">负责人</label>
+                        <div>
+                            <input id="M_fuzeren" type="text" class="form-control" placeholder="负责人">
                         </div>
                     </div>
                     <div>
@@ -178,6 +225,15 @@
                             </div>
                         </div>
                     </div>
+                    <div class="form-group-info">
+                        <label class="control-label">图片</label>
+                        <div>
+                            <input type="file" id="M_tupian" />
+                        </div>
+                    </div>
+                    <div style="text-align:center; padding-top:30px;">
+                        <img id="M_tupian_show" src="" style="width:340px;height:210px;">
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button id="M_Save" type="button" class="btn btn-primary">保存</button>
@@ -187,17 +243,111 @@
         </div>
     </div>
 
-    <script src="../libs/jquery/jquery/dist/jquery.js"></script>
-    <script src="../libs/jquery/bootstrap/dist/js/bootstrap.js"></script>
-    <script src="js/ui-load.js"></script>
-    <script src="js/ui-jp.config.js"></script>
-    <script src="js/ui-jp.js"></script>
-    <script src="js/ui-nav.js"></script>
-    <script src="js/ui-toggle.js"></script>
-    <script src="js/ui-client.js"></script>
-    <script src="js/jquery.bootstrap.newsbox.min.js" type="text/javascript"></script>
-    <script src="js/common.js" type="text/javascript"></script>
-    <script src="js/jiaoshi-manager.js" type="text/javascript"></script>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal_ziyuan" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div role="document">
+            <div class="modal-content  modal-guanli">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                    <h3 class="modal-title" id="myModalLabel">添加资源</h3>
+                </div>
+                <div class="modal-body">
+
+                    <input id="M_id" type="hidden" name="">
+                    <div class="form-group-info">
+                        <label class="control-label">资源标题</label>
+                        <div>
+                            <input id="M_biaoti" type="text" class="form-control" placeholder="资源标题">
+                        </div>
+                    </div>
+                    <div class="form-group-info">
+                        <label class="control-label">说明</label>
+                        <div>
+                            <textarea id="M_shuoming" class="form-control" rows="3"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group-info">
+                        <label class="control-label">图片</label>
+                        <div>
+                            <input type="file" id="M_tupian_zy" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="M_Save_zy" type="button" class="btn btn-primary">保存</button>
+                    <!-- <button type="button" class="btn btn-primary">退出</button> -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(function() {
+
+            var modal_ziyuan = $("#myModal_ziyuan");
+            modal_ziyuan.on("show.bs.modal", function() {
+                $("#M_biaoti").val('');
+                $("#M_shuoming").val('');
+                $("#M_tupian_zy").val('');
+            });
+            modal_ziyuan.on('hide.bs.modal', function() {
+                $("#M_biaoti").val('');
+                $("#M_shuoming").val('');
+                $("#M_tupian_zy").val('');
+            });
+            $("#M_Save_zy").click(function() {
+
+                var imgFile = document.getElementById("M_tupian_zy").files.length > 0 ? document.getElementById("M_tupian_zy").files[0] : null;
+                if (!imgFile) {
+                    $.Zebra_Dialog('请添加图片。', {
+                        type: 'error',
+                        title: '信息提示'
+                    });
+                    return;
+                } else if (imgFile.size > 1024 * 1024 * 10) {
+                    $.Zebra_Dialog('请上传小于10M的图片。', {
+                        type: 'error',
+                        title: '信息提示'
+                    });
+                    return;
+                }
+                var zy = {
+                    biaoti: $("#M_biaoti").val(),
+                    shuoming: $("#M_shuoming").val(),
+                };
+                var formData = new FormData();
+                formData.append("img", document.getElementById("M_tupian_zy").files[0]);
+                $.ajax({
+                    type: "post",
+                    url: apiUrl + 'Image',
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function(response) {
+                        var imgUrl = apiUrl.replace('api/', 'Imgs/') + response.substring(response.lastIndexOf('\\') + 1);
+                        zy.url = imgUrl;
+                        console.log(imgUrl);
+                        $.ajax({
+                            type: "post",
+                            url: apiUrl + 'T_ZiYuan',
+                            data: zy,
+                            dataType: "json",
+                            success: function(response) {
+                                $('#myModal_ziyuan').modal('hide');
+                            }
+                        });
+                    },
+                    error: function(e) {
+                        $.Zebra_Dialog('图片保存失败', {
+                            type: 'error',
+                            title: '信息提示'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>

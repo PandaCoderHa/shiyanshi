@@ -17,6 +17,8 @@
     <WebStackScaffolding_IsAsyncSelected>True</WebStackScaffolding_IsAsyncSelected>
     <NameOfLastUsedPublishProfile>FolderProfile</NameOfLastUsedPublishProfile>
     <WebStackScaffolding_ViewDialogWidth>600</WebStackScaffolding_ViewDialogWidth>
+    <Controller_SelectedScaffolderID>ApiControllerWithContextScaffolder</Controller_SelectedScaffolderID>
+    <Controller_SelectedScaffolderCategoryPath>root/Controller</Controller_SelectedScaffolderCategoryPath>
   </PropertyGroup>
   <ProjectExtensions>
     <VisualStudio>

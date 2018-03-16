@@ -13,6 +13,7 @@
         <EntityTypeShape EntityType="ShiYanShiModel.T_YuYue" Width="2.375" PointX="5.375" PointY="0.875" />
         <AssociationConnector Association="ShiYanShiModel.FK_T_YuYue_M_ShiYanShi" />
         <AssociationConnector Association="ShiYanShiModel.FK_T_YuYue_M_ZuoWei" />
+        <EntityTypeShape EntityType="ShiYanShiModel.T_ZiYuan" Width="1.5" PointX="5.375" PointY="5.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

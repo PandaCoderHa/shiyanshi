@@ -9,6 +9,10 @@
     <Property Name="shifoutingyong" Type="bit" />
     <Property Name="shifoushanchu" Type="bit" Nullable="false" />
     <Property Name="gengxinriqi" Type="datetime" />
+    <Property Name="louceng" Type="int" />
+    <Property Name="miaoshu" Type="nvarchar" MaxLength="300" />
+    <Property Name="tupian" Type="nvarchar" MaxLength="300" />
+    <Property Name="fuzeren" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="M_ZuoWei">
     <Key>
@@ -32,6 +36,8 @@
     <Property Name="kaishiriqi" Type="datetime" Nullable="false" />
     <Property Name="jieshuriqi" Type="datetime" Nullable="false" />
     <Property Name="gengxinriqi" Type="datetime" Nullable="false" />
+    <Property Name="kaishizhou" Type="int" />
+    <Property Name="jieshuzhou" Type="int" />
   </EntityType>
   <EntityType Name="T_YuYue">
     <Key>
@@ -49,6 +55,15 @@
     <Property Name="zhidaojiaoshi" Type="nvarchar" MaxLength="100" />
     <Property Name="banji" Type="nvarchar" MaxLength="100" />
     <Property Name="xueshengxingming" Type="nvarchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="T_ZiYuan">
+    <Key>
+      <PropertyRef Name="zidongbianhao" />
+    </Key>
+    <Property Name="zidongbianhao" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="biaoti" Type="nvarchar" MaxLength="120" Nullable="false" />
+    <Property Name="shuoming" Type="nvarchar" MaxLength="500" />
+    <Property Name="url" Type="nchar" MaxLength="300" />
   </EntityType>
   <Association Name="FK_M_ZuoWei_M_ShiYanShi">
     <End Role="M_ShiYanShi" Type="Self.M_ShiYanShi" Multiplicity="1" />
@@ -103,6 +118,7 @@
     <EntitySet Name="M_ZuoWei" EntityType="Self.M_ZuoWei" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="T_ShiYanShiBuKeYongShiJian" EntityType="Self.T_ShiYanShiBuKeYongShiJian" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="T_YuYue" EntityType="Self.T_YuYue" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="T_ZiYuan" EntityType="Self.T_ZiYuan" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_M_ZuoWei_M_ShiYanShi" Association="Self.FK_M_ZuoWei_M_ShiYanShi">
       <End Role="M_ShiYanShi" EntitySet="M_ShiYanShi" />
       <End Role="M_ZuoWei" EntitySet="M_ZuoWei" />

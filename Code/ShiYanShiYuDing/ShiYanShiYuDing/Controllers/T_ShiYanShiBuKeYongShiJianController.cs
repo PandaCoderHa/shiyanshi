@@ -26,7 +26,9 @@ namespace ShiYanShiYuDing.Controllers
                        sysbky.zidongbianhao,
                        sysbky.kaishiriqi,
                        sysbky.jieshuriqi,
-                       sysbky.zhouji
+                       sysbky.zhouji,
+                       sysbky.kaishizhou,
+                       sysbky.jieshuzhou
                    };
         }
         public IList<object> GetT_ShiYanShiBuKeYongShiJianByShiYanShi(int shiyanshihao)
@@ -39,7 +41,9 @@ namespace ShiYanShiYuDing.Controllers
                        sysbky.zidongbianhao,
                        kaishiriqi = sysbky.kaishiriqi,
                        jieshuriqi=sysbky.jieshuriqi,
-                       sysbky.zhouji
+                       sysbky.zhouji,
+                       sysbky.kaishizhou,
+                       sysbky.jieshuzhou
                    }).ToList();
             return (from sysbky in tb1
                     orderby sysbky.zhouji
@@ -48,7 +52,9 @@ namespace ShiYanShiYuDing.Controllers
                        sysbky.zidongbianhao,
                        kaishiriqi = sysbky.kaishiriqi.ToString("HH:mm"),
                        jieshuriqi = sysbky.jieshuriqi.ToString("HH:mm"),
-                       sysbky.zhouji
+                       sysbky.zhouji,
+                       sysbky.kaishizhou,
+                       sysbky.jieshuzhou
                    }).ToList<object>();
         }
         public string formatTiem(DateTime a)
@@ -88,7 +94,8 @@ namespace ShiYanShiYuDing.Controllers
             old.kaishiriqi = t_ShiYanShiBuKeYongShiJian.kaishiriqi;
             old.jieshuriqi = t_ShiYanShiBuKeYongShiJian.jieshuriqi;
             old.gengxinriqi = t_ShiYanShiBuKeYongShiJian.gengxinriqi;
-
+            old.kaishizhou = t_ShiYanShiBuKeYongShiJian.kaishizhou;
+            old.jieshuzhou = t_ShiYanShiBuKeYongShiJian.jieshuzhou;
             db.Entry(old).State = EntityState.Modified;
 
 

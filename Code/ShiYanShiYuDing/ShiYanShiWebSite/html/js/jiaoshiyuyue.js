@@ -4,6 +4,7 @@ var sysid = getUrlParamater("sysid");
 var zuoweiObjs = [];
 var bukeyongOption = [];
 $(function() {
+    $("#gonghao").text((loginuser.id.length == 10 ? '学号：' : '工号：'));
     getShiYanShis();
     $("#user").text(loginuser.id);
     $("#name").text(loginuser.name);
@@ -147,7 +148,10 @@ function tiJiaoYuYue() {
         $.Zebra_Dialog('时长超出允许范围, 允许时长 1小时 － 4小时 ', alertOption);
         return false;
     }
-
+    if (sc.find("selected").seatIds.length == 0) {
+        $.Zebra_Dialog('请选择座位。', alertOption);
+        return;
+    }
     if (loginuser.id.length == 8) {
         if (!$("#chengyuan").val()) {
             $.Zebra_Dialog('请选择成员。', alertOption);
@@ -155,12 +159,12 @@ function tiJiaoYuYue() {
         } else if ($("#chengyuan").val().length != sc.find("selected").length) {
             $.Zebra_Dialog('座位数与成员数不符。', alertOption);
             return;
+        } else if (sc.find("selected").seatIds.length < 10) {
+            $.Zebra_Dialog('教师至少预约十人。', alertOption);
+            return;
         }
     }
-    if (sc.find("selected").seatIds.length == 0) {
-        $.Zebra_Dialog('请选择座位。', alertOption);
-        return;
-    }
+
     if (loginuser.id.length == 8) {
         sc.find("selected").seatIds.forEach(function(selectedId, i) {
             var zuowei =
@@ -180,11 +184,7 @@ function tiJiaoYuYue() {
             };
             $.ajax({
                 type: "post",
-                url: apiUrl +
-                    "T_YuYue/?shiyanshihao=" +
-                    sysid +
-                    "&zuoweihao=" +
-                    zuowei.zidongbianhao,
+                url: apiUrl + "T_YuYue/?shiyanshihao=" + sysid + "&zuoweihao=" + zuowei.zidongbianhao,
                 data: yuyue,
                 dataType: "json",
                 error: function(err) {
@@ -245,9 +245,9 @@ function tiJiaoYuYue() {
 function setShiYanShiMing() {
     setTimeout(function() {
         if (ShiYanShiS.length > 0) {
-            $("#shiyanshi").text(
-                ShiYanShiS.find(s => s.zidongbianhao == getUrlParamater("sysid")).mingzi
-            );
+            var s = ShiYanShiS.find(s => s.zidongbianhao == getUrlParamater("sysid"));
+            $("#shiyanshi").text(s.mingzi);
+            $("#fuzeren").text(s.fuzeren);
         } else {
             setShiYanShiMing();
         }
@@ -379,24 +379,21 @@ function setBuKeYongShiJan() {
         if (BuKeYongShiJianS.length > 0) {
             //$("#shiyanshi").text(ShiYanShiS.find(s => s.zidongbianhao == getUrlParamater("sysid")).mingzi);
             var d = new Date(riqi);
-            var bukeyong = BuKeYongShiJianS.find(b => b.zhouji == d.getDay());
+            var zhoushu = getYearWeek(d);
+            var bukeyong = BuKeYongShiJianS.find(b => b.kaishizhou <= zhoushu && zhoushu <= b.jieshuzhou && b.zhouji == d.getDay());
             if (bukeyong) {
                 $("#bukeyong").text(bukeyong.kaishiriqi + " - " + bukeyong.jieshuriqi);
                 var kaishi = bukeyong.kaishiriqi.replace(":", "");
                 var jieshu = bukeyong.jieshuriqi.replace(":", "");
                 $("#kaishi option").each(function(i, o) {
-                    var tmp = $(o)
-                        .val()
-                        .replace(":", "");
+                    var tmp = $(o).val().replace(":", "");
                     if (kaishi <= tmp && tmp < jieshu) {
                         bukeyongOption.push(o);
                         $(o).remove();
                     }
                 });
                 $("#jieshu option").each(function(i, o) {
-                    var tmp = $(o)
-                        .val()
-                        .replace(":", "");
+                    var tmp = $(o).val().replace(":", "");
                     if (kaishi < tmp && tmp <= jieshu) {
                         bukeyongOption.push(o);
                         $(o).remove();
@@ -431,43 +428,22 @@ function setYiYuYueZuoWei() {
                     if (zhuo) {
                         for (var j = 0; j < zhuo.length; j++) {
                             var zuowei = zhuo[j];
-                            // y.kaishi
-                            if (
-                                zuowei.zidongbianhao == y.zuoweihao &&
-                                $.trim(y.kaishi.substr(0, 10)) == riqi
-                            ) {
-                                var kaishiSelected = $("#kaishi")
-                                    .val()
-                                    .replace(":", "");
-                                var jieshuSelected = $("#jieshu")
-                                    .val()
-                                    .replace(":", "");
-                                var kaishiY = y.kaishi.substr(
-                                    y.kaishi.indexOf(" "),
-                                    y.kaishi.length - y.kaishi.indexOf(" ")
-                                );
+                            var kTemp = new Date($.trim(y.kaishi.substr(0, 10))).toString();
+                            var rTemp = new Date(riqi).toString();
+                            if (zuowei.zidongbianhao == y.zuoweihao && kTemp.substr(0, kTemp.indexOf(':') - 3) == rTemp.substr(0, rTemp.indexOf(':') - 3)) {
+                                var kaishiSelected = $("#kaishi").val().replace(":", "");
+                                var jieshuSelected = $("#jieshu").val().replace(":", "");
+                                var kaishiY = y.kaishi.substr(y.kaishi.indexOf(" "), y.kaishi.length - y.kaishi.indexOf(" "));
                                 kaishiY = $.trim(kaishiY.replace(":", ""));
-                                var jieshuY = y.jieshu.substr(
-                                    y.jieshu.indexOf(" "),
-                                    y.jieshu.length - y.jieshu.indexOf(" ")
-                                );
+                                var jieshuY = y.jieshu.substr(y.jieshu.indexOf(" "), y.jieshu.length - y.jieshu.indexOf(" "));
                                 jieshuY = $.trim(jieshuY.replace(":", ""));
-                                console.log(
-                                    kaishiSelected +
-                                    "<" +
-                                    kaishiY +
-                                    "&&<" +
-                                    jieshuY +
-                                    "<" +
-                                    jieshuSelected
-                                );
+                                console.log(kaishiSelected + "<" + kaishiY + "&&<" + jieshuY + "<" + jieshuSelected);
                                 if (
                                     (kaishiY <= kaishiSelected && kaishiSelected < jieshuY) ||
                                     (kaishiY < jieshuSelected && jieshuSelected <= jieshuY)
                                 ) {
                                     sc.get(i + "_" + (j + 1)).status("unavailable");
                                 }
-                                //sc.get(i + '_' + (j + 1)).status('unavailable');
                             }
                         }
                     }
@@ -477,4 +453,14 @@ function setYiYuYueZuoWei() {
             setYiYuYueZuoWei();
         }
     }, 300);
+}
+
+function getYearWeek(date) {
+    var date2 = new Date(date.getFullYear(), 0, 1);
+    var day1 = date.getDay();
+    if (day1 == 0) day1 = 7;
+    var day2 = date2.getDay();
+    if (day2 == 0) day2 = 7;
+    d = Math.round((date.getTime() - date2.getTime() + (day2 - day1) * (24 * 60 * 60 * 1000)) / 86400000);
+    return Math.ceil(d / 7) + 1;
 }

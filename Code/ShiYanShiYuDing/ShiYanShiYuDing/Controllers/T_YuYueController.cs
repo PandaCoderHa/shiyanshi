@@ -40,6 +40,7 @@ namespace ShiYanShiYuDing.Controllers
 
             var result = (from yy in tb1
                           where yy.yuyuekaishiriqi >= new DateTime( DateTime.Now.Year,1,1)
+                          orderby yy.zidongbianhao descending
                           select new
                           {
                               yy.zidongbianhao,
@@ -53,8 +54,8 @@ namespace ShiYanShiYuDing.Controllers
                               yy.xiangmu,
                               yy.banji,
                               yy.zhidaojiaoshi,
-                              kaishi = yy.yuyuekaishiriqi.ToString("yyyy-MM-d HH:mm"),
-                              jieshu = yy.yuyuejieshuriqi.ToString("yyyy-MM-d HH:mm")
+                              kaishi = yy.yuyuekaishiriqi.ToString("yyyy-MM-dd HH:mm"),
+                              jieshu = yy.yuyuejieshuriqi.ToString("yyyy-MM-dd HH:mm")
                           }).ToList<object>();
             return result;
         }
