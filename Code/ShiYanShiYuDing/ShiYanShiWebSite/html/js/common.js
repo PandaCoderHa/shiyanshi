@@ -1,3 +1,4 @@
+//var apiUrl = "http://10.203.82.224:8081/api/";
 var apiUrl = "http://localhost:51369/api/";
 var ShiYanShiS = [];
 var BuKeYongShiJianS = [];
@@ -304,8 +305,8 @@ function getZiYuan() {
         success: function(response) {
             if (response) {
                 ZiYuans = response;
-                var length = isHomePage ? 6 : ZiYuans.length;
                 if (isHomePage) {
+                    var length = (ZiYuans.length >= 6) ? 6 : ZiYuans.length;
                     for (var i = 0; i < 6; i++) {
                         var ziyuan = ZiYuans[i];
                         $("#ziyuanList").append('<li class="booking-item col-sm-4 col-xs-6 " style="margin-bottom: 10px;overflow: hidden; ">' +

@@ -67,6 +67,7 @@ namespace ShiYanShiYuDing.Controllers
             old.gengxinriqi = m_ShiYanShi.gengxinriqi;
             old.louceng = m_ShiYanShi.louceng;
             old.fuzeren = m_ShiYanShi.fuzeren;
+            old.miaoshu = m_ShiYanShi.miaoshu;
             if (!string.IsNullOrEmpty(m_ShiYanShi.tupian))
             {
                 old.tupian = m_ShiYanShi.tupian;

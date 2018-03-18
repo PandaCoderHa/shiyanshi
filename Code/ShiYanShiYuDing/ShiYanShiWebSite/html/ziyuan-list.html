@@ -155,8 +155,6 @@
                     <h3 class="modal-title" id="myModalLabel">添加资源</h3>
                 </div>
                 <div class="modal-body">
-
-                    <input id="M_id" type="hidden" name="">
                     <div class="form-group-info">
                         <label class="control-label">资源标题</label>
                         <div>
@@ -169,6 +167,7 @@
                             <textarea id="M_shuoming" class="form-control" rows="3"></textarea>
                         </div>
                     </div>
+                    <br/>
                     <div class="form-group-info">
                         <label class="control-label">图片</label>
                         <div>
@@ -224,7 +223,7 @@
                         title: '信息提示'
                     });
                     return;
-                } else if (imgFile.size > 1024 * 1024 * 4) {
+                } else if (imgFile.size > 1024 * 1024 * 10) {
                     $.Zebra_Dialog('请上传小于4M的图片。', {
                         type: 'error',
                         title: '信息提示'

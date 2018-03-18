@@ -15,6 +15,7 @@ $(function() {
             var selectedS = ShiYanShiS.find(s => s.zidongbianhao == id);
             $("#M_id").val(id);
             $("#M_mingzi").val($.trim(selectedS.mingzi));
+            $("#M_miaoshu").val($.trim(selectedS.miaoshu));
             $("#M_louceng").val(selectedS.louceng);
             $("#M_fuzeren").val(selectedS.fuzeren);
             $("input:radio[name='M_shifoshiyong']").eq(0).attr("checked", true);
@@ -24,6 +25,7 @@ $(function() {
 
         } else {
             $("#M_mingzi").val('');
+            $("#M_miaoshu").val('');
             $("input:radio[name='M_shifoshiyong']").eq(0).attr("checked", true);
             $("#M_tupian_show").hide();
             $("#M_fuzeren").val('');
@@ -32,6 +34,7 @@ $(function() {
     modal.on('hide.bs.modal', function() {
         $("#M_id").val('');
         $("#M_mingzi").val('');
+        $("#M_miaoshu").val('');
         $("#M_louceng").val(1);
         $("#M_tupian").val('');
         $("#M_tupian_show").hide();
@@ -50,6 +53,7 @@ $(function() {
         var id = $("#M_id").val();
         var sys = {
             mingzi: $("#M_mingzi").val(),
+            miaoshu: $("#M_miaoshu").val(),
             louceng: $("#M_louceng").val(),
             shifoutingyong: $("input:radio[name='M_shifoshiyong']:checked").val() ? false : true,
             fuzeren: $("#M_fuzeren").val(),
