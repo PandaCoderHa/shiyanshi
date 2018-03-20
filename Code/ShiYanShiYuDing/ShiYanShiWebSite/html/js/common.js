@@ -78,6 +78,7 @@ function getShiYanShis() {
                         if (i == 0 || (response[i - 1] && response[i - 1].louceng != sys.louceng)) {
                             $("#shiyanshiList tbody").append('<tr style="border-bottom: solid 2px #00a65a;"><td colspan="2"><h4>' + sys.louceng + '楼</h4></td></tr>');
                         }
+                        var delInfo = "删除实验室时,将同时删除与实验室相关（如预约，座位，不可用时间等）数据，该操作不可恢复！";
                         $("#shiyanshiList tbody").append(
                             "<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;" +
                             (sys.tupian ? "<img src='" + sys.tupian + "' style='width:50px;'>" : '') +
@@ -85,7 +86,7 @@ function getShiYanShis() {
                             "</td>" +
                             '<td> <a href="javascript:void(0)" >远程开门</a> | ' +
                             '<a href="#" data-id="' + sys.zidongbianhao + '" data-toggle="modal" data-target="#myModal">修改</a> | ' +
-                            '<a href="javascript:delConfrim(' + sys.zidongbianhao + ',deleteShiYanShi)" >删除</a></td></tr>'
+                            '<a href=javascript:delConfrim(' + sys.zidongbianhao + ',deleteShiYanShi,"' + delInfo + '") >删除</a></td></tr>'
                         );
                     }, this);
                 }
@@ -319,7 +320,7 @@ function getZiYuan() {
                         var ziyuan = ZiYuans[i];
                         $("#ziyuanList").append('<li class="booking-room col-sm-3 clearfix">' +
                             (loginuser.id.length == 8 ? '<a href="javascript:delConfrim(' + ziyuan.zidongbianhao + ',deleteZiYuan)" class="glyphicon glyphicon-remove ziyuan_del"></a>' : '') +
-                            '<a href="javascript:void(0)" class="booking-room-icon has-img" title=""><img src="' + ziyuan.url + '" alt=""></a>' +
+                            '<a href="' + ziyuan.url + '" target="_blank" class="booking-room-icon has-img lightbox" title=""><img src="' + ziyuan.url + '" alt=""></a>' +
                             '<div class="booking-room-info">' +
                             '<a href="javascript:" class="booking-room-name text-center">' +
                             '<span>' + ziyuan.biaoti + '</span></a>' +
@@ -372,9 +373,10 @@ function randomString(len) {
     return pwd;
 }
 
-function delConfrim(id, callfunc) {
-    $.Zebra_Dialog('您确定要删除吗?', {
-        type: 'question',
+function delConfrim(id, callfunc, info) {
+    info = info ? info : '您确定要删除吗?';
+    $.Zebra_Dialog(info, {
+        type: 'warning',
         title: '删除确认',
         buttons: ['确定', '取消'],
         onClose: function(caption) {

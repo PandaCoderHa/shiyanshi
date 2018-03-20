@@ -116,13 +116,37 @@ namespace ShiYanShiYuDing.Controllers
         public async Task<IHttpActionResult> DeleteM_ShiYanShi(int id)
         {
             M_ShiYanShi m_ShiYanShi = await db.M_ShiYanShi.FindAsync(id);
+            //m_ShiYanShi.T_YuYue.Clear();
             if (m_ShiYanShi == null)
             {
                 return NotFound();
             }
+            try
+            {
+                while (m_ShiYanShi.M_ZuoWei.Count>0)
+                {
+                    db.M_ZuoWei.Remove(m_ShiYanShi.M_ZuoWei.First());
 
-            db.M_ShiYanShi.Remove(m_ShiYanShi);
-            await db.SaveChangesAsync();
+                }
+                while (m_ShiYanShi.T_YuYue.Count > 0)
+                {
+                    db.T_YuYue.Remove(m_ShiYanShi.T_YuYue.First());
+
+                }
+                while (m_ShiYanShi.T_ShiYanShiBuKeYongShiJian.Count > 0)
+                {
+                    db.T_ShiYanShiBuKeYongShiJian.Remove(m_ShiYanShi.T_ShiYanShiBuKeYongShiJian.First());
+
+                }
+
+                db.M_ShiYanShi.Remove(m_ShiYanShi);
+                await db.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
 
             return Ok(m_ShiYanShi);
         }
