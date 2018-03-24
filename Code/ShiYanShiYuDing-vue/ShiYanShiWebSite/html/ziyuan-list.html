@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en" class="">
+
+<head>
+    <meta charset="utf-8" />
+    <title>高校实验室预约系统</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <link rel="stylesheet" href="../libs/assets/animate.css/animate.css" type="text/css" />
+    <link rel="stylesheet" href="../libs/assets/font-awesome/css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="../libs/assets/simple-line-icons/css/simple-line-icons.css" type="text/css" />
+    <link rel="stylesheet" href="../libs/jquery/bootstrap/dist/css/bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="css/flat/zebra_dialog.min.css" type="text/css">
+    <link ref="stylesheet" href="css/lightbox.min.css" type="text/css" />
+
+    <link rel="stylesheet" href="css/font.css" type="text/css" />
+    <link rel="stylesheet" href="css/app.css" type="text/css" />
+    <link href="css/site.css" rel="stylesheet" type="text/css" />
+    <link href="css/detail.css" rel="stylesheet" type="text/css" />
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+
+    <script src="../libs/jquery/jquery/dist/jquery.js"></script>
+    <script src="../libs/jquery/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="js/ui-load.js"></script>
+    <script src="js/ui-jp.config.js"></script>
+    <script src="js/ui-jp.js"></script>
+    <script src="js/ui-nav.js"></script>
+    <script src="js/ui-toggle.js"></script>
+    <script src="js/ui-client.js"></script>
+    <script src="js/zebra_dialog.min.js"></script>
+    <script src="js/lightbox.min.js"></script>
+    <script src="js/Vue.js"></script>
+
+    <script src="js/jquery.bootstrap.newsbox.min.js" type="text/javascript"></script>
+    <script src="js/common.js" type="text/javascript"></script>
+
+</head>
+
+<body>
+    <div id="app">
+        <my-header v-bind:mulu="mulu"></my-header>
+
+        <div class="content-wrapper" style="min-height: 100px;">
+
+            <div class="container">
+                <section class="content">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="" style="padding: 15px 0 15px 0;">
+                                <h1 style="font-size:24px; ">
+                                    资源展示
+                                </h1>
+                            </div>
+                            <div class="box box-success box-sharp">
+                                <div class="box-header with-border">
+                                    <h3 class="box-title" style="display: inline-block">
+                                        资源列表
+                                    </h3>
+
+                                </div>
+                                <div class="box-body">
+                                    <ul id="ziyuanList" class="booking-rooms row sm-gutter clearfix" style="margin-bottom: 0;margin-top: 10px;">
+                                        <li v-for="ziyuan in ZiYuans" class="booking-room col-sm-3 clearfix">
+                                            <a v-if="loginuser.id.length == 8" href="javascript:void(0)" v-on:click="delConfrim( ziyuan.zidongbianhao ,deleteZiYuan)" class="glyphicon glyphicon-remove ziyuan_del"></a>
+                                            <a v-bind:href=ziyuan.url class="booking-room-icon has-img" title="" target="_blank">
+                                                <img v-bind:src=ziyuan.url alt="">
+                                            </a>
+                                            <div class="booking-room-info">
+                                                <a href="javascript:" class="booking-room-name text-center">
+                                                    <span>{{ziyuan.biaoti}}</span>
+                                                </a>
+                                                <p class="booking-room-size" v-bind:title=ziyuan.shuoming>{{ziyuan.shuoming}}</p>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="box-tianjia">
+                                    <button v-if="loginuser.id.length == 8" id="tianjiaZiyuan" type="button" class="u-btn md active jsSubmit" data-toggle="modal"
+                                        data-target="#myModal">添加</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div role="document">
+                <div class="modal-content  modal-guanli">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h3 class="modal-title" id="myModalLabel">添加资源</h3>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group-info">
+                            <label class="control-label">资源标题</label>
+                            <div>
+                                <input id="M_biaoti" type="text" class="form-control" placeholder="资源标题">
+                            </div>
+                        </div>
+                        <div class="form-group-info">
+                            <label class="control-label">说明</label>
+                            <div>
+                                <textarea id="M_shuoming" class="form-control" rows="3"></textarea>
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="form-group-info">
+                            <label class="control-label">图片</label>
+                            <div>
+                                <input type="file" id="M_tupian" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="M_Save" type="button" class="btn btn-primary">保存</button>
+                        <!-- <button type="button" class="btn btn-primary">退出</button> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        $(function () {
+            app.getZiYuan();
+            var modal = $("#myModal");
+            modal.on("show.bs.modal", function () {
+                $("#M_biaoti").val('');
+                $("#M_shuoming").val('');
+                $("#M_tupian").val('');
+            });
+            modal.on('hide.bs.modal', function () {
+                $("#M_biaoti").val('');
+                $("#M_shuoming").val('');
+                $("#M_tupian").val('');
+            });
+            $("#M_Save").click(function () {
+
+                var imgFile = document.getElementById("M_tupian").files.length > 0 ? document.getElementById("M_tupian").files[0] : null;
+                if (!imgFile) {
+                    $.Zebra_Dialog('请添加图片。', {
+                        type: 'error',
+                        title: '信息提示'
+                    });
+                    return;
+                } else if (imgFile.size > 1024 * 1024 * 10) {
+                    $.Zebra_Dialog('请上传小于4M的图片。', {
+                        type: 'error',
+                        title: '信息提示'
+                    });
+                    return;
+                }
+                var zy = {
+                    biaoti: $("#M_biaoti").val(),
+                    shuoming: $("#M_shuoming").val(),
+                };
+                var formData = new FormData();
+                formData.append("img", document.getElementById("M_tupian").files[0]);
+                $.ajax({
+                    type: "post",
+                    url: apiUrl + 'Image',
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function (response) {
+                        var imgUrl = apiUrl.replace('api/', 'Imgs/') + response.substring(response.lastIndexOf('\\') + 1);
+                        zy.url = imgUrl;
+                        console.log(imgUrl);
+                        $.ajax({
+                            type: "post",
+                            url: apiUrl + 'T_ZiYuan',
+                            data: zy,
+                            dataType: "json",
+                            success: function (response) {
+                                $('#myModal').modal('hide');
+                                getZiYuan();
+                            }
+                        });
+                    },
+                    error: function (e) {
+                        $.Zebra_Dialog('图片保存失败', {
+                            type: 'error',
+                            title: '信息提示'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

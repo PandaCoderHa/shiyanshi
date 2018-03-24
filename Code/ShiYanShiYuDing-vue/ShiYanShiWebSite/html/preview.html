@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en" class="">
+
+<head>
+  <meta charset="utf-8" />
+  <title>高校实验室预约系统</title>
+  <meta name="description" content="" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <link rel="stylesheet" href="../libs/assets/animate.css/animate.css" type="text/css" />
+  <link rel="stylesheet" href="../libs/assets/font-awesome/css/font-awesome.min.css" type="text/css" />
+  <link rel="stylesheet" href="../libs/assets/simple-line-icons/css/simple-line-icons.css" type="text/css" />
+  <link rel="stylesheet" href="../libs/jquery/bootstrap/dist/css/bootstrap.css" type="text/css" />
+
+  <link rel="stylesheet" href="css/font.css" type="text/css" />
+  <link rel="stylesheet" href="css/app.css" type="text/css" />
+
+
+  <link href="css/site.css" rel="stylesheet" type="text/css" />
+  <link href="css/detail.css" rel="stylesheet" type="text/css" />
+  <link href="css/dcalendar.picker.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+
+<body>
+  <div id="app">
+    <my-header v-bind:mulu="mulu"></my-header>
+
+    <div class="app app-header-fixed ">
+      <div class="g-in f-cb">
+
+        <div class="g-sd-l">
+          <div class="m-s-menu">
+            <ul>
+              <li class="learn">
+                <span class="fa fa-th-list"></span> 实验室列表</li>
+            </ul>
+
+
+          </div>
+        </div>
+
+
+        <div class="g-mn gw" id="container">
+          <div class="g-mnc">
+            <div class="g-mncw m-reserved">
+              <div class="group-tabs add-europe-tabs">
+                <ul>
+                  <li class="crt">
+                    <a v-if="loginuser.id.length==10" href="javascript:">个人预约</a>
+                  </li>
+                  <li class="crt">
+                    <a v-if="loginuser.id.length==8"href="javascript:">教师预约</a>
+                  </li>
+                </ul>
+              </div>
+
+
+              <div class="part">
+                <p style="padding-top:24px;margin-bottom:24px;">
+                  尊敬的学员，如果您要预约课程，可点击下方表格“预约课程”按钮进行预约
+                </p>
+                <table id='mycalendar' class='calendar u-tab'></table>
+                <!-- <table class="calendar u-tab">
+                <thead>
+                  <tr>
+                    <th class="month" colspan="7">
+                      <span class="f-fl">
+                        <a href="#">&lt;&nbsp;2017年09月</a>
+                      </span>
+                      <span class="f-fr">
+                        <a href="#">2017年11月&nbsp;&gt;</a>
+                      </span>
+                      <span class="f-fc s-fc6">2017年10月</span>
+                    </th>
+                  </tr>
+                  <tr>
+                    <th width="14.28%">日</th>
+                    <th width="14.28%">一</th>
+                    <th width="14.28%">二</th>
+                    <th width="14.28%">三</th>
+                    <th width="14.28%">四</th>
+                    <th width="14.28%">五</th>
+                    <th width="14.28%">六</th>
+                  </tr>
+                </thead>
+                <tbody>
+
+                  <tr>
+
+                    <td>
+                      1
+                    </td>
+                    <td>
+                      2
+                    </td>
+                    <td>
+                      3
+                    </td>
+                    <td>
+                      4
+                    </td>
+                    <td>
+                      5
+                    </td>
+                    <td>
+                      6
+                    </td>
+                    <td>
+                      7
+                    </td>
+                  </tr>
+                </tbody>
+              </table> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="../libs/jquery/jquery/dist/jquery.js"></script>
+  <script src="../libs/jquery/bootstrap/dist/js/bootstrap.js"></script>
+  <script src="js/ui-load.js"></script>
+  <script src="js/ui-jp.config.js"></script>
+  <script src="js/ui-jp.js"></script>
+  <script src="js/ui-nav.js"></script>
+  <script src="js/ui-toggle.js"></script>
+  <script src="js/ui-client.js"></script>
+  <script src="js/Vue.js "></script>
+
+  <script src="js/jquery.bootstrap.newsbox.min.js" type="text/javascript"></script>
+  <script src="js/common.js" type="text/javascript"></script>
+  <script src="js/dcalendar.picker.js" type="text/javascript"></script>
+  <script>
+    var sysid;
+    $(function () {
+      sysid = getUrlParamater("sysid");
+      app.getShiYanShis();
+      app.getYuYue(app.loginuser.id, sysid);
+      calendar();
+    });
+
+    function calendar() {
+      setTimeout(function () {
+        if (app.YuYueS) {
+          $('#mycalendar').dcalendar();
+        } else {
+          calendar();
+        }
+      }, 500);
+    }
+  </script>
+</body>
+
+</html>

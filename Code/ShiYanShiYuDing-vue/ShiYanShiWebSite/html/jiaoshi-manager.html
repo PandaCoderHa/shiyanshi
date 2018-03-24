@@ -1,0 +1,296 @@
+﻿<!DOCTYPE html>
+<html lang="en" class="">
+
+<head>
+    <meta charset="utf-8" />
+    <title>高校实验室预约系统</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <link rel="stylesheet" href="../libs/assets/animate.css/animate.css" type="text/css" />
+    <link rel="stylesheet" href="../libs/assets/font-awesome/css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="../libs/assets/simple-line-icons/css/simple-line-icons.css" type="text/css" />
+    <link rel="stylesheet" href="../libs/jquery/bootstrap/dist/css/bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="css/flat/zebra_dialog.min.css" type="text/css">
+    <link rel="stylesheet" href="css/font.css" type="text/css" />
+    <link rel="stylesheet" href="css/app.css" type="text/css" />
+
+
+    <link href="css/site.css" rel="stylesheet" type="text/css" />
+    <link href="css/detail.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="css/style.css" type="text/css" />
+
+    <script src="../libs/jquery/jquery/dist/jquery.js"></script>
+    <script src="../libs/jquery/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="js/ui-load.js"></script>
+    <script src="js/ui-jp.config.js"></script>
+    <script src="js/ui-jp.js"></script>
+    <script src="js/ui-nav.js"></script>
+    <script src="js/ui-toggle.js"></script>
+    <script src="js/ui-client.js"></script>
+    <script src="js/jquery.bootstrap.newsbox.min.js" type="text/javascript"></script>
+    <script src="js/zebra_dialog.min.js"></script>
+    <script src="js/Vue.js"></script>
+    <script src="js/common.js" type="text/javascript"></script>
+    <script src="js/jiaoshi-manager.js" type="text/javascript"></script>
+
+</head>
+
+<body>
+    <div id="app">
+        <my-header v-bind:mulu="mulu"></my-header>
+        <div class="app app-header-fixed ">
+            <div class="g-in f-cb">
+                <div class="g-sd-l">
+                    <div class="m-s-menu">
+                        <ul>
+                            <li class="learn">
+                                <span class="fa fa-th-list"></span> 实验室列表
+                            </li>
+
+                        </ul>
+
+                    </div>
+                </div>
+                <div class="g-mncw">
+                    <form>
+
+
+                        <div class="m-school">
+
+                            <div class="panel panel-default m20 m0">
+                                <div class="panel-heading">
+                                    <div class="panel-heading-title">实验室管理</div>
+
+                                </div>
+
+                                <div class="table-responsive">
+                                    <table id="shiyanshiList" class="table table-striped b-t b-light">
+                                        <thead>
+                                            <tr>
+                                                <th>实验室名称</th>
+                                                <th style="width:180px;">操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr v-for="sys in ShiYanShiS">
+                                                <td>&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <img v-bind:src=sys.tupian style='width:50px;'> {{ sys.mingzi }}
+                                                </td>
+                                                <td>
+                                                    <a href="javascript:void(0)">远程开门</a> |
+                                                    <a href="#" v-bind:data-id=sys.zidongbianhao data-toggle="modal" data-target="#myModal">修改</a> |
+                                                    <!-- <a v-bind:href=javascript:delConfrim({{sys.zidongbianhao}},deleteShiYanShi,"删除实验室时,将同时删除与实验室相关（如预约，座位，不可用时间等）数据，该操作不可恢复！")>删除</a> -->
+                                                    <a href='javascript:void(0)' v-on:click="delConfrim(sys.zidongbianhao,deleteShiYanShi,'删除实验室时,将同时删除与实验室相关（如预约，座位，不可用时间等）数据，该操作不可恢复！')" >删除</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+
+                            <div class="sibmit f-tac">
+                                <input type="button" value="新增实验室" class="u-btn md active jsSubmit" data-toggle="modal" data-target="#myModal">
+                                <input type="button" value="新增资源" class="u-btn md active jsSubmit" data-toggle="modal" data-target="#myModal_ziyuan">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div role="document">
+                <div class="modal-content  modal-guanli">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h3 class="modal-title" id="myModalLabel">编辑实验室</h3>
+                    </div>
+                    <div class="modal-body">
+
+                        <input id="M_id" type="hidden" name="">
+                        <div class="form-group-info">
+                            <label class="control-label">实验室名称</label>
+                            <div>
+                                <input id="M_mingzi" type="text" class="form-control" placeholder="实验室名称">
+                            </div>
+                        </div>
+                        <div class="form-group-info">
+                            <label class="control-label">说明</label>
+                            <div>
+                                <textarea id="M_miaoshu" class="form-control" rows="3"></textarea>
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="form-group-info">
+                            <label class="control-label">楼层</label>
+                            <div>
+                                <select id="M_louceng" class="form-control">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group-info">
+                            <label class="control-label">负责人</label>
+                            <div>
+                                <input id="M_fuzeren" type="text" class="form-control" placeholder="负责人">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="control-label"> </label>
+                            <div class="radio-group">
+                                <div class="radio">
+                                    <label class="i-checks">
+                                        <input type="radio" name="M_shifoshiyong" value="shi">
+                                        <i></i>
+                                        使用
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label class="i-checks">
+                                        <input type="radio" name="M_shifoshiyong" value="fou">
+                                        <i></i>
+                                        停用
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group-info">
+                            <label class="control-label">图片</label>
+                            <div>
+                                <input type="file" id="M_tupian" />
+                            </div>
+                        </div>
+                        <div style="text-align:center; padding-top:30px;">
+                            <img id="M_tupian_show" src="" style="width:340px;height:210px;">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="M_Save" type="button" class="btn btn-primary">保存</button>
+                        <!-- <button type="button" class="btn btn-primary">退出</button> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal_ziyuan" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div role="document">
+                <div class="modal-content  modal-guanli">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h3 class="modal-title" id="myModalLabel">添加资源</h3>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group-info">
+                            <label class="control-label">资源标题</label>
+                            <div>
+                                <input id="M_biaoti" type="text" class="form-control" placeholder="资源标题">
+                            </div>
+                        </div>
+                        <div class="form-group-info">
+                            <label class="control-label">说明</label>
+                            <div>
+                                <textarea id="M_shuoming" class="form-control" rows="3"></textarea>
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="form-group-info">
+                            <label class="control-label">图片</label>
+                            <div>
+                                <input type="file" id="M_tupian_zy" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="M_Save_zy" type="button" class="btn btn-primary">保存</button>
+                        <!-- <button type="button" class="btn btn-primary">退出</button> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(function () {
+
+            var modal_ziyuan = $("#myModal_ziyuan");
+            modal_ziyuan.on("show.bs.modal", function () {
+                $("#M_biaoti").val('');
+                $("#M_shuoming").val('');
+                $("#M_tupian_zy").val('');
+            });
+            modal_ziyuan.on('hide.bs.modal', function () {
+                $("#M_biaoti").val('');
+                $("#M_shuoming").val('');
+                $("#M_tupian_zy").val('');
+            });
+            $("#M_Save_zy").click(function () {
+
+                var imgFile = document.getElementById("M_tupian_zy").files.length > 0 ? document.getElementById("M_tupian_zy").files[0] : null;
+                if (!imgFile) {
+                    $.Zebra_Dialog('请添加图片。', {
+                        type: 'error',
+                        title: '信息提示'
+                    });
+                    return;
+                } else if (imgFile.size > 1024 * 1024 * 10) {
+                    $.Zebra_Dialog('请上传小于10M的图片。', {
+                        type: 'error',
+                        title: '信息提示'
+                    });
+                    return;
+                }
+                var zy = {
+                    biaoti: $("#M_biaoti").val(),
+                    shuoming: $("#M_shuoming").val(),
+                };
+                var formData = new FormData();
+                formData.append("img", document.getElementById("M_tupian_zy").files[0]);
+                $.ajax({
+                    type: "post",
+                    url: apiUrl + 'Image',
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function (response) {
+                        var imgUrl = apiUrl.replace('api/', 'Imgs/') + response.substring(response.lastIndexOf('\\') + 1);
+                        zy.url = imgUrl;
+                        console.log(imgUrl);
+                        $.ajax({
+                            type: "post",
+                            url: apiUrl + 'T_ZiYuan',
+                            data: zy,
+                            dataType: "json",
+                            success: function (response) {
+                                $('#myModal_ziyuan').modal('hide');
+                            }
+                        });
+                    },
+                    error: function (e) {
+                        $.Zebra_Dialog('图片保存失败', {
+                            type: 'error',
+                            title: '信息提示'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

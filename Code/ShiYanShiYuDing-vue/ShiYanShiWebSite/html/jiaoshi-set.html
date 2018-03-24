@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en" class="">
+
+<head>
+    <meta charset="utf-8" />
+    <title>高校实验室预约系统</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <link rel="stylesheet" href="../libs/assets/animate.css/animate.css" type="text/css" />
+    <link rel="stylesheet" href="../libs/assets/font-awesome/css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="../libs/assets/simple-line-icons/css/simple-line-icons.css" type="text/css" />
+    <link rel="stylesheet" href="../libs/jquery/bootstrap/dist/css/bootstrap.css" type="text/css" />
+
+    <link rel="stylesheet" href="css/font.css" type="text/css" />
+    <link rel="stylesheet" href="css/app.css" type="text/css" />
+
+
+
+    <link href="css/site.css" rel="stylesheet" type="text/css" />
+    <link href="css/detail.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="css/style.css" type="text/css" />
+
+</head>
+
+<body>
+    <header id="header" class="app-header navbar" role="menu">
+        <div class="navbar navbar-static-top">
+            <div class="container">
+                <div class="navbar-header bg-dark">
+                    <button class="pull-right visible-xs dk" ui-toggle-class="show" target=".navbar-collapse">
+				<i class="glyphicon glyphicon-cog"></i>
+			  </button>
+                    <button class="pull-right visible-xs" ui-toggle-class="off-screen" target=".app-aside" ui-scroll="app">
+				<i class="glyphicon glyphicon-align-justify"></i>
+			  </button>
+                    <a href="home.html" class="navbar-brand text-lt">
+                        <span class="hidden-folded m-l-xs">高校实验室预约系统</span>
+                    </a>
+                </div>
+
+                <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
+
+                    <ul class="nav navbar-nav navbar-menu">
+                        <li>
+                            <a href="home.html">
+                                <span>开始预约</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="ziyuan-list.html">
+                                <span>资源展示</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="yuyue-manager.html">
+                                <span>预约记录</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="yuyue-liucheng.html">
+                                <span>预约流程</span>
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+
+
+                <div class="navbar-custom-menu hidden-xs">
+                    <ul class="nav navbar-nav">
+
+
+                        <li class="dropdown">
+                            <a href="#" data-toggle="dropdown" class="dropdown-toggle" aria-expanded="false">
+                                <i class="fa fa-fw fa-plus visible-xs-inline-block"></i>
+                                <span translate="header.navbar.new.NEW"> <img src="img/user.png" class="user-image" alt="User Image"> 个人中心</span>
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+
+                                <li>
+                                    <a href="info-change.html">修改个人资料</a>
+                                </li>
+                                <li>
+                                    <a id="logout" ui-sref="access.signin">退出登录</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                </div>
+
+
+            </div>
+        </div>
+
+    </header>
+
+    <!-- <banner>
+    <div class="banner-img"></div>
+  </banner> -->
+
+    <div class="app app-header-fixed ">
+        <div class="g-in f-cb">
+
+            <div class="g-sd-l">
+                <div class="m-s-menu">
+                    <ul>
+                        <!-- <li class="learn">
+                            <span class="fa fa-th-list"></span> 实验室列表</li>
+                        <li>
+                            <a href="preview.html">第一实验室</a>
+                        </li>
+                        <li class="crt">
+                            <a href="preview.html">
+                                <span class="glyphicon glyphicon-play"></span>第二实验室</a>
+                        </li>
+                        <li>
+                            <a href="preview.html">第三实验室</a>
+                        </li>
+                        <li>
+                            <a href="preview.html">第四实验室</a>
+                        </li>
+                        <li>
+                            <a href="preview.html">第五实验室</a>
+                        </li> -->
+
+                    </ul>
+
+
+                </div>
+            </div>
+
+            <div class="g-mncw w860">
+                <form>
+                    <div class="m-school">
+                        <div class="panel panel-default m20 m0">
+                            <div class="panel-heading">
+                                <div class="panel-heading-title">实验室</div>
+                                <div class="shiyan-list">
+                                    <select id="shiyanshiSelect" class="form-control">
+                                        <!-- <option value="0">第一实验室</option>
+                                        <option value="1">第二实验室</option>
+                                        <option value="2">第三实验室</option>
+                                        <option value="3">第四实验室</option>
+                                        <option value="3">第五实验室</option> -->
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-striped b-t b-light">
+                                    <thead>
+                                        <tr>
+                                            <th>序号</th>
+                                            <th>星期</th>
+                                            <th>开始时间</th>
+                                            <th>结束时间</th>
+                                            <th>开始周</th>
+                                            <th>结束周</th>
+                                            <th style="width:120px;">操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id='bukeyongTable'>
+                                        <!-- <tr>
+                                            <td>1</td>
+                                            <td>1</td>
+                                            <td>08:00</td>
+                                            <td>12:00</td>
+                                            <td>
+                                                <a href="＃" data-toggle="modal" data-target="#myModal">修改</a>｜
+                                                <a href="＃">删除</a>
+                                            </td>
+                                        </tr> -->
+                                    </tbody>
+                                </table>
+                            </div>
+                            <footer class="panel-footer">
+                                <div class="row">
+                                    <div class="col-sm-6 hidden-xs">
+                                    </div>
+                                </div>
+                            </footer>
+                        </div>
+                        <div class="sibmit f-tac">
+
+                            <input type="button" value="新 增" data-toggle="modal" data-target="#myModal" class="u-btn md active jsSubmit">
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+
+
+        </div>
+    </div>
+
+
+
+    <script src="../libs/jquery/jquery/dist/jquery.js"></script>
+    <script src="../libs/jquery/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="js/ui-load.js"></script>
+    <script src="js/ui-jp.config.js"></script>
+    <script src="js/ui-jp.js"></script>
+    <script src="js/ui-nav.js"></script>
+    <script src="js/ui-toggle.js"></script>
+    <script src="js/ui-client.js"></script>
+
+    <script src="js/jquery.bootstrap.newsbox.min.js" type="text/javascript"></script>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div role="document">
+            <div class="modal-content modal-jiaoshi">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+                    <h3 class="modal-title" id="myModalLabel">编辑实验室</h3>
+                </div>
+                <div class="modal-body">
+                    <div id="M_error" class="alert alert-warning">
+                    </div>
+                    <input id="M_id" type="hidden" name="">
+                    <div class="form-group-list">
+                        <label class="control-label">实验室名称</label>
+                        <div>
+                            <input id="M_mingzi" type="text" class="form-control" placeholder="" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group-list">
+                        <label class="control-label">星期</label>
+                        <div class="select-time">
+                            <select id="M_zhouji" class="form-control">
+                                <option value='1'>周一</option>
+                                <option value='2'>周二</option>
+                                <option value='3'>周三</option>
+                                <option value='4'>周四</option>
+                                <option value='5'>周五</option>
+                                <option value='6'>周六</option>
+                                <option value='7'>周日</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group-list">
+                        <label class="control-label">选择时间段</label>
+                        <div class="select-time">
+                            <select id="M_kaishi" class="form-control">
+                            </select>
+                        </div>
+                        <span class="toto">–</span>
+                        <div class="select-time">
+                            <select id="M_jieshu" class="form-control">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group-list">
+                        <label class="control-label">开始结束周</label>
+                        <div class="select-time">
+                            <select id="M_kaishizhou" class="form-control"></select>
+                        </div>
+                        <span class="toto">–</span>
+                        <div class="select-time">
+                            <select id="M_jieshuzhou" class="form-control"></select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="M_Save" type="button" class="btn btn-primary">保存</button>
+                    <!-- <button type="button" class="btn btn-primary">退出</button> -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="js/common.js" type="text/javascript"></script>
+
+    <script>
+        $(function() {
+            var times = ["08:00", "08:30", "09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00", "20:30", "21:00", "21:30", "22:00", ];
+            times.forEach(function(t) {
+                $("#M_kaishi").append(' <option valuue="' + t + '">' + t + '</option>')
+                $("#M_jieshu").append(' <option valuue="' + t + '">' + t + '</option>')
+            });
+            for (let i = 1; i < 54; i++) {
+                $("#M_kaishizhou").append(' <option valuue="' + i + '">' + i + '</option>')
+                $("#M_jieshuzhou").append(' <option valuue="' + i + '">' + i + '</option>')
+            }
+            $("#M_kaishizhou").change(function() {
+                if (parseInt($("#M_kaishizhou").val()) > parseInt($("#M_jieshuzhou").val())) {
+                    $("#M_jieshuzhou").val($("#M_kaishizhou").val());
+                }
+            });
+            getShiYanShis();
+            $("#shiyanshiSelect").change(getBuKeYongShiJian);
+            getBuKeYongShiJian();
+
+            var modal = $("#myModal");
+            modal.on("show.bs.modal", function(e) {
+                $("#M_error").hide();
+                var id = $(e.relatedTarget).data("id");
+                if (id) {
+                    var selectedB = BuKeYongShiJianS.find(b => b.zidongbianhao == id);
+                    $("#M_id").val(id);
+                    $("#M_mingzi").val($.trim($("#shiyanshiSelect option:selected").text()));
+                    $("#M_zhouji").val(selectedB.zhouji);
+                    $("#M_kaishi").val(selectedB.kaishiriqi);
+                    $("#M_jieshu").val(selectedB.jieshuriqi);
+                    $("#M_kaishizhou").val(selectedB.kaishizhou);
+                    $("#M_jieshuzhou").val(selectedB.jieshuzhou);
+                } else {
+                    $("#M_id").val('');
+                    $("#M_mingzi").val($.trim($("#shiyanshiSelect option:selected").text()));
+                    $("#M_zhouji").val(1);
+                    $("#M_kaishi").val('08:00');
+                    $("#M_jieshu").val('08:30');
+                    $("#M_kaishizhou").val(1);
+                    $("#M_jieshuzhou").val(1);
+                }
+            });
+            modal.on('hide.bs.modal', function() {
+                $("#M_id").val('');
+                $("#M_mingzi").val($.trim($("#shiyanshiSelect option:selected").text()));
+                $("#M_zhouji").val(1);
+                $("#M_kaishi option:eq(0)").attr('selected', true);
+                $("#M_jieshu option:eq(1)").attr('selected', true);
+                $("#M_kaishizhou").val(1);
+                $("#M_jieshuzhou").val(1);
+            });
+            $("#M_Save").click(function() {
+                var id = $("#M_id").val();
+                if (parseInt($("#M_kaishi").val().replace(':', '')) >=
+                    parseInt($("#M_jieshu").val().replace(':', ''))) {
+                    $("#M_error").text('结束时间要大于开始时间。');
+                    $("#M_error").show();
+                    return;
+                } else {
+                    $("#M_error").hide();
+                }
+                if ($("#M_kaishizhou").val() > $("#M_jieshuzhou").val()) {
+                    $("#M_error").text('结束周要大于开始周。');
+
+                } else {
+                    $("#M_error").hide();
+                }
+                var bukeyong = {
+                    zhouji: $("#M_zhouji").val(),
+                    kaishiriqi: $("#M_kaishi").val(),
+                    jieshuriqi: $("#M_jieshu").val(),
+                    kaishizhou: $("#M_kaishizhou").val(),
+                    jieshuzhou: $("#M_jieshuzhou").val(),
+                    gengxinriqi: new Date().toString().substr(0, 24)
+                };
+                if (id) {
+                    $.ajax({
+                        type: "put",
+                        url: apiUrl + 'T_ShiYanShiBuKeYongShiJian/' + id,
+                        data: bukeyong,
+                        dataType: "json",
+                        success: function(response) {
+                            // alert('保存成功！');
+                            $('#myModal').modal('hide');
+                            getBuKeYongShiJian();
+                        }
+                    });
+                } else {
+                    $.ajax({
+                        type: "post",
+                        url: apiUrl + 'T_ShiYanShiBuKeYongShiJian/?shiyanshibianhao=' + $("#shiyanshiSelect").val(),
+                        data: bukeyong,
+                        dataType: "json",
+                        complete: function() {
+                            // alert('保存成功！');
+                            $('#myModal').modal('hide');
+                            getBuKeYongShiJian();
+                        }
+                    });
+                }
+            });
+
+
+        });
+
+        function getBuKeYongShiJian() {
+            setTimeout(function() {
+                console.log('$("#shiyanshiSelect").val()' + $("#shiyanshiSelect").val());
+                if ($("#shiyanshiSelect").val() != 0) {
+                    getBuKeYongShiJianByShiYanShi($("#shiyanshiSelect").val());
+                } else {
+                    getBuKeYongShiJian();
+                }
+            }, 300);
+        }
+
+        function shanchu(id) {
+            deleteBukeYongShiJian(id);
+        }
+    </script>
+
+
+</body>
+
+</html>

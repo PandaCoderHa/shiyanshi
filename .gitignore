@@ -4,5 +4,11 @@ Code/publish/Web/
 Code/ShiYanShiYuDing/.vs
 Code/ShiYanShiYuDing/ShiYanShiYuDing/bin/
 Code/ShiYanShiYuDing/ShiYanShiYuDing/obj/
+
+Code/ShiYanShiYuDing-vue/packages/
+Code/ShiYanShiYuDing-vue/.vs
+Code/ShiYanShiYuDing-vue/ShiYanShiYuDing/bin/
+Code/ShiYanShiYuDing-vue/ShiYanShiYuDing/obj/
+
 *.ide
 *.lock

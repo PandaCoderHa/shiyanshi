@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en" class="">
+
+<head>
+    <meta charset="utf-8" />
+    <title>高校实验室预约系统</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <link rel="stylesheet" href="../libs/assets/animate.css/animate.css" type="text/css" />
+    <link rel="stylesheet" href="../libs/assets/font-awesome/css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="../libs/assets/simple-line-icons/css/simple-line-icons.css" type="text/css" />
+    <link rel="stylesheet" href="../libs/jquery/bootstrap/dist/css/bootstrap.css" type="text/css" />
+
+    <link rel="stylesheet" href="css/font.css" type="text/css" />
+    <link rel="stylesheet" href="css/app.css" type="text/css" />
+    <link rel="stylesheet" href="css/jquery.seat-charts.css" type="text/css" />
+    <link href="css/site.css" rel="stylesheet" type="text/css" />
+    <link href="css/detail.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="css/flat/zebra_dialog.min.css" type="text/css">
+    <link rel="stylesheet" href="css/style.css" type="text/css" />
+   
+
+</head>
+
+<body>
+    <div id="app">
+        <my-header v-bind:mulu="mulu"></my-header>
+
+        <div class="app app-header-fixed ">
+            <div class="g-in f-cb">
+
+                <div class="g-sd-l">
+                    <div class="m-s-menu">
+                        <ul>
+                            <li class="learn">
+                                <span class="fa fa-th-list"></span> 实验室列表</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="g-mncw">
+                    <form>
+                        <div class="m-school">
+                            <div class="part">
+
+                                <div class="part-info">
+                                    <i class="glyphicon glyphicon-info-sign"></i>
+                                    <label>当日开放：</label>
+                                    <span>08:00 - 22:00</span>
+                                    <i>；</i>
+                                    <label>当日不可用：</label>
+                                    <span id="bukeyong" style="color:red">08:00 - 22:00</span>
+                                    <i>；</i>
+                                    <label>预约至少提前：</label>
+                                    <span>0天</span>
+                                    <i>；</i>
+                                    <label>最长提前：</label>
+                                    <span>10天</span>
+                                    <i>；</i>
+                                    <label>允许时长</label>
+                                    <span>1小时 － 4小时</span>
+                                    <i>；</i>
+                                    <label>迟到</label>
+                                    <span>30分钟</span>取消预约。
+                                </div>
+
+                                <div class="tit">
+                                    <span class="u-tt-md">申请人信息</span>
+                                </div>
+                                <div class="name-info">
+                                    <label>{{(loginuser.id.length == 10 ? '学号：' : '工号：')}}</label>
+                                    <span >{{loginuser.id}}</span>
+                                    <label>姓名：</label>
+                                    <span >{{loginuser.name}}</span>
+                                    <label>实验室：</label>
+                                    <span id="shiyanshi">第一实验室</span>
+                                    <label>实验室负责人：</label>
+                                    <span id="fuzeren"></span>
+                                </div>
+                            </div>
+
+                            <div class="part dates">
+                                <div class="row">
+                                    <div class="col-lg-2">
+                                        <div class="tit">
+                                            <span class="u-tt-md">日期</span>
+                                        </div>
+                                        <!-- <div class="tit2">显示一个星期内的</div> -->
+                                        <ul id="checkDate">
+                                            <li class="active">
+                                                <span id="riqi" class="day">10-15</span>
+                                                <span id="riqizhou" class="week">周日</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-lg-5">
+                                        <div class="tit">
+                                            <span class="u-tt-md">课程相关实验项目名称</span>
+                                        </div>
+                                        <input id="xiangmu" type="textbox" class="form-control" value=""></input>
+                                    </div>
+                                    <div class="col-lg-5">
+                                        <div class="tit">
+                                            <span class="u-tt-md">指导教师</span>
+                                        </div>
+                                        <input id="zhidao" type="textbox" class="form-control" value=""></input>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="part time">
+
+                                <div class="tit">
+                                    <span class="u-tt-md">选择时间段</span>
+                                </div>
+
+                                <div class="select-time">
+                                    <select id="kaishi" class="form-control m-b">
+                                        <option v-for="o in timeOptions" v-bindvalue=o >{{o}}</option>
+                                    </select>
+                                </div>
+
+                                <span class="toto">–</span>
+
+                                <div class="select-time">
+                                    <select id="jieshu" class="form-control m-b">
+                                        <option v-for="o in timeOptions" v-bindvalue=o >{{o}}</option>
+                                    </select>
+                                </div>
+
+
+                            </div>
+
+                            <div v-if="loginuser.id.length == 8" class="part">
+                                <div class="tit">
+                                    <span class="u-tt-md">成员选择</span>
+                                </div>
+                                <div class="chosen-box">
+                                    <select id="chengyuan" ui-jq="chosen" multiple="" class="w-md">
+                                    </select>
+
+                                </div>
+                                <input id="quanxuan" type="button" value="全选" onclick="chengyuanQuanXuan()" class="u-btn md active jsSubmit">
+                            </div>
+
+
+
+                            <div class="part time">
+                                <div class="tit tit-zuowei">
+                                    <span class="u-tt-md">选择座位</span>
+                                </div>
+                                <div id="my-legend-container" class="seatCharts-info">
+                                </div>
+                                <div id="seat-map" class="seatCharts-left-box">
+                                </div>
+                            </div>
+                            <div class="sibmit f-tac">
+                                <input id="tijiao" type="button" value="提交申请" class="u-btn md active jsSubmit">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../libs/jquery/jquery/dist/jquery.js"></script>
+    <script src="../libs/jquery/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="js/ui-load.js"></script>
+    <script src="js/ui-jp.config.js"></script>
+    <script src="js/ui-jp.js"></script>
+    <script src="js/ui-nav.js"></script>
+    <script src="js/ui-toggle.js"></script>
+    <script src="js/ui-client.js"></script>
+    <script src="js/zebra_dialog.min.js"></script>
+    <script src="js/Vue.js "></script>
+
+    <script src="js/jquery.bootstrap.newsbox.min.js" type="text/javascript"></script>
+    <script src="js/jquery.seat-charts.min.js" type="text/javascript"></script>
+    <script src="js/Vue.js "></script>
+    <script src="js/common.js" type="text/javascript"></script>
+    <script src="js/jiaoshiyuyue.js" type="text/javascript"></script>
+</body>
+
+</html>

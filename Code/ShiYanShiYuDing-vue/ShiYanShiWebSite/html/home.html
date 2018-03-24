@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en" class="">
+
+<head>
+    <meta charset="utf-8" />
+    <title>高校实验室预约系统</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <link rel="stylesheet" href="../libs/assets/animate.css/animate.css" type="text/css" />
+    <link rel="stylesheet" href="../libs/assets/font-awesome/css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="../libs/assets/simple-line-icons/css/simple-line-icons.css" type="text/css" />
+    <link rel="stylesheet" href="../libs/jquery/bootstrap/dist/css/bootstrap.css" type="text/css" />
+
+    <link rel="stylesheet" href="css/font.css" type="text/css" />
+    <link rel="stylesheet" href="css/app.css" type="text/css" />
+
+    <link href="css/site.css" rel="stylesheet" type="text/css" />
+    <link href="css/detail.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="css/style.css" type="text/css" />
+
+</head>
+
+<body>
+    <div id="app">
+        <my-header v-bind:mulu="mulu"></my-header>
+        <div class="content-wrapper" style="min-height: 100px;">
+
+            <div class="container">
+                <section class="content">
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <div class="" style="padding: 15px 0 15px 0;">
+                                <h1 style="margin:0;font-size:24px;border-left: 4px solid green;padding-left: 16px; font-weight: bold;">
+                                    <span class="fa fa-clock-o" style="margin-right: 4px;"></span> 快速预约
+                                </h1>
+                            </div>
+                            <div class="box box-success box-sharp">
+                                <div class="box-header with-border">
+                                    <h3 class="box-title" style="display: inline-block">
+                                        实验室
+                                    </h3>
+                                    <a href="sys-list.html" class="pull-right">查看更多实验室</a>
+                                </div>
+                                <div class="box-body">
+                                    <ul id="sysList" class="booking-rooms row sm-gutter clearfix" style="margin-bottom: 0;margin-top: 10px;">
+                                        <li v-for="sys in ShiYanShiTop6" class="booking-room col-sm-4 clearfix">
+                                            <a v-bind:href="'preview.html?sysid=' +sys.zidongbianhao" class="booking-room-icon has-img" title="">
+                                                <img v-bind:src=sys.tupian alt="">
+                                            </a>
+                                            <div class="booking-room-info">
+                                                <a href="javascript:" class="booking-room-name text-center">
+                                                    {{sys.louceng+"楼"+sys.mingzi }} </a>
+                                                <p class="booking-room-size" v-bind:title=sys.miaoshu>{{sys.miaoshu}}</p>
+                                                <small class="">
+                                                    <i class="fa fa-circle text-success"></i>
+                                                    开放预约中
+                                                </small>
+                                            </div>
+
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+
+                            <div class=" " style="padding: 15px 0 15px 0; ">
+                                <h1 style="margin:0;font-size:24px;border-left: 4px solid green;padding-left: 16px; font-weight:
+                                                bold; ">
+                                    <span class="fa fa-cubes " style="margin-right: 4px; "></span> 资源展示
+                                </h1>
+                            </div>
+                            <div class="nav-tabs-custom " style="background: none; ">
+
+                                <div class="tab-content ">
+                                    <div class="tab-pane active ">
+                                        <ul id="ziyuanList " class="booking-items row xs-gutter clearfix ">
+                                            <li v-for="zy in ZiYuansTop6" class="booking-item col-sm-4 col-xs-6 " style="margin-bottom: 10px;overflow:
+                                                hidden; ">
+                                                <a v-bind:href=zy.url target="_blank"  class="booking-item-icon has-img " title=" ">
+                                                    <img v-bind:src=zy.url alt=" ">
+                                                </a>
+                                            </li>
+                                        </ul>
+                                        <p class="text-center " style="margin: 10px ">
+                                            <a href="ziyuan-list.html " class=" ">查看全部</a>
+                                        </p>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4 ">
+                            <div class="row xs-gutter ">
+                                <div class="col-xs-4 ">
+                                    <div class="small-box text-center bg-yellow ">
+                                        <div class="inner " style="padding-left: 0;padding-right: 0; ">
+                                            <p style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis; ">房间数</p>
+                                            <h3 id="fangjianshu " style="margin-bottom: 0; ">{{ShiYanShiS.length}}</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-4 ">
+                                    <div class="small-box text-center bg-aqua ">
+                                        <div class="inner " style="padding-left: 0;padding-right: 0; ">
+                                            <p style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis; ">资产数</p>
+                                            <h3 id="zichang " style="margin-bottom: 0; ">{{zichangshu}}</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-4 ">
+                                    <div class="small-box text-center bg-green ">
+                                        <div class="inner " style="padding-left: 0;padding-right: 0; ">
+                                            <p style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis; ">当天活跃用户</p>
+                                            <h3 id="huoyueshu " style="margin-bottom: 0; ">{{dangtianhuoyueshu}}</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="box box-default box-sharp ">
+                                <div class="box-header with-border ">
+                                    <h3 class="box-title ">
+                                        <i class="fa fa-list "></i> 最新预约记录
+                                    </h3>
+                                </div>
+                                <div class="box-body ">
+                                    <ul id="yuyueList " class="list-group book-list ">
+                                        <li v-for="yy in YuYueSTop10" class="list-group-item book-list-item sharp ">
+                                            <span class="book-list-title ">[{{yy.shiyanshiMing}}]</span>
+                                            <br>
+                                            <small class="book-list-start ">{{yy.kaishi}}</small> 至
+                                            <small class="book-list-finish ">{{yy.jieshu}}</small>
+                                            <br>
+
+                                            <div class="clearfix ">
+                                                <span class="pull-right ">-
+                                                    <small class="book-list-user ">{{yy.xueshengxingming}}</small>
+                                                </span>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+
+    </div>
+
+
+</body>
+<script src="../libs/jquery/jquery/dist/jquery.js "></script>
+<script src="../libs/jquery/bootstrap/dist/js/bootstrap.js "></script>
+<script src="js/ui-load.js "></script>
+<script src="js/ui-jp.config.js "></script>
+<script src="js/ui-jp.js "></script>
+<script src="js/ui-nav.js "></script>
+<script src="js/ui-toggle.js "></script>
+<script src="js/ui-client.js "></script>
+<script src="js/Vue.js "></script>
+
+<script src="js/jquery.bootstrap.newsbox.min.js " type="text/javascript "></script>
+<script src="js/common.js " type="text/javascript "></script>
+<script>
+    $(function () {
+        app.getShiYanShis();
+        app.getZiYuan();
+        app.getAllYuYue();
+        // getAllZuoWei();
+    });
+</script>
+
+</html>
