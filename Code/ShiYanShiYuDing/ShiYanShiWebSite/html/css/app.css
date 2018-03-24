@@ -1127,6 +1127,15 @@ body {
     .navbar-form .form-group {
         margin-bottom: 0;
     }
+	
+    .navbar-brand img {
+       position: absolute;
+        top: 5px;
+        height: 90px;
+        margin-top: 0;
+        left: 5px;
+    }
+
 }
 
 html.bg {

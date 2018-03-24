@@ -308,7 +308,7 @@ function getZiYuan() {
                 ZiYuans = response;
                 if (isHomePage) {
                     var length = (ZiYuans.length >= 6) ? 6 : ZiYuans.length;
-                    for (var i = 0; i < 6; i++) {
+                    for (var i = 0; i < length; i++) {
                         var ziyuan = ZiYuans[i];
                         $("#ziyuanList").append('<li class="booking-item col-sm-4 col-xs-6 " style="margin-bottom: 10px;overflow: hidden; ">' +
                             '<a href="javascript: " class="booking-item-icon has-img " title=" ">' +
