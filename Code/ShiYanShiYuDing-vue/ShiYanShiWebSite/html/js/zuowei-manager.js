@@ -1,10 +1,15 @@
-$(function() {
-    getShiYanShis();
-    getZuoWei();
-    $("#shiyanshiSelect").change(getZuoWei);
-
+$(function () {
+    app.getShiYanShis();
+    //getZuoWei();
+    //$("#shiyanshiSelect").change(getZuoWei);
+    var inter = setInterval(function () {
+        if (app.selectedSYS) {
+            clearInterval(inter);
+            app.shiyanshiChange();
+        }
+    }, 300);
     var modal = $("#myModal");
-    modal.on("show.bs.modal", function(e) {
+    modal.on("show.bs.modal", function (e) {
         var id = $(e.relatedTarget).data("id");
         if (id) {
             var selectedS = ShiYanShiS.find(s => s.zidongbianhao == id);
@@ -22,11 +27,11 @@ $(function() {
                 .attr("checked", true);
         }
     });
-    modal.on("hide.bs.modal", function() {
+    modal.on("hide.bs.modal", function () {
         $("#M_id").val("");
         $("#M_mingzi").val("");
     });
-    $("#M_Save").click(function() {
+    $("#M_Save").click(function () {
         var id = $("#M_id").val();
         var zuowei = {
             zuoweimingcheng: $("#M_mingzi").val(),
@@ -41,43 +46,38 @@ $(function() {
                 url: apiUrl + "M_ZuoWei/" + id,
                 data: zuowei,
                 dataType: "json",
-                success: function(response) {
+                success: function (response) {
                     $("#myModal").modal("hide");
-                    getZuoWei();
+                    //getZuoWei();
+                    app.shiyanshiChange();
                 }
             });
         } else {
-            // $.post(apiUrl + 'M_ZuoWei/?shiyanshibianhao=' + $("#shiyanshiSelect").val(), zuowei,
-            //     function (data, textStatus, jqXHR) {
-            //         alert('保存成功！');
-            //         $('#myModal').modal('hide');
-            //         window.location.href = window.location.href;
-            //     },
-            //     "json"
-            // );
             $.ajax({
                 type: "post",
                 url: apiUrl + "M_ZuoWei/?shiyanshibianhao=" + $("#shiyanshiSelect").val(),
                 data: zuowei,
                 dataType: "json",
-                complete: function() {
+                complete: function () {
                     $("#myModal").modal("hide");
-                    getZuoWei();
+                    // getZuoWei();
+                    app.shiyanshiChange();
+
                 }
             });
         }
     });
 
     var modal1 = $("#myModal1");
-    modal1.on("show.bs.modal", function(e) {
+    modal1.on("show.bs.modal", function (e) {
         $("#M_renShuSelect").val(1);
         $("#M_zhuoShuSelect").val(1);
         $('#jqmeter-container').hide();
     });
-    modal1.on("hide.bs.modal", function() {
+    modal1.on("hide.bs.modal", function () {
 
     });
-    $("#M_PiLiang").click(function() {
+    $("#M_PiLiang").click(function () {
         var zuoweishu = $("#M_renShuSelect").val() * $("#M_zhuoShuSelect").val();
         if (confirm("将为实验室【" + $.trim($("#shiyanshiSelect option:selected").text()) + "】批量添加" + zuoweishu + "个座位？")) {
             var count = 0;
@@ -93,7 +93,9 @@ $(function() {
                 if (zuoweishu == count) {
                     clearInterval(interval);
                     $("#myModal1").modal("hide");
-                    getZuoWei();
+                    // getZuoWei();
+                    app.shiyanshiChange();
+
                 }
             }, 100)
             for (let i = 0; i < $("#M_zhuoShuSelect").val(); i++) {
@@ -110,7 +112,7 @@ $(function() {
                         url: apiUrl + "M_ZuoWei/?shiyanshibianhao=" + $("#shiyanshiSelect").val(),
                         data: zuowei,
                         dataType: "json",
-                        complete: function() {
+                        complete: function () {
                             count = count + 1;
                         }
                     });
@@ -122,21 +124,20 @@ $(function() {
     });
 });
 
-function getZuoWei() {
-    setTimeout(function() {
-        console.log('$("#shiyanshiSelect").val()' + $("#shiyanshiSelect").val());
-        if ($("#shiyanshiSelect").val() != 0) {
-            getZuoWeiByShiyanshi($("#shiyanshiSelect").val());
-            setZhuoHao();
-        } else {
-            getZuoWei();
-        }
-    }, 300);
-}
+// function getZuoWei() {
+//     setTimeout(function() {
+//         if ($("#shiyanshiSelect").val() != 0) {
+//             app.getZuoWeiByShiyanshi($("#shiyanshiSelect").val());
+//             setZhuoHao();
+//         } else {
+//             getZuoWei();
+//         }
+//     }, 300);
+// }
 
-function ShanChuan(id) {
-    deleteZuoWei(id);
-}
+//function ShanChuan(id) {
+//    deleteZuoWei(id);
+//}
 
 var setZhuoHaoCount = 0;
 

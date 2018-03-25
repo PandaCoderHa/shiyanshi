@@ -15,255 +15,157 @@
 
     <link href="css/site.css" rel="stylesheet" type="text/css" />
     <link href="css/detail.css" rel="stylesheet" type="text/css" />
-	<link rel="stylesheet" href="css/style.css" type="text/css" />
+    <link rel="stylesheet" href="css/style.css" type="text/css" />
 
 </head>
 
 <body>
-    <header id="header" class="app-header navbar" role="menu">
-	  <div class="navbar navbar-static-top">
-		<div class="container">
-			<div class="navbar-header bg-dark">
-			  <button class="pull-right visible-xs dk" ui-toggle-class="show" target=".navbar-collapse">
-				<i class="glyphicon glyphicon-cog"></i>
-			  </button>
-			  <button class="pull-right visible-xs" ui-toggle-class="off-screen" target=".app-aside" ui-scroll="app">
-				<i class="glyphicon glyphicon-align-justify"></i>
-			  </button>
-			  <a href="home.html" class="navbar-brand text-lt">
-				<span class="hidden-folded m-l-xs">高校实验室预约系统</span>
-			  </a>
-			</div>
-			
-			<div class="collapse navbar-collapse pull-left" id="navbar-collapse">
+    <div id="app">
+        <my-header v-bind:mulu="mulu"></my-header>
+        <div class="app app-header-fixed ">
+            <div class="g-in f-cb">
+                <div class="g-mncw w860">
+                    <form>
 
-				<ul class="nav navbar-nav navbar-menu">
-					<li>
-						<a href="home.html">
-							<span>开始预约</span>
-						</a>
-					</li>
-				
-					<li>
-						<a href="ziyuan-list.html">
-							<span>资源展示</span>
-						</a>
-					</li>
-					<li>
-						<a href="yuyue-manager.html">
-							<span>预约记录</span>
-						</a>
-					</li>
-					
-					<li>
-						<a href="yuyue-liucheng.html">
-							<span>预约流程</span>
-						</a>
-					</li>
-													
-				</ul>
-			</div>
-			
-			
-			<div class="navbar-custom-menu hidden-xs">
-            <ul class="nav navbar-nav">
-                 
-                
-				<li class="dropdown">
-                    <a href="#" data-toggle="dropdown" class="dropdown-toggle" aria-expanded="false">
-                        <i class="fa fa-fw fa-plus visible-xs-inline-block"></i>
-                        <span translate="header.navbar.new.NEW"> <img src="img/user.png" class="user-image" alt="User Image"> 个人中心</span>
-                        <span class="caret"></span>
-                    </a>
-                    <ul class="dropdown-menu" role="menu">
-                       
-                        <li>
-                            <a href="info-change.html">修改个人资料</a>
-                        </li>
-                        <li>
-                            <a id="logout" ui-sref="access.signin">退出登录</a>
-                        </li>
-                    </ul>
-                </li>
-               
-            </ul>
-        </div>
-		
-		
-		</div>
-	</div>
-    
-  </header>
-    <!-- <banner>
-        <div class="banner-img"></div>
-    </banner> -->
-    <div class="app app-header-fixed ">
-        <div class="g-in f-cb">
-            <div class="g-sd-l">
-                <div class="m-s-menu">
-                    <ul>
-                        <li class="learn">
-                            <span class="fa fa-th-list"></span> 实验室列表
-                        </li>
-                        <li>
-                            <a href="preview.html">第一实验室</a>
-                        </li>
-                        <li class="crt">
-                            <a href="preview.html">
-                                <span class="glyphicon glyphicon-play"></span>第二实验室</a>
-                        </li>
-                        <li>
-                            <a href="preview.html">第三实验室</a>
-                        </li>
-                        <li>
-                            <a href="preview.html">第四实验室</a>
-                        </li>
-                        <li>
-                            <a href="preview.html">第五实验室</a>
-                        </li>
-                    </ul>
 
+                        <div class="m-school">
+
+                            <div class="panel panel-default m20 m0">
+                                <div class="panel-heading">
+                                    <div class="panel-heading-title">实验室</div>
+                                    <div class="shiyan-list">
+                                        <select lass="form-control" v-model="selectedSYS" v-on:change="shiyanshiChange()">
+                                            <option v-for="sys in ShiYanShiS" v-bind:value=sys.zidongbianhao>{{sys.mingzi}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="table-responsive">
+                                    <table class="table table-striped b-t b-light">
+                                        <thead>
+                                            <tr>
+                                                <!-- <th>
+                                                    <input type="checkbox"></input>
+                                                </th> -->
+                                                <th>坐位编号</th>
+                                                <th>坐位名称</th>
+                                                <th>桌号</th>
+                                                <th style="width:80px;">操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="zuoweiTable">
+                                            <tr v-for="(z,i) in ZuoWeiS">
+                                                <td>{{i+1}}</td>
+                                                <td>{{z.zuoweimingcheng }}</td>
+                                                <td>{{z.zhuohao}}</td>
+                                                <td><a href="javascript:void(0)" v-on:click="delConfrim( z.zidongbianhao,deleteZuoWei)">删除</a></td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+
+                            <div class="sibmit f-tac">
+                                <input type="button" value="新 增" class="u-btn md active jsSubmit" data-toggle="modal" data-target="#myModal">
+                                <input type="button" value="批量添加" class="u-btn md active jsSubmit" data-toggle="modal" data-target="#myModal1">
+                            </div>
+                        </div>
+                    </form>
                 </div>
+
             </div>
-            <div class="g-mncw w860">
-                <form>
+        </div>
 
 
-                    <div class="m-school">
-
-                        <div class="panel panel-default m20 m0">
-                            <div class="panel-heading">
-                                <div class="panel-heading-title">实验室</div>
-                                <div class="shiyan-list">
-                                    <select id="shiyanshiSelect" class="form-control">
-                                        <option value="0">第一实验室</option>
-                                        <option value="1">第二实验室</option>
-                                        <option value="2">第三实验室</option>
-                                        <option value="3">第四实验室</option>
-                                        <option value="3">第五实验室</option>
-                                    </select>
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div role="document">
+                <div class="modal-content modal-zuowei">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h3 class="modal-title" id="myModalLabel">编辑坐位</h3>
+                    </div>
+                    <div class="modal-body">
+                        <input id="M_id" type="hidden" name="">
+                        <div class="form-group-info">
+                            <label class="control-label">坐位名称</label>
+                            <div>
+                                <input id="M_mingzi" type="text" class="form-control" placeholder="坐位名称">
+                            </div>
+                        </div>
+                        <div class="form-group-info">
+                            <label class="control-label">桌号</label>
+                            <div>
+                                <select id="M_zhuohaoSelect" class="form-control"></select>
+                                <!-- <input id="M_zhuohao" type="text" class="form-control" placeholder="桌号"> -->
+                            </div>
+                        </div>
+                        <div>
+                            <label class="control-label"> </label>
+                            <div class="radio-group">
+                                <div class="radio">
+                                    <label class="i-checks">
+                                        <input type="radio" name="M_shifoshiyong" value="shi">
+                                        <i></i>
+                                        使用
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label class="i-checks">
+                                        <input type="radio" name="M_shifoshiyong" value="fou">
+                                        <i></i>
+                                        停用
+                                    </label>
                                 </div>
                             </div>
-
-                            <div class="table-responsive">
-                                <table class="table table-striped b-t b-light">
-                                    <thead>
-                                        <tr>
-                                            <!-- <th>
-                                                <input type="checkbox"></input>
-                                            </th> -->
-                                            <th>坐位编号</th>
-                                            <th>坐位名称</th>
-                                            <th>桌号</th>
-                                            <th style="width:80px;">操作</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="zuoweiTable">
-                                    </tbody>
-                                </table>
-                            </div>
-
-                        </div>
-
-                        <div class="sibmit f-tac">
-                            <input type="button" value="新 增" class="u-btn md active jsSubmit" data-toggle="modal" data-target="#myModal">
-                            <input type="button" value="批量添加" class="u-btn md active jsSubmit" data-toggle="modal" data-target="#myModal1">
                         </div>
                     </div>
-                </form>
+                    <div class="modal-footer">
+                        <button id="M_Save" type="button" class="btn btn-primary">保存</button>
+                        <!-- <button type="button" class="btn btn-primary">退出</button> -->
+                    </div>
+                </div>
             </div>
-
         </div>
-    </div>
 
-
-    <!-- Modal -->
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div role="document">
-            <div class="modal-content modal-zuowei">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    <h3 class="modal-title" id="myModalLabel">编辑坐位</h3>
-                </div>
-                <div class="modal-body">
-                    <input id="M_id" type="hidden" name="">
-                    <div class="form-group-info">
-                        <label class="control-label">坐位名称</label>
-                        <div>
-                            <input id="M_mingzi" type="text" class="form-control" placeholder="坐位名称">
-                        </div>
+        <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div role="document">
+                <div class="modal-content modal-zuowei">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h3 class="modal-title" id="myModalLabel">批量添加坐位</h3>
                     </div>
-                    <div class="form-group-info">
-                        <label class="control-label">桌号</label>
-                        <div>
-                            <select id="M_zhuohaoSelect" class="form-control"></select>
-                            <!-- <input id="M_zhuohao" type="text" class="form-control" placeholder="桌号"> -->
-                        </div>
-                    </div>
-                    <div>
-                        <label class="control-label"> </label>
-                        <div class="radio-group">
-                            <div class="radio">
-                                <label class="i-checks">
-                                    <input type="radio" name="M_shifoshiyong" value="shi">
-                                    <i></i>
-                                    使用
-                                </label>
+                    <div class="modal-body">
+                        <div id="jqmeter-container"></div>
+                        <div class="form-group-info">
+                            <label class="control-label">桌位数：</label>
+                            <div>
+                                <select id="M_zhuoShuSelect" class="form-control"></select>
+                                <!-- <input id="M_zhuohao" type="text" class="form-control" placeholder="桌号"> -->
                             </div>
-                            <div class="radio">
-                                <label class="i-checks">
-                                    <input type="radio" name="M_shifoshiyong" value="fou">
-                                    <i></i>
-                                    停用
-                                </label>
+                        </div>
+                        <div class="form-group-info">
+                            <label class="control-label">每桌人数：</label>
+                            <div>
+                                <select id="M_renShuSelect" class="form-control"></select>
+                                <!-- <input id="M_zhuohao" type="text" class="form-control" placeholder="桌号"> -->
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button id="M_Save" type="button" class="btn btn-primary">保存</button>
-                    <!-- <button type="button" class="btn btn-primary">退出</button> -->
+                    <div class="modal-footer">
+                        <button id="M_PiLiang" type="button" class="btn btn-primary">保存</button>
+                        <!-- <button type="button" class="btn btn-primary">退出</button> -->
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div role="document">
-            <div class="modal-content modal-zuowei">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    <h3 class="modal-title" id="myModalLabel">批量添加坐位</h3>
-                </div>
-                <div class="modal-body">
-                    <div id="jqmeter-container"></div>
-                    <div class="form-group-info">
-                        <label class="control-label">桌位数：</label>
-                        <div>
-                            <select id="M_zhuoShuSelect" class="form-control"></select>
-                            <!-- <input id="M_zhuohao" type="text" class="form-control" placeholder="桌号"> -->
-                        </div>
-                    </div>
-                    <div class="form-group-info">
-                        <label class="control-label">每桌人数：</label>
-                        <div>
-                            <select id="M_renShuSelect" class="form-control"></select>
-                            <!-- <input id="M_zhuohao" type="text" class="form-control" placeholder="桌号"> -->
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button id="M_PiLiang" type="button" class="btn btn-primary">保存</button>
-                    <!-- <button type="button" class="btn btn-primary">退出</button> -->
-                </div>
-            </div>
-        </div>
-    </div>
-
     <script src="../libs/jquery/jquery/dist/jquery.js"></script>
     <script src="../libs/jquery/bootstrap/dist/js/bootstrap.js"></script>
     <script src="js/ui-load.js"></script>
@@ -274,6 +176,7 @@
     <script src="js/ui-client.js"></script>
     <script src="js/jquery.bootstrap.newsbox.min.js" type="text/javascript"></script>
     <script src="js/jqmeter.min.js" type="text/javascript"></script>
+    <script src="js/Vue.js "></script>
     <script src="js/common.js" type="text/javascript"></script>
     <script src="js/zuowei-manager.js" type="text/javascript"></script>
 </body>

@@ -1,7 +1,7 @@
 //var apiUrl = "http://10.203.82.224:8081/api/";
 var apiUrl = "http://localhost:51369/api/";
 
-var xingqi = new Array("星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日");
+//var xingqi = new Array("星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日");
 var isHomePage = false;
 var app;
 
@@ -68,6 +68,7 @@ $(function () {
             mulu: [],
             ShiYanShiS: [],
             ShiYanShiTop6: [],
+            selectedSYS: null,
             BuKeYongShiJianS: [],
             ZuoWeiS: [],
             ZiYuans: [],
@@ -77,7 +78,8 @@ $(function () {
             loginuser: {},
             dangtianhuoyueshu: 0,
             zichangshu: 0,
-            timeOptions: ["08:00", "08:30", "09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00", "20:30", "21:00", "21:30", "22:00"]
+            timeOptions: ["08:00", "08:30", "09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00", "20:30", "21:00", "21:30", "22:00"],
+            xingqi : new Array("星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日")
         },
         computed: {
             YuYueSJilu: function () {
@@ -157,21 +159,15 @@ $(function () {
                         if (response) {
                             thisTmp.ShiYanShiS = response;
                             thisTmp.ShiYanShiTop6 = response.slice(0, 6);
-                            if ($("#shiyanshiSelect").length > 0) {
-                                $("#shiyanshiSelect").html("");
-                                response.forEach(function (sys) {
-                                    $("#shiyanshiSelect").append(
-                                        '<option value="' +
-                                        sys.zidongbianhao +
-                                        '">' +
-                                        sys.mingzi +
-                                        "</option>"
-                                    );
-                                }, this);
-                            }
+                            thisTmp.selectedSYS = response[0].zidongbianhao;
                         }
                     }
                 });
+            },
+            shiyanshiChange: function () {
+                console.log(this.selectedSYS);
+                this.getZuoWeiByShiyanshi(this.selectedSYS);
+                this.getBuKeYongShiJianByShiYanShi(this.selectedSYS);
             },
             deleteShiYanShi: function (id) {
                 var thisTmp = this;
@@ -235,7 +231,7 @@ $(function () {
             getZuoWeiByShiyanshi: function (shiyanshihao) {
                 var thisTmp = this;
                 if (shiyanshihao) {
-                    $("#zuoweiTable").html("");
+                    //$("#zuoweiTable").html("");
                     $.ajax({
                         type: "get",
                         url: apiUrl + "M_ZuoWei?shiyanshihao=" + shiyanshihao,
@@ -259,13 +255,12 @@ $(function () {
                 }
             },
             //////不可用时间设定
-            getBuKeYongShiJianByShiYanShi: function (shiyanshihao) {
+            getBuKeYongShiJianByShiYanShi: function () {
                 var thisTmp = this;
-                if (shiyanshihao) {
-                    $("#bukeyongTable").html("");
+                if (this.selectedSYS) {
                     $.ajax({
                         type: "get",
-                        url: apiUrl + "T_ShiYanShiBuKeYongShiJian?shiyanshihao=" + shiyanshihao,
+                        url: apiUrl + "T_ShiYanShiBuKeYongShiJian?shiyanshihao=" + this.selectedSYS,
                         dataType: "json",
                         success: function (response) {
                             if (response) {
@@ -382,7 +377,7 @@ $(function () {
                     }
                 });
             },
-            logOut:function(){
+            logOut: function () {
                 sessionStorage.clear();
                 window.location.href = "/login.html";
             }
