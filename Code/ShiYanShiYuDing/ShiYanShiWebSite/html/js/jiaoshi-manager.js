@@ -1,4 +1,4 @@
-$(function() {
+$(function () {
     getShiYanShis();
 
     // $("#M_tupian").change(function() {
@@ -8,7 +8,7 @@ $(function() {
 
 
     var modal = $("#myModal");
-    modal.on("show.bs.modal", function(e) {
+    modal.on("show.bs.modal", function (e) {
         var id = $(e.relatedTarget).data("id");
         $("#M_tupian").val('');
         if (id) {
@@ -31,7 +31,7 @@ $(function() {
             $("#M_fuzeren").val('');
         }
     });
-    modal.on('hide.bs.modal', function() {
+    modal.on('hide.bs.modal', function () {
         $("#M_id").val('');
         $("#M_mingzi").val('');
         $("#M_miaoshu").val('');
@@ -40,7 +40,7 @@ $(function() {
         $("#M_tupian_show").hide();
         $("#M_fuzeren").val('');
     });
-    $("#M_Save").click(function() {
+    $("#M_Save").click(function () {
 
         var imgFile = document.getElementById("M_tupian").files.length > 0 ? document.getElementById("M_tupian").files[0] : null;
         if (imgFile && imgFile.size > 1024 * 1024 * 10) {
@@ -68,13 +68,13 @@ $(function() {
                 data: formData,
                 contentType: false,
                 processData: false,
-                success: function(response) {
+                success: function (response) {
                     var imgUrl = apiUrl.replace('api/', 'Imgs/') + response.substring(response.lastIndexOf('\\') + 1);
                     sys.tupian = imgUrl;
                     console.log(imgUrl);
                     doSave();
                 },
-                error: function(e) {
+                error: function (e) {
                     $.Zebra_Dialog('图片保存失败', {
                         type: 'error',
                         title: '信息提示'
@@ -93,7 +93,7 @@ $(function() {
                     url: apiUrl + 'M_ShiYanShi/' + id,
                     data: sys,
                     dataType: "json",
-                    success: function(response) {
+                    success: function (response) {
                         $('#myModal').modal('hide');
                         getShiYanShis();
                     }
@@ -104,7 +104,7 @@ $(function() {
                     url: apiUrl + 'M_ShiYanShi',
                     data: sys,
                     dataType: "json",
-                    success: function(response) {
+                    success: function (response) {
                         $('#myModal').modal('hide');
                         getShiYanShis();
                     }
@@ -113,7 +113,44 @@ $(function() {
         }
 
     });
+
+
+
 });
+
+var alertOption = {
+    type: 'information',
+    title: '信息提示'
+};
+function kaimen() {
+    var loadOption = {
+        message: '开门中,请稍候。。。',
+        theme: 'dark'
+    };
+    $("body").loading(loadOption);
+    $.ajax({
+        type: "post",
+        url: 'http://labdoor.xiaosikeji.com/api/open_door',
+        data: {
+            door_num: 8005
+        },
+        dataType: "json",
+        //jsonpCallback: "getData",
+        success: function (response) {
+            $("body").loading('stop');
+            if (response && response == 'open') {
+                $.Zebra_Dialog('远程开门成功', alertOption);
+            } else {
+                $.Zebra_Dialog('远程开门失败', alertOption);
+            }
+        },
+        error: function (e) {
+            $.Zebra_Dialog('远程开门失败', alertOption);
+            $("body").loading('stop');
+            console.log(e);
+        }
+    });
+}
 
 // function ShanChuan(id) {
 //     $.Zebra_Dialog('您确定要删除吗?', {

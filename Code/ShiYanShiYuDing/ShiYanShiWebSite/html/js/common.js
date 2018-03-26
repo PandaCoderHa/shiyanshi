@@ -8,7 +8,7 @@ var YuYueS;
 var loginuser;
 var xingqi = new Array("星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日");
 var isHomePage = false;
-$(function() {
+$(function () {
     isHomePage = window.location.href.indexOf('home.html') > 0;
     var title = '创新实践共享平台在线监控及评测平台';
 
@@ -38,7 +38,7 @@ $(function() {
         $("#navbar-collapse ul").html("");
 
         var classname = '<li class="crt"><span class="glyphicon glyphicon-play"></span>'
-        mulu.forEach(function(m) {
+        mulu.forEach(function (m) {
             $("#navbar-collapse ul").append(' <li><a href="' + m[1] + '"><span>' + m[0] + '</span></a></li>');
         });
     } else {
@@ -52,7 +52,7 @@ $(function() {
     }
     $("header div:eq(0) a").prepend('<img src="img/logo.png" />');
 
-    $("#logout").click(function() {
+    $("#logout").click(function () {
         sessionStorage.clear();
         window.location.href = "/login.html";
     });
@@ -64,7 +64,7 @@ function getShiYanShis() {
         type: "get",
         url: apiUrl + "M_ShiYanShi",
         dataType: "json",
-        success: function(response) {
+        success: function (response) {
             if (response) {
                 ShiYanShiS = response;
                 console.log(ShiYanShiS);
@@ -74,7 +74,7 @@ function getShiYanShis() {
                 //实验室管理
                 if ($("#shiyanshiList tbody").length > 0) {
                     $("#shiyanshiList tbody").html("");
-                    response.forEach(function(sys, i) {
+                    response.forEach(function (sys, i) {
                         if (i == 0 || (response[i - 1] && response[i - 1].louceng != sys.louceng)) {
                             $("#shiyanshiList tbody").append('<tr style="border-bottom: solid 2px #00a65a;"><td colspan="2"><h4>' + sys.louceng + '楼</h4></td></tr>');
                         }
@@ -84,7 +84,7 @@ function getShiYanShis() {
                             (sys.tupian ? "<img src='" + sys.tupian + "' style='width:50px;'>" : '') +
                             sys.mingzi +
                             "</td>" +
-                            '<td> <a href="javascript:void(0)" >远程开门</a> | ' +
+                            '<td> <a href="javascript:kaimen(' + sys.zidongbianhao + ')" >远程开门</a> | ' +
                             '<a href="#" data-id="' + sys.zidongbianhao + '" data-toggle="modal" data-target="#myModal">修改</a> | ' +
                             '<a href=javascript:delConfrim(' + sys.zidongbianhao + ',deleteShiYanShi,"' + delInfo + '") >删除</a></td></tr>'
                         );
@@ -94,7 +94,7 @@ function getShiYanShis() {
                     $("#sysList").html('');
 
                     var length = isHomePage ? 6 : ShiYanShiS.length
-                        // ShiYanShiS.forEach(function(sys) {
+                    // ShiYanShiS.forEach(function(sys) {
                     for (var i = 0; i < length; i++) {
                         var sys = ShiYanShiS[i];
                         $("#sysList").append(
@@ -131,7 +131,7 @@ function getShiYanShis() {
 
                 if ($("#shiyanshiSelect").length > 0) {
                     $("#shiyanshiSelect").html("");
-                    response.forEach(function(sys) {
+                    response.forEach(function (sys) {
                         $("#shiyanshiSelect").append(
                             '<option value="' +
                             sys.zidongbianhao +
@@ -151,10 +151,10 @@ function deleteShiYanShi(id) {
         $.ajax({
             type: "delete",
             url: apiUrl + "M_ShiYanShi/" + id,
-            success: function(response) {
+            success: function (response) {
                 getShiYanShis();
             },
-            error: function(e) {
+            error: function (e) {
                 console.log(e)
             }
         });
@@ -166,7 +166,7 @@ function getAllZuoWei() {
         type: "get",
         url: apiUrl + "M_ZuoWei",
         dataType: "json",
-        success: function(response) {
+        success: function (response) {
             $("#zichang").text(response.length);
         }
     });
@@ -179,11 +179,11 @@ function getZuoWeiByShiyanshi(shiyanshihao) {
             type: "get",
             url: apiUrl + "M_ZuoWei?shiyanshihao=" + shiyanshihao,
             dataType: "json",
-            success: function(response) {
+            success: function (response) {
                 ZuoWeiS = response;
                 if (response) {
                     console.log(response);
-                    response.forEach(function(z, i) {
+                    response.forEach(function (z, i) {
                         // $("#zuoweiTable").append(' <tr><td><input type="checkbox"></input></td><td>' + z.zidongbianhao + "</td><td>" + z.zuoweimingcheng + "</td><td>" + z.zhuohao + '</td><td><a href="javascript:ShanChuan(' + z.zidongbianhao + ')" >删除</a></td></tr>');
                         $("#zuoweiTable").append(' <tr><td>' + (i + 1) + "</td><td>" + z.zuoweimingcheng + "</td><td>" + z.zhuohao + '</td><td><a href="javascript:ShanChuan(' + z.zidongbianhao + ')" >删除</a></td></tr>');
                     }, this);
@@ -198,7 +198,7 @@ function deleteZuoWei(id) {
         $.ajax({
             type: "delete",
             url: apiUrl + "M_ZuoWei/" + id,
-            success: function(response) {
+            success: function (response) {
                 getZuoWei();
             }
         });
@@ -213,10 +213,10 @@ function getBuKeYongShiJianByShiYanShi(shiyanshihao) {
             type: "get",
             url: apiUrl + "T_ShiYanShiBuKeYongShiJian?shiyanshihao=" + shiyanshihao,
             dataType: "json",
-            success: function(response) {
+            success: function (response) {
                 if (response) {
                     BuKeYongShiJianS = response;
-                    response.forEach(function(b, i) {
+                    response.forEach(function (b, i) {
                         $("#bukeyongTable").append(
                             " <tr>" + "<td>" + (i + 1) + "</td>" + "<td>" + xingqi[b.zhouji - 1] + "</td>" +
                             "<td>" + b.kaishiriqi + "</td>" + "<td>" + b.jieshuriqi + "</td>" +
@@ -225,7 +225,7 @@ function getBuKeYongShiJianByShiYanShi(shiyanshihao) {
                     }, this);
                 }
             },
-            error: function(err) {
+            error: function (err) {
                 console.log("err:", err);
             }
         });
@@ -237,7 +237,7 @@ function deleteBukeYongShiJian(id) {
         $.ajax({
             type: "delete",
             url: apiUrl + "T_ShiYanShiBuKeYongShiJian/" + id,
-            success: function(response) {
+            success: function (response) {
                 getBuKeYongShiJian();
             }
         });
@@ -251,12 +251,12 @@ function getYuYue(user, shiyanshihao) {
             type: "get",
             url: apiUrl + "T_YuYue?shiyanshihao=" + shiyanshihao + "&user=" + user,
             dataType: "json",
-            success: function(response) {
+            success: function (response) {
                 if (response) {
                     YuYueS = response;
                 }
             },
-            error: function(err) {
+            error: function (err) {
                 console.log("err:", err);
             }
         });
@@ -269,7 +269,7 @@ function getAllYuYue() {
         type: "get",
         url: apiUrl + "T_YuYue",
         dataType: "json",
-        success: function(response) {
+        success: function (response) {
             if (response) {
                 YuYueS = response;
                 if ($("#huoyueshu")) {
@@ -290,7 +290,7 @@ function getAllYuYue() {
                 }
             }
         },
-        error: function(err) {
+        error: function (err) {
             console.log("err:", err);
         }
     });
@@ -303,7 +303,7 @@ function getZiYuan() {
         type: "get",
         url: apiUrl + "T_ZiYuan",
         dataType: "json",
-        success: function(response) {
+        success: function (response) {
             if (response) {
                 ZiYuans = response;
                 if (isHomePage) {
@@ -331,7 +331,7 @@ function getZiYuan() {
 
             }
         },
-        error: function(err) {
+        error: function (err) {
             console.log("err:", err);
         }
     });
@@ -342,7 +342,7 @@ function deleteZiYuan(id) {
         $.ajax({
             type: "delete",
             url: apiUrl + "T_ZiYuan/" + id,
-            success: function(response) {
+            success: function (response) {
                 getZiYuan();
             }
         });
@@ -379,7 +379,7 @@ function delConfrim(id, callfunc, info) {
         type: 'warning',
         title: '删除确认',
         buttons: ['确定', '取消'],
-        onClose: function(caption) {
+        onClose: function (caption) {
             if (caption == "确定") {
                 callfunc(id);
             }
