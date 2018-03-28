@@ -122,34 +122,55 @@ var alertOption = {
     type: 'information',
     title: '信息提示'
 };
-function kaimen() {
+function kaimen(id) {
     var loadOption = {
         message: '开门中,请稍候。。。',
         theme: 'dark'
     };
+    var doornums = {
+        G309: 8009,
+        G306: 8008,
+        G305: 8007,
+        G301: 8006,
+        E103: 8005,
+        G211: 8004,
+        G206: 8003,
+        G205: 8002,
+        G201: 8001,
+        G109: 8000
+
+    }
     $("body").loading(loadOption);
-    $.ajax({
-        type: "post",
-        url: 'http://labdoor.xiaosikeji.com/api/open_door',
-        data: {
-            door_num: 8005
-        },
-        dataType: "json",
-        //jsonpCallback: "getData",
-        success: function (response) {
-            $("body").loading('stop');
-            if (response && response == 'open') {
-                $.Zebra_Dialog('远程开门成功', alertOption);
-            } else {
-                $.Zebra_Dialog('远程开门失败', alertOption);
+    var shiyanshi = ShiYanShiS.find(s => s.zidongbianhao == id);
+    if (shiyanshi) {
+        $.ajax({
+            type: "post",
+            url: 'http://labdoor.xiaosikeji.com/api/open_door',
+            data: {
+                door_num: doornums[shiyanshi.mingzi.substr(0, 4)]
+            },
+            dataType: "json",
+            //jsonpCallback: "getData",
+            success: function (response) {
+                $("body").loading('stop');
+                if (response && response == 'open') {
+                    $.Zebra_Dialog('远程开门成功', alertOption);
+                } else {
+                    $.Zebra_Dialog('远程开门失败', alertOption);
+                }
+            },
+            error: function (e) {
+                if (e.responseText == "open") {
+                    $.Zebra_Dialog('远程开门成功', alertOption);
+                } else {
+                    $.Zebra_Dialog('远程开门失败', alertOption);
+                }
+                $("body").loading('stop');
+                console.log(e);
             }
-        },
-        error: function (e) {
-            $.Zebra_Dialog('远程开门失败', alertOption);
-            $("body").loading('stop');
-            console.log(e);
-        }
-    });
+        });
+    }
+
 }
 
 // function ShanChuan(id) {
