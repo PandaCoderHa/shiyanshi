@@ -215,24 +215,29 @@
                             <input id="M_fuzeren" type="text" class="form-control" placeholder="负责人">
                         </div>
                     </div>
-                    <div>
-                        <label class="control-label"> </label>
-                        <div class="radio-group">
+                    <div class="form-group-info">
+                        <label class="control-label">是否停用</label>
+                        <div>
+                            
+                            <input id="M_shifoshiyong" type="checkbox">
+                        </div>
+                        <!-- <div class="radio-group">
+                           
                             <div class="radio">
                                 <label class="i-checks">
-                                    <input type="radio" name="M_shifoshiyong" value="shi">
+                                    <input type="radio" name="M_shifoshiyong" value="false">
                                     <i></i>
                                     使用
                                 </label>
                             </div>
                             <div class="radio">
                                 <label class="i-checks">
-                                    <input type="radio" name="M_shifoshiyong" value="fou">
+                                    <input type="radio" name="M_shifoshiyong" value="true">
                                     <i></i>
                                     停用
                                 </label>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="form-group-info">
                         <label class="control-label">图片</label>
@@ -258,8 +263,8 @@
             <div class="modal-content  modal-guanli">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                     <h3 class="modal-title" id="myModalLabel">添加资源</h3>
                 </div>
                 <div class="modal-body">
@@ -291,20 +296,20 @@
         </div>
     </div>
     <script>
-        $(function() {
+        $(function () {
 
             var modal_ziyuan = $("#myModal_ziyuan");
-            modal_ziyuan.on("show.bs.modal", function() {
+            modal_ziyuan.on("show.bs.modal", function () {
                 $("#M_biaoti").val('');
                 $("#M_shuoming").val('');
                 $("#M_tupian_zy").val('');
             });
-            modal_ziyuan.on('hide.bs.modal', function() {
+            modal_ziyuan.on('hide.bs.modal', function () {
                 $("#M_biaoti").val('');
                 $("#M_shuoming").val('');
                 $("#M_tupian_zy").val('');
             });
-            $("#M_Save_zy").click(function() {
+            $("#M_Save_zy").click(function () {
 
                 var imgFile = document.getElementById("M_tupian_zy").files.length > 0 ? document.getElementById("M_tupian_zy").files[0] : null;
                 if (!imgFile) {
@@ -332,7 +337,7 @@
                     data: formData,
                     contentType: false,
                     processData: false,
-                    success: function(response) {
+                    success: function (response) {
                         var imgUrl = apiUrl.replace('api/', 'Imgs/') + response.substring(response.lastIndexOf('\\') + 1);
                         zy.url = imgUrl;
                         console.log(imgUrl);
@@ -341,12 +346,12 @@
                             url: apiUrl + 'T_ZiYuan',
                             data: zy,
                             dataType: "json",
-                            success: function(response) {
+                            success: function (response) {
                                 $('#myModal_ziyuan').modal('hide');
                             }
                         });
                     },
-                    error: function(e) {
+                    error: function (e) {
                         $.Zebra_Dialog('图片保存失败', {
                             type: 'error',
                             title: '信息提示'

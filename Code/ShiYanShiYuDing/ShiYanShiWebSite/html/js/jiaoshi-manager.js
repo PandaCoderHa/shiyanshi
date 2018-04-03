@@ -18,7 +18,7 @@ $(function () {
             $("#M_miaoshu").val($.trim(selectedS.miaoshu));
             $("#M_louceng").val(selectedS.louceng);
             $("#M_fuzeren").val(selectedS.fuzeren);
-            $("input:radio[name='M_shifoshiyong']").eq(0).attr("checked", true);
+            $("#M_shifoshiyong").prop("checked", selectedS.shifoutingyong);
             //$("input:radio[name='M_shifoshiyong']:checked")
             $("#M_tupian_show").attr('src', selectedS.tupian);
             $("#M_tupian_show").show();
@@ -26,7 +26,7 @@ $(function () {
         } else {
             $("#M_mingzi").val('');
             $("#M_miaoshu").val('');
-            $("input:radio[name='M_shifoshiyong']").eq(0).attr("checked", true);
+            $("#M_shifoshiyong").prop("checked", false);
             $("#M_tupian_show").hide();
             $("#M_fuzeren").val('');
         }
@@ -55,7 +55,7 @@ $(function () {
             mingzi: $("#M_mingzi").val(),
             miaoshu: $("#M_miaoshu").val(),
             louceng: $("#M_louceng").val(),
-            shifoutingyong: $("input:radio[name='M_shifoshiyong']:checked").val() ? false : true,
+            shifoutingyong: $("#M_shifoshiyong").prop("checked"),// $("input:radio[name='M_shifoshiyong']:checked").val() ? false : true,
             fuzeren: $("#M_fuzeren").val(),
             gengxinriqi: new Date().toString().substr(0, 24)
         };
@@ -160,13 +160,16 @@ function kaimen(id) {
                 }
             },
             error: function (e) {
-                if (e.responseText == "open") {
-                    $.Zebra_Dialog('远程开门成功', alertOption);
-                } else {
-                    $.Zebra_Dialog('远程开门失败', alertOption);
-                }
-                $("body").loading('stop');
-                console.log(e);
+                setTimeout(() => {
+                    if (e.responseText == "open") {
+                        $.Zebra_Dialog('远程开门成功', alertOption);
+                    } else {
+                        $.Zebra_Dialog('远程开门失败', alertOption);
+                    }
+                    $("body").loading('stop');
+                    console.log(e);
+                }, 10*1000);
+
             }
         });
     }

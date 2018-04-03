@@ -30,7 +30,8 @@ namespace ShiYanShiYuDing.Controllers
                        sys.louceng,
                        sys.miaoshu,
                        sys.tupian,
-                       sys.fuzeren
+                       sys.fuzeren,
+                       sys.shifoutingyong
                    };
         }
 

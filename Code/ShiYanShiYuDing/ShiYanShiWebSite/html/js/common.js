@@ -97,6 +97,12 @@ function getShiYanShis() {
                     // ShiYanShiS.forEach(function(sys) {
                     for (var i = 0; i < length; i++) {
                         var sys = ShiYanShiS[i];
+                        if (sys.shifoutingyong) {
+                            if ((length + 1) <= ShiYanShiS.length) {
+                                length++;
+                            }
+                            continue;
+                        }
                         $("#sysList").append(
                             '<li class="booking-room col-sm-' + (isHomePage ? 4 : 3) + ' clearfix">' +
                             '    <a href="preview.html?sysid=' + sys.zidongbianhao + '" class="booking-room-icon has-img" title="">' +
