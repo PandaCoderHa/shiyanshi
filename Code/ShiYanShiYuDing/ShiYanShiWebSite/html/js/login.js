@@ -35,29 +35,29 @@ $(function () {
     });
 
 
-    //微信登录
-    $.ajax({
-        type: "get",
-        url: 'wx.mindaxiaosi.com/api/auth_lab',
-        dataType: "json",
-        //jsonpCallback: "getData",
-        success: function (response) {
-            if (response && response.userid) {
-                var userObj = JSON.stringify({
-                    id: response.userid,
-                    classes: decodeURI(response.class),
-                    name: decodeURI(response.username)
-                });
-                sessionStorage.setItem("user", JSON.stringify(userObj));
-                window.location.href = "/html/home.html?sysid=1";
-            }
-        },
-        error: function (XMLHttpRequest, textStatus, errorThrown) {
-            console.log("XMLHttpRequest", XMLHttpRequest);
-            console.log("textStatus", textStatus);
-            console.log("errorThrown", errorThrown);
-        }
-    });
+    // //微信登录
+    // $.ajax({
+    //     type: "get",
+    //     url: 'wx.mindaxiaosi.com/api/auth_lab',
+    //     dataType: "json",
+    //     //jsonpCallback: "getData",
+    //     success: function (response) {
+    //         if (response && response.userid) {
+    //             var userObj = JSON.stringify({
+    //                 id: response.userid,
+    //                 classes: decodeURI(response.class),
+    //                 name: decodeURI(response.username)
+    //             });
+    //             sessionStorage.setItem("user", JSON.stringify(userObj));
+    //             window.location.href = "/html/home.html?sysid=1";
+    //         }
+    //     },
+    //     error: function (XMLHttpRequest, textStatus, errorThrown) {
+    //         console.log("XMLHttpRequest", XMLHttpRequest);
+    //         console.log("textStatus", textStatus);
+    //         console.log("errorThrown", errorThrown);
+    //     }
+    // });
 });
 
 function login() {
