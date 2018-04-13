@@ -12,7 +12,7 @@ var alertOption = {
     title: '信息提示'
 };
 
-$(function () {
+$(function() {
     // var carNumber = $("#user").val();
     // if (carNumber.length == 8) {
     //   $("#login").attr("href", '#');
@@ -21,7 +21,7 @@ $(function () {
     // }
 
     var myModal2 = $("#myModal2");
-    myModal2.on("show.bs.modal", function (e) {
+    myModal2.on("show.bs.modal", function(e) {
         // var shiyanshi = $(e.relatedTarget).data("shiyanshi");
         // var kaishi = $(e.relatedTarget).data("kaishi");
         // var html = '';
@@ -30,7 +30,7 @@ $(function () {
         // }, this);
         // $("#M_tbody").html(html);
     });
-    myModal2.on("hide.bs.modal", function () {
+    myModal2.on("hide.bs.modal", function() {
         // $("#M_tbody").html('');
     });
 
@@ -59,6 +59,16 @@ $(function () {
     //     }
     // });
 });
+
+function isWeiXin() {
+    var ua = window.navigator.userAgent.toLowerCase();
+
+    if (ua.match(/MicroMessenger/i) == 'micromessenger') {
+        return true;
+    } else {
+        return false;
+    }
+}
 
 function login() {
     if (!$("#user").val()) {
@@ -107,7 +117,7 @@ function login() {
                 },
                 dataType: "json",
                 //jsonpCallback: "getData",
-                success: function (response) {
+                success: function(response) {
                     if (response && response.errcode && response.errcode == 2) {
                         $.Zebra_Dialog('账号或密码错误。', alertOption);
                         return;
@@ -123,7 +133,7 @@ function login() {
                         }
                     }
                 },
-                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
                     console.log("XMLHttpRequest", XMLHttpRequest);
                     console.log("textStatus", textStatus);
                     console.log("errorThrown", errorThrown);
@@ -136,11 +146,7 @@ function login() {
             });
             $.ajax({
                 type: "post",
-                url: baseApi +
-                    "?nonce=" +
-                    encryptObj.nonce +
-                    "&msg_signature=" +
-                    encryptObj.msg_signature,
+                url: baseApi + "?nonce=" + encryptObj.nonce + "&msg_signature=" + encryptObj.msg_signature,
                 headers: headers,
                 data: {
                     encrypt_msg: encryptObj.encrypt_msg,
@@ -148,21 +154,21 @@ function login() {
                 },
                 dataType: "json",
                 //jsonpCallback: "getData",
-                success: function (response) {
+                success: function(response) {
                     if (response && response.errcode && response.errcode == 2) {
                         $.Zebra_Dialog('账号或密码错误。', alertOption);
                         return;
                     }
                     teacherJson = JSON.parse(decrypt(response));
                     $("#kecheng").html("");
-                    teacherJson.forEach(function (s) {
+                    teacherJson.forEach(function(s) {
                         $("#kecheng").append(
                             ' <option value="' + s.name + '">' + s.name + "</option>"
                         );
                     });
                     $("#myModal2").modal("show");
                 },
-                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
                     console.log("XMLHttpRequest", XMLHttpRequest);
                     console.log("textStatus", textStatus);
                     console.log("errorThrown", errorThrown);
@@ -183,7 +189,7 @@ function doLogin() {
     var students = new Array();
     var all = teacherJson
         .find(s => s.name == $("#kecheng").val())
-        .students.sort(function (a, b) {
+        .students.sort(function(a, b) {
             return a.card_number > b.card_number ? 1 : -1;
         });
     for (var i = 0; i < all.length; i++) {
@@ -195,7 +201,7 @@ function doLogin() {
     userObj = JSON.stringify({
         id: $("#user").val(),
         name: $("#user").val(),
-        students: students.sort(function (a, b) {
+        students: students.sort(function(a, b) {
             return a.name.localeCompare(b.name);
         })
     });
@@ -261,8 +267,8 @@ function encrypt(word) {
     }
     var encrypt_msg = encrypted.ciphertext.toString();
     var msg_signature = CryptoJS.SHA1(
-        [nonce, encrypt_msg, API_KEY].sort().join("")
-    )
+            [nonce, encrypt_msg, API_KEY].sort().join("")
+        )
         .toString()
         .toLocaleUpperCase();
     console.log("msg_signature", msg_signature);

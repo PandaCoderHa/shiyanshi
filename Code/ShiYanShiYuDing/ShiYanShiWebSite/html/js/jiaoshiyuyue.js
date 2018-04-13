@@ -164,9 +164,22 @@ function tiJiaoYuYue() {
             return;
         }
     }
-
+    var bianhaos = [];
     if (loginuser.id.length == 8) {
-        sc.find("selected").seatIds.forEach(function(selectedId, i) {
+        var seatIds = sc.find("selected").seatIds;
+        var failStus = [];
+        seatIds.forEach(function(selectedId, i) {
+            var stuid = $("#chengyuan").val()[i];
+            if (yiYuYue(stuid, sysid, riqi + " " + $("#kaishi").val())) {
+                var student = loginuser.students.find(s => s.card_number == stuid)
+                failStus.push(student.name);
+            }
+        }, this);
+        if (failStus.length > 0) {
+            $.Zebra_Dialog('以下同学相同时间段已预约该实验室：' + failStus.join('; '), alertOption);
+            return;
+        }
+        seatIds.forEach(function(selectedId, i) {
             var zuowei =
                 zuoweiObjs[selectedId.split("_")[0]][selectedId.split("_")[1] - 1];
             var student = loginuser.students.find(s => s.card_number == $("#chengyuan").val()[i])
@@ -182,6 +195,7 @@ function tiJiaoYuYue() {
                 xiangmu: $("#xiangmu").val(),
                 zhidaojiaoshi: $("#zhidao").val()
             };
+            bianhaos.push(yuyue.xueshengbianhao);
             $.ajax({
                 type: "post",
                 url: apiUrl + "T_YuYue/?shiyanshihao=" + sysid + "&zuoweihao=" + zuowei.zidongbianhao,
@@ -199,6 +213,7 @@ function tiJiaoYuYue() {
                                 window.location.href = "preview.html?sysid=" + sysid;
                             }
                         });
+                        sendAlert(bianhaos);
                     }
                 }
             });
@@ -217,13 +232,15 @@ function tiJiaoYuYue() {
             xiangmu: $("#xiangmu").val(),
             zhidaojiaoshi: $("#zhidao").val()
         };
+        if (yiYuYue(yuyue.xueshengbianhao, sysid, yuyue.yuyuekaishiriqi)) {
+            $.Zebra_Dialog('相同时间段已预约该实验室。', alertOption);
+            return;
+        }
+        bianhaos.push(yuyue.xueshengbianhao);
         $.ajax({
             type: "post",
             url: apiUrl +
-                "T_YuYue/?shiyanshihao=" +
-                sysid +
-                "&zuoweihao=" +
-                zuowei.zidongbianhao,
+                "T_YuYue/?shiyanshihao=" + sysid + "&zuoweihao=" + zuowei.zidongbianhao,
             data: yuyue,
             dataType: "json",
             error: function(err) {
@@ -237,9 +254,43 @@ function tiJiaoYuYue() {
                         window.location.href = "preview.html?sysid=" + sysid;
                     }
                 });
+                sendAlert(bianhaos);
             }
         });
     }
+}
+
+function yiYuYue(id, shiyanshi, kaishishijian) {
+    kaishishijian = new Date(kaishishijian).toISOString().split('T')[0].replace(/-/g, '') + kaishishijian.split(' ')[1].replace(':', '');
+    var yyy = YuYueS.filter(function(y) {
+        var kaishi = y.kaishi.replace(/-/g, '').replace(/ /g, '').replace(':', '');
+        var jieshu = y.jieshu.replace(/-/g, '').replace(/ /g, '').replace(':', '');
+        if (y.xueshengbianhao == id && y.shiyanshihao == shiyanshi &&
+            (kaishishijian >= kaishi && kaishishijian < jieshu)) {
+            return true;
+        }
+    });
+    return yyy.length > 0;
+}
+
+function sendAlert(bianhaos) {
+    var time = riqi + " " + $("#kaishi").val();
+    $.ajax({
+        type: "post",
+        url: 'http://wx.mindaxiaosi.com/lab_sms',
+        data: {
+            userids: bianhaos.join(','),
+            title: $("#shiyanshi").text() + '预约成功.',
+            time: time
+        },
+        dataType: "json",
+        error: function(err) {
+            console.log(err);
+        },
+        success: function(response) {
+            console.log(response);
+        }
+    });
 }
 
 function setShiYanShiMing() {
