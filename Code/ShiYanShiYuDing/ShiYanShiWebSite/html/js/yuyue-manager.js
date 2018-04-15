@@ -109,16 +109,17 @@ function deleteYuYue(id) {
         buttons: ['确定', '取消'],
         onClose: function(caption) {
             if (caption == "确定") {
-
+                var bianhaos = [];
                 if (id && YuYueS.length > 0) {
+                    var tempY = YuYueS.find(y => y.zidongbianhao == id);
                     if (loginuser.id.length == 8) {
-                        var tempY = YuYueS.find(y => y.zidongbianhao == id);
                         var selected = YuYueS.filter(
                             y => y.shiyanshihao == tempY.shiyanshihao &&
                             y.kaishi == tempY.kaishi &&
                             y.jieshu == tempY.jieshu
                         );
                         selected.forEach(function(yy, i) {
+                            bianhaos.push(yy.xueshengbianhao);
                             $.ajax({
                                 type: "delete",
                                 url: apiUrl + 'T_YuYue/' + yy.zidongbianhao,
@@ -131,6 +132,7 @@ function deleteYuYue(id) {
                             });
                         })
                     } else {
+                        bianhaos.push(tempY.xueshengbianhao);
                         $.ajax({
                             type: "delete",
                             url: apiUrl + 'T_YuYue/' + id,
@@ -140,10 +142,30 @@ function deleteYuYue(id) {
                             }
                         });
                     }
+                    if (bianhaos.length > 0) {
+                        sendAlert(bianhaos, tempY);
+                    }
                 }
-
-
             }
+        }
+    });
+}
+
+function sendAlert(bianhaos, yuyue) {
+    $.ajax({
+        type: "post",
+        url: 'http://wx.mindaxiaosi.com/lab_sms',
+        data: {
+            userids: bianhaos.join(','),
+            title: yuyue.shiyanshiMing + '取消预约.',
+            time: yuyue.kaishi
+        },
+        dataType: "json",
+        error: function(err) {
+            console.log(err);
+        },
+        success: function(response) {
+            console.log(response);
         }
     });
 }
