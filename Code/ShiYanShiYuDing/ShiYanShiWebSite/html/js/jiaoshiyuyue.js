@@ -20,7 +20,8 @@ $(function() {
     $("#tijiao").click(tiJiaoYuYue);
     $("#kaishi").change(kaishiChange);
     $("#jieshu").change(setYiYuYueZuoWei);
-    getYuYue(-1, sysid);
+    //getYuYue(-1, sysid);
+    getAllYuYue();
     setYiYuYueZuoWei();
     kaishiChange();
     if (loginuser.id.length != 8) {
@@ -233,7 +234,7 @@ function tiJiaoYuYue() {
             zhidaojiaoshi: $("#zhidao").val()
         };
         if (yiYuYue(yuyue.xueshengbianhao, sysid, yuyue.yuyuekaishiriqi)) {
-            $.Zebra_Dialog('相同时间段已预约该实验室。', alertOption);
+            $.Zebra_Dialog('相同时间段已预约实验室。', alertOption);
             return;
         }
         bianhaos.push(yuyue.xueshengbianhao);
@@ -265,7 +266,7 @@ function yiYuYue(id, shiyanshi, kaishishijian) {
     var yyy = YuYueS.filter(function(y) {
         var kaishi = y.kaishi.replace(/-/g, '').replace(/ /g, '').replace(':', '');
         var jieshu = y.jieshu.replace(/-/g, '').replace(/ /g, '').replace(':', '');
-        if (y.xueshengbianhao == id && y.shiyanshihao == shiyanshi &&
+        if (y.xueshengbianhao == id &&
             (kaishishijian >= kaishi && kaishishijian < jieshu)) {
             return true;
         }
