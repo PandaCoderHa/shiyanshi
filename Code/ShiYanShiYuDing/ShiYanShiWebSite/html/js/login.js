@@ -13,51 +13,12 @@ var alertOption = {
 };
 
 $(function() {
-    // var carNumber = $("#user").val();
-    // if (carNumber.length == 8) {
-    //   $("#login").attr("href", '#');
-    //   $("#login").attr("data-toggle", "modal");
-    //   $("#login").attr("data-target", "#myModal2");
-    // }
-
     var myModal2 = $("#myModal2");
-    myModal2.on("show.bs.modal", function(e) {
-        // var shiyanshi = $(e.relatedTarget).data("shiyanshi");
-        // var kaishi = $(e.relatedTarget).data("kaishi");
-        // var html = '';
-        // YuYueS.filter(y => y.shiyanshihao == shiyanshi && y.kaishi == kaishi).forEach(function (yy, i) {
-        //   html += '<tr><td>' + (i + 1) + '</td><td>' + yy.xueshengbianhao + '</td><td>' + loginuser.students.find(s => s.card_number == yy.xueshengbianhao).name + '</td></tr>';
-        // }, this);
-        // $("#M_tbody").html(html);
-    });
+    myModal2.on("show.bs.modal", function(e) {});
     myModal2.on("hide.bs.modal", function() {
         // $("#M_tbody").html('');
     });
 
-
-    // //微信登录
-    // $.ajax({
-    //     type: "get",
-    //     url: 'wx.mindaxiaosi.com/api/auth_lab',
-    //     dataType: "json",
-    //     //jsonpCallback: "getData",
-    //     success: function (response) {
-    //         if (response && response.userid) {
-    //             var userObj = JSON.stringify({
-    //                 id: response.userid,
-    //                 classes: decodeURI(response.class),
-    //                 name: decodeURI(response.username)
-    //             });
-    //             sessionStorage.setItem("user", JSON.stringify(userObj));
-    //             window.location.href = "/html/home.html?sysid=1";
-    //         }
-    //     },
-    //     error: function (XMLHttpRequest, textStatus, errorThrown) {
-    //         console.log("XMLHttpRequest", XMLHttpRequest);
-    //         console.log("textStatus", textStatus);
-    //         console.log("errorThrown", errorThrown);
-    //     }
-    // });
 });
 
 function isWeiXin() {
@@ -102,6 +63,14 @@ function login() {
                 t_uid: carNumber,
                 passwd: $("#password").val()
             });
+            // ////////////////////////////////////////
+            // userObj = { id: carNumber };
+            // userObj.classes = 'studentJson.classes';
+            // userObj.name = 'studentJson.name';
+            // sessionStorage.setItem("user", JSON.stringify(userObj));
+            // window.location.href = "/html/home.html?sysid=1";
+            // ////////////////////////////////////////
+
             //var studentJson = JSON.parse(decrypt(studentResult));
             $.ajax({
                 type: "post",

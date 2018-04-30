@@ -39,39 +39,11 @@
                 </div>
 
                 <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
-
-                    <ul class="nav navbar-nav navbar-menu">
-                        <li>
-                            <a href="home.html">
-                                <span>开始预约</span>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="ziyuan-list.html">
-                                <span>资源展示</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="yuyue-manager.html">
-                                <span>预约记录</span>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="yuyue-liucheng.html">
-                                <span>预约流程</span>
-                            </a>
-                        </li>
-
-                    </ul>
+                    <ul class="nav navbar-nav navbar-menu"></ul>
                 </div>
-
 
                 <div class="navbar-custom-menu hidden-xs">
                     <ul class="nav navbar-nav">
-
-
                         <li class="dropdown">
                             <a href="#" data-toggle="dropdown" class="dropdown-toggle" aria-expanded="false">
                                 <i class="fa fa-fw fa-plus visible-xs-inline-block"></i>
@@ -107,29 +79,7 @@
 
             <div class="g-sd-l">
                 <div class="m-s-menu">
-                    <ul>
-                        <!-- <li class="learn">
-                            <span class="fa fa-th-list"></span> 实验室列表</li>
-                        <li>
-                            <a href="preview.html">第一实验室</a>
-                        </li>
-                        <li class="crt">
-                            <a href="preview.html">
-                                <span class="glyphicon glyphicon-play"></span>第二实验室</a>
-                        </li>
-                        <li>
-                            <a href="preview.html">第三实验室</a>
-                        </li>
-                        <li>
-                            <a href="preview.html">第四实验室</a>
-                        </li>
-                        <li>
-                            <a href="preview.html">第五实验室</a>
-                        </li> -->
-
-                    </ul>
-
-
+                    <ul> </ul>
                 </div>
             </div>
 
@@ -141,11 +91,6 @@
                                 <div class="panel-heading-title">实验室</div>
                                 <div class="shiyan-list">
                                     <select id="shiyanshiSelect" class="form-control">
-                                        <!-- <option value="0">第一实验室</option>
-                                        <option value="1">第二实验室</option>
-                                        <option value="2">第三实验室</option>
-                                        <option value="3">第四实验室</option>
-                                        <option value="3">第五实验室</option> -->
                                     </select>
                                 </div>
                             </div>
@@ -163,16 +108,6 @@
                                         </tr>
                                     </thead>
                                     <tbody id='bukeyongTable'>
-                                        <!-- <tr>
-                                            <td>1</td>
-                                            <td>1</td>
-                                            <td>08:00</td>
-                                            <td>12:00</td>
-                                            <td>
-                                                <a href="＃" data-toggle="modal" data-target="#myModal">修改</a>｜
-                                                <a href="＃">删除</a>
-                                            </td>
-                                        </tr> -->
                                     </tbody>
                                 </table>
                             </div>
@@ -184,16 +119,11 @@
                             </footer>
                         </div>
                         <div class="sibmit f-tac">
-
                             <input type="button" value="新 增" data-toggle="modal" data-target="#myModal" class="u-btn md active jsSubmit">
-
                         </div>
                     </div>
                 </form>
             </div>
-
-
-
         </div>
     </div>
 
@@ -248,13 +178,18 @@
                         <label class="control-label">选择时间段</label>
                         <div class="select-time">
                             <select id="M_kaishi" class="form-control">
+                                    <option>08:30-10:00</option>
+                                    <option>10:20-11:50</option>
+                                    <option>13:30-15:00</option>
+                                    <option>15:20-16:50</option>
+                                    <option>17:30-20:30</option>
                             </select>
                         </div>
-                        <span class="toto">–</span>
+                        <!-- <span class="toto">–</span>
                         <div class="select-time">
                             <select id="M_jieshu" class="form-control">
                             </select>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="form-group-list">
                         <label class="control-label">开始结束周</label>
@@ -281,11 +216,11 @@
 
     <script>
         $(function() {
-            var times = ["08:00", "08:30", "09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00", "20:30", "21:00", "21:30", "22:00", ];
-            times.forEach(function(t) {
-                $("#M_kaishi").append(' <option valuue="' + t + '">' + t + '</option>')
-                $("#M_jieshu").append(' <option valuue="' + t + '">' + t + '</option>')
-            });
+            // var times = ["08:00", "08:30", "09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00", "20:30", "21:00", "21:30", "22:00", ];
+            // times.forEach(function(t) {
+            //     $("#M_kaishi").append(' <option valuue="' + t + '">' + t + '</option>')
+            //     $("#M_jieshu").append(' <option valuue="' + t + '">' + t + '</option>')
+            // });
             for (let i = 1; i < 54; i++) {
                 $("#M_kaishizhou").append(' <option valuue="' + i + '">' + i + '</option>')
                 $("#M_jieshuzhou").append(' <option valuue="' + i + '">' + i + '</option>')
@@ -308,16 +243,16 @@
                     $("#M_id").val(id);
                     $("#M_mingzi").val($.trim($("#shiyanshiSelect option:selected").text()));
                     $("#M_zhouji").val(selectedB.zhouji);
-                    $("#M_kaishi").val(selectedB.kaishiriqi);
-                    $("#M_jieshu").val(selectedB.jieshuriqi);
+                    $("#M_kaishi").val(selectedB.kaishiriqi + '-' + selectedB.jieshuriqi);
+                    // $("#M_jieshu").val();
                     $("#M_kaishizhou").val(selectedB.kaishizhou);
                     $("#M_jieshuzhou").val(selectedB.jieshuzhou);
                 } else {
                     $("#M_id").val('');
                     $("#M_mingzi").val($.trim($("#shiyanshiSelect option:selected").text()));
                     $("#M_zhouji").val(1);
-                    $("#M_kaishi").val('08:00');
-                    $("#M_jieshu").val('08:30');
+                    $("#M_kaishi option:eq(0)").attr('selected', true);
+                    // $("#M_jieshu").val('08:30');
                     $("#M_kaishizhou").val(1);
                     $("#M_jieshuzhou").val(1);
                 }
@@ -327,20 +262,20 @@
                 $("#M_mingzi").val($.trim($("#shiyanshiSelect option:selected").text()));
                 $("#M_zhouji").val(1);
                 $("#M_kaishi option:eq(0)").attr('selected', true);
-                $("#M_jieshu option:eq(1)").attr('selected', true);
+                // $("#M_jieshu option:eq(1)").attr('selected', true);
                 $("#M_kaishizhou").val(1);
                 $("#M_jieshuzhou").val(1);
             });
             $("#M_Save").click(function() {
                 var id = $("#M_id").val();
-                if (parseInt($("#M_kaishi").val().replace(':', '')) >=
-                    parseInt($("#M_jieshu").val().replace(':', ''))) {
-                    $("#M_error").text('结束时间要大于开始时间。');
-                    $("#M_error").show();
-                    return;
-                } else {
-                    $("#M_error").hide();
-                }
+                // if (parseInt($("#M_kaishi").val().replace(':', '')) >=
+                //     parseInt($("#M_jieshu").val().replace(':', ''))) {
+                //     $("#M_error").text('结束时间要大于开始时间。');
+                //     $("#M_error").show();
+                //     return;
+                // } else {
+                //     $("#M_error").hide();
+                // }
                 if ($("#M_kaishizhou").val() > $("#M_jieshuzhou").val()) {
                     $("#M_error").text('结束周要大于开始周。');
 
@@ -349,8 +284,8 @@
                 }
                 var bukeyong = {
                     zhouji: $("#M_zhouji").val(),
-                    kaishiriqi: $("#M_kaishi").val(),
-                    jieshuriqi: $("#M_jieshu").val(),
+                    kaishiriqi: $("#M_kaishi").val().split('-')[0],
+                    jieshuriqi: $("#M_kaishi").val().split('-')[1],
                     kaishizhou: $("#M_kaishizhou").val(),
                     jieshuzhou: $("#M_jieshuzhou").val(),
                     gengxinriqi: new Date().toString().substr(0, 24)

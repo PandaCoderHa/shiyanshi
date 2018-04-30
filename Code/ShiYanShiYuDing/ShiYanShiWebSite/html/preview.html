@@ -22,80 +22,80 @@
 </head>
 
 <body>
-   <header id="header" class="app-header navbar" role="menu">
-	  <div class="navbar navbar-static-top">
-		<div class="container">
-			<div class="navbar-header bg-dark">
-			  <button class="pull-right visible-xs dk" ui-toggle-class="show" target=".navbar-collapse">
+    <header id="header" class="app-header navbar" role="menu">
+        <div class="navbar navbar-static-top">
+            <div class="container">
+                <div class="navbar-header bg-dark">
+                    <button class="pull-right visible-xs dk" ui-toggle-class="show" target=".navbar-collapse">
 				<i class="glyphicon glyphicon-cog"></i>
 			  </button>
-			  <button class="pull-right visible-xs" ui-toggle-class="off-screen" target=".app-aside" ui-scroll="app">
+                    <button class="pull-right visible-xs" ui-toggle-class="off-screen" target=".app-aside" ui-scroll="app">
 				<i class="glyphicon glyphicon-align-justify"></i>
 			  </button>
-			  <a href="home.html" class="navbar-brand text-lt">
-				<span class="hidden-folded m-l-xs">高校实验室预约系统</span>
-			  </a>
-			</div>
-			
-			<div class="collapse navbar-collapse pull-left" id="navbar-collapse">
-
-				<ul class="nav navbar-nav navbar-menu">
-					<li>
-						<a href="home.html">
-							<span>开始预约</span>
-						</a>
-					</li>
-				
-					<li>
-						<a href="ziyuan-list.html">
-							<span>资源展示</span>
-						</a>
-					</li>
-					<li>
-						<a href="yuyue-manager.html">
-							<span>预约记录</span>
-						</a>
-					</li>
-					
-					<li>
-						<a href="yuyue-liucheng.html">
-							<span>预约流程</span>
-						</a>
-					</li>
-													
-				</ul>
-			</div>
-			
-			
-			<div class="navbar-custom-menu hidden-xs">
-            <ul class="nav navbar-nav">
-                 
-                
-				<li class="dropdown">
-                    <a href="#" data-toggle="dropdown" class="dropdown-toggle" aria-expanded="false">
-                        <i class="fa fa-fw fa-plus visible-xs-inline-block"></i>
-                        <span translate="header.navbar.new.NEW"> <img src="img/user.png" class="user-image" alt="User Image"> 个人中心</span>
-                        <span class="caret"></span>
+                    <a href="home.html" class="navbar-brand text-lt">
+                        <span class="hidden-folded m-l-xs">高校实验室预约系统</span>
                     </a>
-                    <ul class="dropdown-menu" role="menu">
-                       
+                </div>
+
+                <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
+
+                    <ul class="nav navbar-nav navbar-menu">
                         <li>
-                            <a href="info-change.html">修改个人资料</a>
+                            <a href="home.html">
+                                <span>开始预约</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="ziyuan-list.html">
+                                <span>资源展示</span>
+                            </a>
                         </li>
                         <li>
-                            <a id="logout" ui-sref="access.signin">退出登录</a>
+                            <a href="yuyue-manager.html">
+                                <span>预约记录</span>
+                            </a>
                         </li>
+
+                        <li>
+                            <a href="yuyue-liucheng.html">
+                                <span>预约流程</span>
+                            </a>
+                        </li>
+
                     </ul>
-                </li>
-               
-            </ul>
+                </div>
+
+
+                <div class="navbar-custom-menu hidden-xs">
+                    <ul class="nav navbar-nav">
+
+
+                        <li class="dropdown">
+                            <a href="#" data-toggle="dropdown" class="dropdown-toggle" aria-expanded="false">
+                                <i class="fa fa-fw fa-plus visible-xs-inline-block"></i>
+                                <span translate="header.navbar.new.NEW"> <img src="img/user.png" class="user-image" alt="User Image"> 个人中心</span>
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+
+                                <li>
+                                    <a href="info-change.html">修改个人资料</a>
+                                </li>
+                                <li>
+                                    <a id="logout" ui-sref="access.signin">退出登录</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                </div>
+
+
+            </div>
         </div>
-		
-		
-		</div>
-	</div>
-    
-  </header>
+
+    </header>
 
     <!-- <banner>
     <div class="banner-img"></div>
@@ -132,208 +132,11 @@
 
 
                         <div class="part">
-                            <p style="padding-top:24px;margin-bottom:24px;">
-                                尊敬的学员，如果您要预约课程，可点击下方表格“预约课程”按钮进行预约
-                            </p>
+                            <h4 id="sysmingzi" style="padding-top:24px;"></h4>
+                            </h4>
+                            <p id="sysmiaoshu" style="margin-bottom:24px;color:darkgrey"></p>
                             <table id='mycalendar' class='calendar u-tab'></table>
-                            <!-- <table class="calendar u-tab">
-                <thead>
-                  <tr>
-                    <th class="month" colspan="7">
-                      <span class="f-fl">
-                        <a href="#">&lt;&nbsp;2017年09月</a>
-                      </span>
-                      <span class="f-fr">
-                        <a href="#">2017年11月&nbsp;&gt;</a>
-                      </span>
-                      <span class="f-fc s-fc6">2017年10月</span>
-                    </th>
-                  </tr>
-                  <tr>
-                    <th width="14.28%">日</th>
-                    <th width="14.28%">一</th>
-                    <th width="14.28%">二</th>
-                    <th width="14.28%">三</th>
-                    <th width="14.28%">四</th>
-                    <th width="14.28%">五</th>
-                    <th width="14.28%">六</th>
-                  </tr>
-                </thead>
-                <tbody>
 
-                  <tr>
-
-                    <td>
-                      1
-                    </td>
-                    <td>
-                      2
-                    </td>
-                    <td>
-                      3
-                    </td>
-                    <td>
-                      4
-                    </td>
-                    <td>
-                      5
-                    </td>
-                    <td>
-                      6
-                    </td>
-                    <td>
-                      7
-                    </td>
-                  </tr>
-
-                  <tr>
-
-                    <td>
-                      8
-                    </td>
-                    <td>
-                      9
-                    </td>
-                    <td>
-                      10
-                    </td>
-                    <td>
-                      11
-                    </td>
-                    <td>
-                      12
-                      <div class="f-tac">
-                        <a href="jiaoshiyuyue.html">
-                          <span class="u-btn hover">预&nbsp;约</span>
-                        </a>
-                      </div>
-
-                    </td>
-                    <td>
-                      13
-                      <div class="f-tac">
-                        <a href="jiaoshiyuyue.html">
-                          <span class="u-btn hover">预&nbsp;约</span>
-                        </a>
-                      </div>
-
-                    </td>
-                    <td>
-                      14
-                      <div class="f-tac">
-                        <a href="jiaoshiyuyue.html">
-                          <span class="u-btn hover">预&nbsp;约</span>
-                        </a>
-                      </div>
-
-                    </td>
-                  </tr>
-
-                  <tr>
-
-                    <td>
-                      15
-                      <div class="f-tac">
-                        <a href="jiaoshiyuyue.html">
-                          <span class="u-btn hover">预&nbsp;约</span>
-                        </a>
-                      </div>
-
-                    </td>
-                    <td>
-                      16
-                      <div class="f-tac">
-                        <a href="jiaoshiyuyue.html">
-                          <span class="u-btn hover">预&nbsp;约</span>
-                        </a>
-                      </div>
-
-                    </td>
-                    <td>
-                      17
-                      <div class="f-tac">
-                        <a href="jiaoshiyuyue.html">
-                          <span class="u-btn hover">预&nbsp;约</span>
-                        </a>
-                      </div>
-
-                    </td>
-                    <td>
-                      18
-                      <div class="f-tac">
-                        <a href="jiaoshiyuyue.html">
-                          <span class="u-btn hover">预&nbsp;约</span>
-                        </a>
-                      </div>
-
-                    </td>
-                    <td>
-                      19
-                      <div class="f-tac">
-                        <a href="jiaoshiyuyue2.html">
-                          <span class="u-btn hover">已预约教室</span>
-                        </a>
-                      </div>
-                    </td>
-                    <td>
-                      20
-                    </td>
-                    <td>
-                      21
-                    </td>
-                  </tr>
-
-                  <tr>
-
-                    <td>
-                      22
-                    </td>
-                    <td>
-                      23
-                    </td>
-                    <td>
-                      24
-                    </td>
-                    <td>
-                      25
-                    </td>
-                    <td>
-                      26
-                    </td>
-                    <td>
-                      27
-                    </td>
-                    <td>
-                      28
-                    </td>
-                  </tr>
-
-                  <tr>
-
-                    <td>
-                      29
-                    </td>
-                    <td>
-                      30
-                    </td>
-                    <td>
-                      31
-                    </td>
-                    <td>
-                      &nbsp;
-                    </td>
-                    <td>
-                      &nbsp;
-                    </td>
-                    <td>
-                      &nbsp;
-                    </td>
-                    <td>
-                      &nbsp;
-                    </td>
-                  </tr>
-                </tbody>
-              </table> -->
                         </div>
                     </div>
                 </div>
@@ -360,14 +163,31 @@
         $(function() {
             sysid = getUrlParamater("sysid");
             getShiYanShis();
+            setShuYanShi();
             getYuYue(loginuser.id, sysid);
             calendar();
+
+
         });
+
+        function setShuYanShi() {
+            setTimeout(function() {
+                if (ShiYanShiS) {
+                    var shiyanshi = ShiYanShiS.find(s => s.zidongbianhao == sysid);
+                    $("#sysmingzi").text(shiyanshi.mingzi);
+                    $("#sysmiaoshu").text(shiyanshi.miaoshu);
+
+                } else {
+                    setShuYanShi();
+                }
+            }, 500);
+        }
 
         function calendar() {
             setTimeout(function() {
                 if (YuYueS) {
                     $('#mycalendar').dcalendar();
+
                 } else {
                     calendar();
                 }

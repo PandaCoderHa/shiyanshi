@@ -18,3 +18,7 @@
 --20180313
 --alter table [dbo].[T_ZiYuan] alter column [url] nvarchar(300); 
 --update [dbo].[T_ZiYuan] set url=RTRIM([url])
+
+alter table [dbo].[T_YuYue] add [xiangmuid] int not null default(1)
+
+ALTER TABLE [dbo].[T_YuYue] ADD FOREIGN KEY [xiangmuid] REFERENCES [dbo].[T_YuYue](zidongbianhao)

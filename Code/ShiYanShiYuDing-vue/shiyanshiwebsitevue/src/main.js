@@ -4,15 +4,20 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import axios from 'axios'
-import ElementUI from 'element-ui';
-import 'element-ui/lib/theme-chalk/index.css';
+import BootstrapVue from 'bootstrap-vue'
 
+
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
+import 'font-awesome/css/font-awesome.css'
+import '../static/md.css'
 import '../static/app.css'
 // import '../static/detail.css'
 import '../static/site.css'
 import '../static/style.css'
 
-Vue.use(ElementUI);
+Vue.prototype.axios = axios;
+Vue.use(BootstrapVue);
 
 Vue.config.productionTip = false
 

@@ -30,5 +30,6 @@ namespace ShiYanShiYuDing.Models
         public virtual DbSet<T_ShiYanShiBuKeYongShiJian> T_ShiYanShiBuKeYongShiJian { get; set; }
         public virtual DbSet<T_YuYue> T_YuYue { get; set; }
         public virtual DbSet<T_ZiYuan> T_ZiYuan { get; set; }
+        public virtual DbSet<T_XiangMu> T_XiangMu { get; set; }
     }
 }

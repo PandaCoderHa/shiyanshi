@@ -27,5 +27,6 @@ namespace ShiYanShiYuDing.Models
     
         public virtual M_ShiYanShi M_ShiYanShi { get; set; }
         public virtual M_ZuoWei M_ZuoWei { get; set; }
+        public virtual T_XiangMu T_XiangMu { get; set; }
     }
 }

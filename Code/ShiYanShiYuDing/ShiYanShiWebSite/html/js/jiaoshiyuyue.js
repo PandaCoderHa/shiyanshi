@@ -18,18 +18,20 @@ $(function() {
     setBuKeYongShiJan();
 
     $("#tijiao").click(tiJiaoYuYue);
-    $("#kaishi").change(kaishiChange);
-    $("#jieshu").change(setYiYuYueZuoWei);
+    $("#kaishi").change(setYiYuYueZuoWei);
+    // $("#jieshu").change(setYiYuYueZuoWei);
     //getYuYue(-1, sysid);
     getAllYuYue();
     setYiYuYueZuoWei();
-    kaishiChange();
+    // kaishiChange();
     if (loginuser.id.length != 8) {
         $("#chengyuan").parent().parent().hide();
     } else {
         setChengYuan();
         $("#chengyuan").change(chengYuanChange);
     }
+    getShiYanShiXiangMuMing();
+    setXiangMu();
 });
 
 function chengyuanQuanXuan() {
@@ -88,59 +90,46 @@ function setChengYuan(selected = false) {
     }
 }
 
-function kaishiChange() {
-    $("#jieshu option").each(function() {
-        if (
-            $(this)
-            .val()
-            .replace(":", "") <=
-            $("#kaishi")
-            .val()
-            .replace(":", "")
-        ) {
-            $(this).hide();
-        } else {
-            $(this).show();
-        }
-    }, this);
-    $("#jieshu option").each(function() {
-        if ($(this).css("display") == "block") {
-            $("#jieshu").val($(this).val());
-            setYiYuYueZuoWei();
-            return false;
-        }
-    }, this);
-}
+// function kaishiChange() {
+//     $("#jieshu option").each(function() {
+//         if ($(this).val().replace(":", "") <= $("#kaishi").val().replace(":", "")) {
+//             $(this).hide();
+//         } else {
+//             $(this).show();
+//         }
+//     }, this);
+//     $("#jieshu option").each(function() {
+//         if ($(this).css("display") == "block") {
+//             $("#jieshu").val($(this).val());
+//             setYiYuYueZuoWei();
+//             return false;
+//         }
+//     }, this);
+// }
 
 function tiJiaoYuYue() {
-    var kaishiSelected = $("#kaishi").val();
-    var jieshuSelected = $("#jieshu").val();
     var alertOption = {
         type: 'information',
         title: '信息提示'
     };
-    var d = new Date(riqi);
+    if (!$("#kaishi").val()) {
+        $.Zebra_Dialog('请选择预约时间段。', alertOption);
+        $("#kaishi").focus();
+        return false;
+    }
+    var kaishiSelected = $("#kaishi").val().split('-')[0];
+    var jieshuSelected = $("#kaishi").val().split('-')[1];
+
     if (!$("#xiangmu").val()) {
-        $.Zebra_Dialog('请填写课程相关实验项目名称', alertOption);
+        $.Zebra_Dialog('请选择课程相关实验项目名称', alertOption);
+        $("#xiangmu").focus();
         return false;
     }
 
     if (new Date(riqi + " " + kaishiSelected) < new Date()) {
         $.Zebra_Dialog('开始时间小于当前时间。', alertOption);
+        $("#kaishi").focus();
         return false;
-    }
-    var bukeyong = BuKeYongShiJianS.find(b => b.zhouji == d.getDay());
-    if (bukeyong) {
-        var kaishiY = bukeyong.kaishiriqi;
-        var jieshuY = bukeyong.jieshuriqi;
-        if (
-            (kaishiY <= kaishiSelected && kaishiSelected < jieshuY) ||
-            (kaishiY < jieshuSelected && jieshuSelected <= jieshuY) ||
-            (kaishiY > kaishiSelected && jieshuY < jieshuSelected)
-        ) {
-            $.Zebra_Dialog('包含不可用时间段。', alertOption);
-            return false;
-        }
     }
     if (
         jieshuSelected.replace(":", "") - kaishiSelected.replace(":", "") > 400 ||
@@ -171,7 +160,7 @@ function tiJiaoYuYue() {
         var failStus = [];
         seatIds.forEach(function(selectedId, i) {
             var stuid = $("#chengyuan").val()[i];
-            if (yiYuYue(stuid, sysid, riqi + " " + $("#kaishi").val())) {
+            if (yiYuYue(stuid, sysid, riqi + " " + $("#kaishi").val().split('-')[0])) {
                 var student = loginuser.students.find(s => s.card_number == stuid)
                 failStus.push(student.name);
             }
@@ -190,8 +179,8 @@ function tiJiaoYuYue() {
                 xueshengbianhao: $("#chengyuan").val()[i],
                 xueshengxingming: student.name,
                 banji: student.class_name,
-                yuyuekaishiriqi: riqi + " " + $("#kaishi").val(),
-                yuyuejieshuriqi: riqi + " " + $("#jieshu").val(),
+                yuyuekaishiriqi: riqi + " " + $("#kaishi").val().split('-')[0],
+                yuyuejieshuriqi: riqi + " " + $("#kaishi").val().split('-')[1],
                 gengxinriqi: new Date().toString().substr(0, 24),
                 xiangmu: $("#xiangmu").val(),
                 zhidaojiaoshi: $("#zhidao").val()
@@ -199,7 +188,7 @@ function tiJiaoYuYue() {
             bianhaos.push(yuyue.xueshengbianhao);
             $.ajax({
                 type: "post",
-                url: apiUrl + "T_YuYue/?shiyanshihao=" + sysid + "&zuoweihao=" + zuowei.zidongbianhao,
+                url: apiUrl + "T_YuYue/?shiyanshihao=" + sysid + "&zuoweihao=" + zuowei.zidongbianhao + "&xiamuhao=" + $("#xiangmu").val(),
                 data: yuyue,
                 dataType: "json",
                 error: function(err) {
@@ -227,12 +216,13 @@ function tiJiaoYuYue() {
             xueshengbianhao: loginuser.id,
             xueshengxingming: loginuser.name,
             banji: loginuser.classes,
-            yuyuekaishiriqi: riqi + " " + $("#kaishi").val(),
-            yuyuejieshuriqi: riqi + " " + $("#jieshu").val(),
+            yuyuekaishiriqi: riqi + " " + $("#kaishi").val().split('-')[0],
+            yuyuejieshuriqi: riqi + " " + $("#kaishi").val().split('-')[1],
             gengxinriqi: new Date().toString().substr(0, 24),
             xiangmu: $("#xiangmu").val(),
             zhidaojiaoshi: $("#zhidao").val()
         };
+        console.log('yuyue', yuyue);
         if (yiYuYue(yuyue.xueshengbianhao, sysid, yuyue.yuyuekaishiriqi)) {
             $.Zebra_Dialog('相同时间段已预约实验室。', alertOption);
             return;
@@ -241,7 +231,7 @@ function tiJiaoYuYue() {
         $.ajax({
             type: "post",
             url: apiUrl +
-                "T_YuYue/?shiyanshihao=" + sysid + "&zuoweihao=" + zuowei.zidongbianhao,
+                "T_YuYue/?shiyanshihao=" + sysid + "&zuoweihao=" + zuowei.zidongbianhao + "&xiamuhao=" + $("#xiangmu").val(),
             data: yuyue,
             dataType: "json",
             error: function(err) {
@@ -275,7 +265,7 @@ function yiYuYue(id, shiyanshi, kaishishijian) {
 }
 
 function sendAlert(bianhaos) {
-    var time = riqi + " " + $("#kaishi").val();
+    var time = riqi + " " + $("#kaishi").val().split('-')[0];
     $.ajax({
         type: "post",
         url: 'http://wx.mindaxiaosi.com/lab_sms',
@@ -306,6 +296,27 @@ function setShiYanShiMing() {
     }, 300);
 }
 
+function setXiangMu() {
+    setTimeout(function() {
+        if (XiangMuS.length > 0) {
+            var html = '';
+            XiangMuS.forEach(function(x, i) {
+                if (i == 0 || (XiangMuS[i - 1] && x.xueyuan != XiangMuS[i - 1].xueyuan)) {
+                    html += '<optgroup label="' + x.xueyuan + '"><option value="' + x.zidongbianhao + '">' + x.xiangmuming + '</option>'
+                } else {
+                    html += '<option value="' + x.zidongbianhao + '">' + x.xiangmuming + '</option>';
+                }
+                if (XiangMuS[i + 1] && x.xueyuan != XiangMuS[i + 1].xueyuan) {
+                    html += '</optgroup>'
+                }
+            });
+            $("#xiangmu").html(html);
+        } else {
+            setXiangMu();
+        }
+    }, 300);
+}
+
 function getZwoWeiByShiYahShi(sysid) {
     if (sysid) {
         var max = 0;
@@ -331,17 +342,7 @@ function getZwoWeiByShiYahShi(sysid) {
                             preZhaohao = z.zhuohao;
                             zuoweiObjs[z.zhuohao] = [z];
                         }
-                        max =
-                            zuoweiObjs[z.zhuohao].length > max ?
-                            zuoweiObjs[z.zhuohao].length :
-                            max;
-                        // if (zuoweiObjs[z.zhuohao]) {
-                        //   zuoweiObjs[z.zhuohao] = [z];
-                        // } else {
-                        //   zuoweiObjs[z.zhuohao].push(z);
-                        // }
-
-                        //$('#zuoweiTable').append(' <tr><td>' + z.zidongbianhao + '</td><td>' + z.zuoweimingcheng + '</td><td>' + z.zhuohao + '</td><td><a href="javascript:ShanChuan(' + z.zidongbianhao + ')" >删除</a></td></tr>')
+                        max = zuoweiObjs[z.zhuohao].length > max ? zuoweiObjs[z.zhuohao].length : max;
                     }, this);
                     var seatMapArr = [];
                     var rowArr = [];
@@ -432,25 +433,15 @@ function setBuKeYongShiJan() {
             //$("#shiyanshi").text(ShiYanShiS.find(s => s.zidongbianhao == getUrlParamater("sysid")).mingzi);
             var d = new Date(riqi);
             var zhoushu = getYearWeek(d);
-            var bukeyong = BuKeYongShiJianS.find(b => b.kaishizhou <= zhoushu && zhoushu <= b.jieshuzhou && b.zhouji == d.getDay());
-            if (bukeyong) {
-                $("#bukeyong").text(bukeyong.kaishiriqi + " - " + bukeyong.jieshuriqi);
-                var kaishi = bukeyong.kaishiriqi.replace(":", "");
-                var jieshu = bukeyong.jieshuriqi.replace(":", "");
-                $("#kaishi option").each(function(i, o) {
-                    var tmp = $(o).val().replace(":", "");
-                    if (kaishi <= tmp && tmp < jieshu) {
-                        bukeyongOption.push(o);
-                        $(o).remove();
-                    }
+            var bkys = BuKeYongShiJianS.filter(b => b.kaishizhou <= zhoushu && zhoushu <= b.jieshuzhou && b.zhouji == d.getDay());
+            if (bkys) {
+                var byksStr = '';
+                bkys.forEach(function(b) {
+                    var temp = b.kaishiriqi + '-' + b.jieshuriqi;
+                    $("#kaishi option:contains('" + temp + "')").remove();
+                    byksStr += !byksStr ? temp : ',' + temp;
                 });
-                $("#jieshu option").each(function(i, o) {
-                    var tmp = $(o).val().replace(":", "");
-                    if (kaishi < tmp && tmp <= jieshu) {
-                        bukeyongOption.push(o);
-                        $(o).remove();
-                    }
-                });
+                $("#bukeyong").text(byksStr);
             } else {
                 $("#bukeyong").text("无");
             }
@@ -483,8 +474,8 @@ function setYiYuYueZuoWei() {
                             var kTemp = new Date($.trim(y.kaishi.substr(0, 10))).toString();
                             var rTemp = new Date(riqi).toString();
                             if (zuowei.zidongbianhao == y.zuoweihao && kTemp.substr(0, kTemp.indexOf(':') - 3) == rTemp.substr(0, rTemp.indexOf(':') - 3)) {
-                                var kaishiSelected = $("#kaishi").val().replace(":", "");
-                                var jieshuSelected = $("#jieshu").val().replace(":", "");
+                                var kaishiSelected = $("#kaishi").val().split('-')[0].replace(":", "");
+                                var jieshuSelected = $("#kaishi").val().split('-')[1].replace(":", "");
                                 var kaishiY = y.kaishi.substr(y.kaishi.indexOf(" "), y.kaishi.length - y.kaishi.indexOf(" "));
                                 kaishiY = $.trim(kaishiY.replace(":", ""));
                                 var jieshuY = y.jieshu.substr(y.jieshu.indexOf(" "), y.jieshu.length - y.jieshu.indexOf(" "));

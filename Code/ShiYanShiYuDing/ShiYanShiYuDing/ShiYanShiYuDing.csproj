@@ -210,6 +210,7 @@
     <Compile Include="Controllers\M_ShiYanShiController.cs" />
     <Compile Include="Controllers\M_ZuoWeiController.cs" />
     <Compile Include="Controllers\T_ShiYanShiBuKeYongShiJianController.cs" />
+    <Compile Include="Controllers\T_XiangMuController.cs" />
     <Compile Include="Controllers\T_YuYueController.cs" />
     <Compile Include="Controllers\T_ZiYuanController.cs" />
     <Compile Include="Global.asax.cs">
@@ -237,6 +238,9 @@
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\T_ShiYanShiBuKeYongShiJian.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\T_XiangMu.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\T_YuYue.cs">
