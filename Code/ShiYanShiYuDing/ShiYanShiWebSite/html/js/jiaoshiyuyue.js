@@ -32,6 +32,9 @@ $(function() {
     }
     getShiYanShiXiangMuMing();
     setXiangMu();
+    $("#xiangmu").keydown(function() {
+        return false;
+    });
 });
 
 function chengyuanQuanXuan() {
@@ -59,9 +62,7 @@ function chengYuanChange() {
         }
     } else if (cyLength < zyLength) {
         for (var i = 0; i < zyLength - cyLength; i++) {
-            sc
-                .find("selected")
-                .seats[sc.find("selected").length - 1].status("available");
+            sc.find("selected").seats[sc.find("selected").length - 1].status("available");
         }
     }
 }
@@ -154,6 +155,7 @@ function tiJiaoYuYue() {
             return;
         }
     }
+    var xiangmuid = XiangMuS.find(x => x.xiangmuming == $("#xiangmu").val()).zidongbianhao
     var bianhaos = [];
     if (loginuser.id.length == 8) {
         var seatIds = sc.find("selected").seatIds;
@@ -182,13 +184,13 @@ function tiJiaoYuYue() {
                 yuyuekaishiriqi: riqi + " " + $("#kaishi").val().split('-')[0],
                 yuyuejieshuriqi: riqi + " " + $("#kaishi").val().split('-')[1],
                 gengxinriqi: new Date().toString().substr(0, 24),
-                xiangmu: $("#xiangmu").val(),
+                xiangmu: xiangmuid,
                 zhidaojiaoshi: $("#zhidao").val()
             };
             bianhaos.push(yuyue.xueshengbianhao);
             $.ajax({
                 type: "post",
-                url: apiUrl + "T_YuYue/?shiyanshihao=" + sysid + "&zuoweihao=" + zuowei.zidongbianhao + "&xiamuhao=" + $("#xiangmu").val(),
+                url: apiUrl + "T_YuYue/?shiyanshihao=" + sysid + "&zuoweihao=" + zuowei.zidongbianhao + "&xiamuhao=" + xiangmuid,
                 data: yuyue,
                 dataType: "json",
                 error: function(err) {
@@ -219,7 +221,7 @@ function tiJiaoYuYue() {
             yuyuekaishiriqi: riqi + " " + $("#kaishi").val().split('-')[0],
             yuyuejieshuriqi: riqi + " " + $("#kaishi").val().split('-')[1],
             gengxinriqi: new Date().toString().substr(0, 24),
-            xiangmu: $("#xiangmu").val(),
+            xiangmu: xiangmuid,
             zhidaojiaoshi: $("#zhidao").val()
         };
         console.log('yuyue', yuyue);
@@ -231,7 +233,7 @@ function tiJiaoYuYue() {
         $.ajax({
             type: "post",
             url: apiUrl +
-                "T_YuYue/?shiyanshihao=" + sysid + "&zuoweihao=" + zuowei.zidongbianhao + "&xiamuhao=" + $("#xiangmu").val(),
+                "T_YuYue/?shiyanshihao=" + sysid + "&zuoweihao=" + zuowei.zidongbianhao + "&xiamuhao=" + xiangmuid,
             data: yuyue,
             dataType: "json",
             error: function(err) {
@@ -299,18 +301,32 @@ function setShiYanShiMing() {
 function setXiangMu() {
     setTimeout(function() {
         if (XiangMuS.length > 0) {
-            var html = '';
+            var xmArray = [];
+            var pid = -1
             XiangMuS.forEach(function(x, i) {
                 if (i == 0 || (XiangMuS[i - 1] && x.xueyuan != XiangMuS[i - 1].xueyuan)) {
-                    html += '<optgroup label="' + x.xueyuan + '"><option value="' + x.zidongbianhao + '">' + x.xiangmuming + '</option>'
+                    xmArray.push({
+                        id: x.zidongbianhao,
+                        parentId: -1,
+                        name: x.xueyuan
+                    })
+                    pid = x.zidongbianhao;
+                    xmArray.push({
+                        id: x.zidongbianhao,
+                        parentId: pid,
+                        name: x.xiangmuming
+                    })
                 } else {
-                    html += '<option value="' + x.zidongbianhao + '">' + x.xiangmuming + '</option>';
-                }
-                if (XiangMuS[i + 1] && x.xueyuan != XiangMuS[i + 1].xueyuan) {
-                    html += '</optgroup>'
+                    xmArray.push({
+                        id: x.zidongbianhao,
+                        parentId: pid,
+                        name: x.xiangmuming
+                    })
                 }
             });
-            $("#xiangmu").html(html);
+
+            var tree = DropdownTree(xmArray, "xiangmu", "tree");
+
         } else {
             setXiangMu();
         }
