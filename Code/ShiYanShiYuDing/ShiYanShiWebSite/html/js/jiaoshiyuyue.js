@@ -155,7 +155,7 @@ function tiJiaoYuYue() {
             return;
         }
     }
-    var xiangmuid = XiangMuS.find(x => x.xiangmuming == $("#xiangmu").val()).zidongbianhao
+    var xiangmu = XiangMuS.find(x => $.trim(x.xiangmuming) == $.trim($("#xiangmu").val()));
     var bianhaos = [];
     if (loginuser.id.length == 8) {
         var seatIds = sc.find("selected").seatIds;
@@ -184,13 +184,14 @@ function tiJiaoYuYue() {
                 yuyuekaishiriqi: riqi + " " + $("#kaishi").val().split('-')[0],
                 yuyuejieshuriqi: riqi + " " + $("#kaishi").val().split('-')[1],
                 gengxinriqi: new Date().toString().substr(0, 24),
-                xiangmu: xiangmuid,
+                xiangmu: xiangmu.xiangmuming,
+                xueyuan: xiangmu.xueyuan,
                 zhidaojiaoshi: $("#zhidao").val()
             };
             bianhaos.push(yuyue.xueshengbianhao);
             $.ajax({
                 type: "post",
-                url: apiUrl + "T_YuYue/?shiyanshihao=" + sysid + "&zuoweihao=" + zuowei.zidongbianhao + "&xiamuhao=" + xiangmuid,
+                url: apiUrl + "T_YuYue/?shiyanshihao=" + sysid + "&zuoweihao=" + zuowei.zidongbianhao,
                 data: yuyue,
                 dataType: "json",
                 error: function(err) {
@@ -221,7 +222,8 @@ function tiJiaoYuYue() {
             yuyuekaishiriqi: riqi + " " + $("#kaishi").val().split('-')[0],
             yuyuejieshuriqi: riqi + " " + $("#kaishi").val().split('-')[1],
             gengxinriqi: new Date().toString().substr(0, 24),
-            xiangmu: xiangmuid,
+            xiangmu: xiangmu.xiangmuming,
+            xueyuan: xiangmu.xueyuan,
             zhidaojiaoshi: $("#zhidao").val()
         };
         console.log('yuyue', yuyue);
@@ -233,7 +235,7 @@ function tiJiaoYuYue() {
         $.ajax({
             type: "post",
             url: apiUrl +
-                "T_YuYue/?shiyanshihao=" + sysid + "&zuoweihao=" + zuowei.zidongbianhao + "&xiamuhao=" + xiangmuid,
+                "T_YuYue/?shiyanshihao=" + sysid + "&zuoweihao=" + zuowei.zidongbianhao,
             data: yuyue,
             dataType: "json",
             error: function(err) {

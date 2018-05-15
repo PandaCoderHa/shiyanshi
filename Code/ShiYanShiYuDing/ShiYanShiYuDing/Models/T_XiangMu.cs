@@ -14,17 +14,8 @@ namespace ShiYanShiYuDing.Models
     
     public partial class T_XiangMu
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public T_XiangMu()
-        {
-            this.T_YuYue = new HashSet<T_YuYue>();
-        }
-    
         public int zidongbianhao { get; set; }
         public string xueyuan { get; set; }
         public string xiangmuming { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<T_YuYue> T_YuYue { get; set; }
     }
 }

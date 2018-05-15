@@ -36,8 +36,7 @@ namespace ShiYanShiYuDing.Controllers
                            yy.banji,
                            yy.yuyuekaishiriqi,
                           yy.yuyuejieshuriqi,
-                          yy.T_XiangMu.xueyuan,
-                          yy.T_XiangMu.xiangmuming
+                          yy.xueyuan
                        }).ToList();
 
             var result = (from yy in tb1
@@ -58,8 +57,7 @@ namespace ShiYanShiYuDing.Controllers
                               yy.zhidaojiaoshi,
                               kaishi = yy.yuyuekaishiriqi.ToString("yyyy-MM-dd HH:mm"),
                               jieshu = yy.yuyuejieshuriqi.ToString("yyyy-MM-dd HH:mm"),
-                              yy.xueyuan,
-                              yy.xiangmuming
+                              yy.xueyuan
                           }).ToList<object>();
             return result;
         }
@@ -86,8 +84,7 @@ namespace ShiYanShiYuDing.Controllers
                            yy.banji,
                            yy.yuyuekaishiriqi,
                            yy.yuyuejieshuriqi,
-                           yy.T_XiangMu.xueyuan,
-                           yy.T_XiangMu.xiangmuming
+                           yy.xueyuan
                        }).ToList();
 
             var result = (from yy in tb1
@@ -107,8 +104,7 @@ namespace ShiYanShiYuDing.Controllers
                               yy.banji,
                               kaishi = yy.yuyuekaishiriqi.ToString("yyyy-MM-d HH:mm"),
                               jieshu = yy.yuyuejieshuriqi.ToString("yyyy-MM-d HH:mm"),
-                              yy.xueyuan,
-                              yy.xiangmuming
+                              yy.xueyuan
                           }).ToList<object>();
             return result;
         }
@@ -163,7 +159,7 @@ namespace ShiYanShiYuDing.Controllers
 
         // POST: api/T_YuYue
         [ResponseType(typeof(T_YuYue))]
-        public async Task<IHttpActionResult> PostT_YuYue(T_YuYue t_YuYue, int shiyanshihao, int zuoweihao,int xiamuhao)
+        public async Task<IHttpActionResult> PostT_YuYue(T_YuYue t_YuYue, int shiyanshihao, int zuoweihao)
         {
             if (!ModelState.IsValid)
             {
@@ -172,7 +168,6 @@ namespace ShiYanShiYuDing.Controllers
 
             t_YuYue.M_ShiYanShi = db.M_ShiYanShi.First(s => s.zidongbianhao == shiyanshihao);
             t_YuYue.M_ZuoWei = db.M_ZuoWei.First(z => z.zidongbianhao == zuoweihao);
-            t_YuYue.T_XiangMu = db.T_XiangMu.First(x => x.zidongbianhao == xiamuhao);
 
             db.T_YuYue.Add(t_YuYue);
             await db.SaveChangesAsync();

@@ -124,7 +124,7 @@ $(function() {
 function daochu() {
     var obj = {
         title: ["姓名", "班级", "实验室", '开始时间', '结束时间', '指导教师', '学院', '实验项目'],
-        titleForKey: ['xueshengxingming', 'banji', "shiyanshiMing", 'kaishi', 'jieshu', 'zhidaojiaoshi', 'xueyuan', 'xiangmuming'],
+        titleForKey: ['xueshengxingming', 'banji', "shiyanshiMing", 'kaishi', 'jieshu', 'zhidaojiaoshi', 'xueyuan', 'xiangmu'],
         data: YuYueS
     };
     exportCsv(obj);

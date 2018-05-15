@@ -68,7 +68,7 @@
           <Property Name="zhidaojiaoshi" Type="nvarchar" MaxLength="100" />
           <Property Name="banji" Type="nvarchar" MaxLength="100" />
           <Property Name="xueshengxingming" Type="nvarchar" MaxLength="200" />
-          <Property Name="xiangmuid" Type="int" Nullable="false" />
+          <Property Name="xueyuan" Type="nvarchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="T_ZiYuan">
           <Key>
@@ -127,18 +127,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_T_YuYue_T_XiangMu">
-          <End Role="T_XiangMu" Type="Self.T_XiangMu" Multiplicity="1" />
-          <End Role="T_YuYue" Type="Self.T_YuYue" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="T_XiangMu">
-              <PropertyRef Name="zidongbianhao" />
-            </Principal>
-            <Dependent Role="T_YuYue">
-              <PropertyRef Name="xiangmuid" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="ShiYanShiModelStoreContainer">
           <EntitySet Name="M_ShiYanShi" EntityType="Self.M_ShiYanShi" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="M_ZuoWei" EntityType="Self.M_ZuoWei" Schema="dbo" store:Type="Tables" />
@@ -160,10 +148,6 @@
           </AssociationSet>
           <AssociationSet Name="FK_T_YuYue_M_ZuoWei" Association="Self.FK_T_YuYue_M_ZuoWei">
             <End Role="M_ZuoWei" EntitySet="M_ZuoWei" />
-            <End Role="T_YuYue" EntitySet="T_YuYue" />
-          </AssociationSet>
-          <AssociationSet Name="FK_T_YuYue_T_XiangMu" Association="Self.FK_T_YuYue_T_XiangMu">
-            <End Role="T_XiangMu" EntitySet="T_XiangMu" />
             <End Role="T_YuYue" EntitySet="T_YuYue" />
           </AssociationSet>
         </EntityContainer>
@@ -228,10 +212,6 @@
           </AssociationSet>
           <EntitySet Name="T_ZiYuan" EntityType="ShiYanShiModel.T_ZiYuan" />
           <EntitySet Name="T_XiangMu" EntityType="ShiYanShiModel.T_XiangMu" />
-          <AssociationSet Name="FK_T_YuYue_T_XiangMu" Association="ShiYanShiModel.FK_T_YuYue_T_XiangMu">
-            <End Role="T_XiangMu" EntitySet="T_XiangMu" />
-            <End Role="T_YuYue" EntitySet="T_YuYue" />
-          </AssociationSet>
         </EntityContainer>
         <EntityType Name="T_ShiYanShiBuKeYongShiJian">
           <Key>
@@ -266,7 +246,7 @@
           <Property Name="xueshengxingming" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="M_ShiYanShi" Relationship="ShiYanShiModel.FK_T_YuYue_M_ShiYanShi" FromRole="T_YuYue" ToRole="M_ShiYanShi" />
           <NavigationProperty Name="M_ZuoWei" Relationship="ShiYanShiModel.FK_T_YuYue_M_ZuoWei" FromRole="T_YuYue" ToRole="M_ZuoWei" />
-          <NavigationProperty Name="T_XiangMu" Relationship="ShiYanShiModel.FK_T_YuYue_T_XiangMu" FromRole="T_YuYue" ToRole="T_XiangMu" />
+          <Property Name="xueyuan" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_T_YuYue_M_ShiYanShi">
           <End Type="ShiYanShiModel.M_ShiYanShi" Role="M_ShiYanShi" Multiplicity="1" />
@@ -292,12 +272,7 @@
           <Property Name="zidongbianhao" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="xueyuan" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="xiangmuming" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="T_YuYue" Relationship="ShiYanShiModel.FK_T_YuYue_T_XiangMu" FromRole="T_XiangMu" ToRole="T_YuYue" />
         </EntityType>
-        <Association Name="FK_T_YuYue_T_XiangMu">
-          <End Type="ShiYanShiModel.T_XiangMu" Role="T_XiangMu" Multiplicity="1" />
-          <End Type="ShiYanShiModel.T_YuYue" Role="T_YuYue" Multiplicity="*" />
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -363,6 +338,7 @@
           <EntitySetMapping Name="T_YuYue">
             <EntityTypeMapping TypeName="ShiYanShiModel.T_YuYue">
               <MappingFragment StoreEntitySet="T_YuYue">
+                <ScalarProperty Name="xueyuan" ColumnName="xueyuan" />
                 <ScalarProperty Name="xueshengxingming" ColumnName="xueshengxingming" />
                 <ScalarProperty Name="banji" ColumnName="banji" />
                 <ScalarProperty Name="zhidaojiaoshi" ColumnName="zhidaojiaoshi" />
@@ -411,14 +387,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="FK_T_YuYue_T_XiangMu" TypeName="ShiYanShiModel.FK_T_YuYue_T_XiangMu" StoreEntitySet="T_YuYue">
-            <EndProperty Name="T_YuYue">
-              <ScalarProperty Name="zidongbianhao" ColumnName="zidongbianhao" />
-            </EndProperty>
-            <EndProperty Name="T_XiangMu">
-              <ScalarProperty Name="zidongbianhao" ColumnName="xiangmuid" />
-            </EndProperty>
-          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
